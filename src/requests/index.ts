@@ -42,10 +42,10 @@ export async function fetchWordAutocompletes(word: string) {
   }
 }
 
-export async function fetchWordDefinitions(word: string): Promise<Result<WordObject, string>> {
+export async function fetchWordDefinitions(word: string): Promise<Result<WordObject[], string>> {
   try {
-    const url = `${API_URL}/public/autocomplete/${word.toLowerCase()}`;
-    const response: AxiosResponse<ApiResponse<WordObject>> = await axios({
+    const url = `${API_URL}/public/def/${word.toLowerCase()}`;
+    const response: AxiosResponse<ApiResponse<WordObject[]>> = await axios({
       method: "GET",
       url: url,
     });

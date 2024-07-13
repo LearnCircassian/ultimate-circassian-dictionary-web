@@ -136,7 +136,6 @@ video {
     font: inherit;
     vertical-align: baseline;
 }
-
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -151,21 +150,17 @@ nav,
 section {
     display: block;
 }
-
 body {
     line-height: 1;
 }
-
 ol,
 ul {
     list-style: none;
 }
-
 blockquote,
 q {
     quotes: none;
 }
-
 blockquote:before,
 blockquote:after,
 q:before,
@@ -173,7 +168,6 @@ q:after {
     content: "";
     content: none;
 }
-
 table {
     border-collapse: collapse;
     border-spacing: 0;
@@ -183,8 +177,8 @@ html,
 body {
     padding: 0;
     margin: 0;
-    font-family: "RobotoMono", sans-serif;
-    background: #f9f9f9;
+    font-family: "Lexend", sans-serif;
+    background: #0b0c13;
     -ms-overflow-style: none; /* IE 11 */
     scrollbar-width: none; /* Firefox 64 */
     /* height: 100vh; */
@@ -280,7 +274,6 @@ input:-webkit-autofill,
 input:-webkit-autofill:focus {
     transition: background-color 600000s 0s, color 600000s 0s;
 }
-
 input[data-autocompleted] {
     background-color: transparent !important;
 }
@@ -289,7 +282,6 @@ input[data-autocompleted] {
     width: 0; /* Remove scrollbar space */
     background: transparent; /* Optional: just make scrollbar invisible */
 }
-
 ::-webkit-scrollbar-thumb {
     background: transparent;
 }
@@ -297,7 +289,6 @@ input[data-autocompleted] {
 .no-scrollbars::-webkit-scrollbar {
     width: 10px;
 }
-
 .no-scrollbars::-webkit-scrollbar-track {
     background: transparent;
 }
@@ -322,7 +313,6 @@ input[data-autocompleted] {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
 }
-
 .rc-slider-tooltip-inner {
     background-color: rgba(255, 255, 255, 0.15) !important;
     backdrop-filter: blur(10px) !important;

@@ -18,8 +18,9 @@ export default function HeaderSearchInput({
   return (
     <div
       className={cn(
-        "flex flex-row gap-2 bg-transparent items-center justify-start",
-        "bg-[#343438] rounded-[12px] px-3 py-[8px] text-[#757575] font-medium text-md",
+        "flex flex-row gap-2 bg-transparent items-center justify-start mx-auto w-full",
+        "bg-[#343438] rounded-[12px] px-4 py-2 my-2 text-[#757575] font-medium",
+        "2xl:text-3xl xl:text-2xl lg:text-xl md:text-lg sm:text-base text-sm",
         className,
       )}
     >
