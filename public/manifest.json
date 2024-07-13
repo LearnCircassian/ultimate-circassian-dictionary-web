@@ -1,0 +1,31 @@
+{
+  "name": "Learn Circassian",
+  "short_name": "learn cir",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b0c13",
+  "theme_color": "#0b0c13",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/fav/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/fav/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "/fav/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "/fav/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
