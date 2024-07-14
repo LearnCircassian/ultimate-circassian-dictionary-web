@@ -42,6 +42,20 @@ export async function fetchWordAutocompletes(word: string) {
   }
 }
 
+export async function fetchWordAutocompletesWithVerbs(word: string) {
+  try {
+    const url = `${API_URL}/public/autocomplete-with-verbs/${word.toLowerCase()}`;
+    const response: AxiosResponse<ApiResponse<string[]>> = await axios({
+      method: "GET",
+      url: url,
+    });
+
+    return ok(response.data.data);
+  } catch (e) {
+    return err(`Failed to fetch definitions for ${word}`);
+  }
+}
+
 export async function fetchWordDefinitions(word: string): Promise<Result<WordObject[], string>> {
   try {
     const url = `${API_URL}/public/def/${word.toLowerCase()}`;

@@ -1,9 +1,12 @@
 import React, { useRef, useEffect, useState } from "react";
 import HeaderSearchInput from "~/components/headerSearchInput";
 import { useQuery } from "@tanstack/react-query";
-import { fetchWordAutocompletes } from "~/requests";
+import { fetchWordAutocompletes, fetchWordAutocompletesWithVerbs } from "~/requests";
 import { useRouter } from "next/navigation";
 import { cn } from "~/utils/classNames";
+import { containsOnlyEnglishLetters } from "~/utils/lang";
+import { Result } from "neverthrow";
+import { useDebounce } from "use-debounce";
 
 export default function Header() {
   const [searchInputValue, setSearchInputValue] = React.useState<string>("");
@@ -37,25 +40,36 @@ export default function Header() {
   );
 }
 
+interface HeaderSearchResultsDropdownProps {
+  searchInputValue: string;
+  onWordSelection: (word: string) => void;
+  setDropdownVisible: (visible: boolean) => void;
+}
+
 function HeaderSearchResultsDropdown({
   searchInputValue,
   onWordSelection,
   setDropdownVisible,
-}: {
-  searchInputValue: string;
-  setDropdownVisible: (visible: boolean) => void;
-  onWordSelection: (word: string) => void;
-}) {
+}: HeaderSearchResultsDropdownProps) {
+  const [debouncedSearchInputValue] = useDebounce(searchInputValue, 500);
+
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { data: wordsResults = [], isLoading } = useQuery({
     staleTime: 60000,
     gcTime: 60000,
-    queryKey: ["autocompleteWords", searchInputValue],
+    queryKey: ["autocompleteWords", debouncedSearchInputValue],
     queryFn: async () => {
-      if (!searchInputValue || searchInputValue.length < 2) {
+      if (!debouncedSearchInputValue || debouncedSearchInputValue.length < 2) {
         return [];
       }
-      const res = await fetchWordAutocompletes(searchInputValue);
+
+      let res: Result<string[], string>;
+      if (containsOnlyEnglishLetters(debouncedSearchInputValue)) {
+        res = await fetchWordAutocompletesWithVerbs(debouncedSearchInputValue);
+      } else {
+        res = await fetchWordAutocompletes(debouncedSearchInputValue);
+      }
+
       if (res.isErr()) {
         return [];
       }
@@ -79,7 +93,7 @@ function HeaderSearchResultsDropdown({
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [setDropdownVisible]);
 
   if (!searchInputValue || searchInputValue.length < 2) {
     return null;
