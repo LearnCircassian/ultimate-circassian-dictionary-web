@@ -177,8 +177,8 @@ html,
 body {
     padding: 0;
     margin: 0;
-    font-family: "Lexend", sans-serif;
-    background: #0b0c13;
+    font-family: "Calibri", sans-serif;
+    background: #fdf7e7;
     -ms-overflow-style: none; /* IE 11 */
     scrollbar-width: none; /* Firefox 64 */
     /* height: 100vh; */

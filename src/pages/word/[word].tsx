@@ -31,7 +31,6 @@ export default function ProfilePage({ wordSpelling, wordDefinitions }: WordPageP
         <title>Ultimate Circassian Dictionary</title>
       </Head>
       <main>
-        <p>Hello</p>
         <WordPageContainer wordSpelling={wordSpelling} wordDefinitions={wordDefinitions} />
       </main>
     </>
