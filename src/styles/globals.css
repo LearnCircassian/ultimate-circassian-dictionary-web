@@ -179,8 +179,6 @@ body {
     margin: 0;
     font-family: "Calibri", sans-serif;
     background: #fdf7e7;
-    -ms-overflow-style: none; /* IE 11 */
-    scrollbar-width: none; /* Firefox 64 */
     /* height: 100vh; */
     position: relative;
     overscroll-behavior: none;
@@ -278,41 +276,6 @@ input[data-autocompleted] {
     background-color: transparent !important;
 }
 
-::-webkit-scrollbar {
-    width: 0; /* Remove scrollbar space */
-    background: transparent; /* Optional: just make scrollbar invisible */
-}
-::-webkit-scrollbar-thumb {
-    background: transparent;
-}
-
-.no-scrollbars::-webkit-scrollbar {
-    width: 10px;
-}
-.no-scrollbars::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.no-scrollbars::-webkit-scrollbar-thumb {
-    background: #ffffff40;
-    border-radius: 15px;
-    height: 40px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-    display: none;
-}
-
-/* For IE, Edge and Firefox */
-.scrollbar-hide {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-}
 .rc-slider-tooltip-inner {
     background-color: rgba(255, 255, 255, 0.15) !important;
     backdrop-filter: blur(10px) !important;
@@ -683,4 +646,24 @@ DEX SCREENER
 .uicheckbox:checked::after {
     left: 20px;
     background-color: #FFF;
+}
+
+
+/* styles/globals.css */
+.scrollbar-gray::-webkit-scrollbar {
+    width: 12px;
+}
+
+.scrollbar-gray::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.scrollbar-gray::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+    border: 3px solid #f1f1f1;
+}
+
+.scrollbar-gray::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
