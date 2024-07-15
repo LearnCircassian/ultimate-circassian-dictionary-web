@@ -46,7 +46,12 @@ function WordDefinitions({ wordDefinitions }: { wordDefinitions: WordObject[] })
     <div className="my-8 flex w-full flex-col gap-6">
       {wordDefinitions.map((wd, idx) => {
         return (
-          <div key={idx} className="flex w-full flex-col">
+          <div
+            key={idx}
+            className={cn("flex w-full flex-col", {
+              "rounded-2xl border-l-4 border-solid border-green": definitionVisible[idx],
+            })}
+          >
             <button
               className="flex w-full items-center justify-between rounded-t-2xl bg-[#b7edad] px-4 py-2 font-bold shadow"
               onClick={() => toggleDefinitionVisibility(idx)}
