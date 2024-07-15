@@ -10,6 +10,8 @@ import Head from "next/head";
 import { ModalContainer, ModalProvider } from "~/hooks/useModal";
 import Layout from "~/containers/layout";
 import { ToastContainer } from "react-toastify";
+import { store } from "~/state/store";
+import { Provider } from "react-redux";
 
 const queryClient = new QueryClient();
 
@@ -69,10 +71,12 @@ function InnerApp({ Component, pageProps }: any) {
 
 export default function App(props: AppProps) {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ModalProvider>
-        <InnerApp {...props} />
-      </ModalProvider>
-    </QueryClientProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <ModalProvider>
+          <InnerApp {...props} />
+        </ModalProvider>
+      </QueryClientProvider>
+    </Provider>
   );
 }

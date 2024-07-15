@@ -34,6 +34,7 @@ export interface ApiPaginationResponse<T> {
 }
 
 export interface WordObject {
+  spelling: string;
   title: string;
   html: string;
   fromLang: string;
