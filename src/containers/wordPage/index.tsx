@@ -48,7 +48,7 @@ function WordDefinitions({ wordDefinitions }: { wordDefinitions: WordObject[] })
         return (
           <div key={idx} className="flex w-full flex-col">
             <button
-              className="flex w-full items-center justify-between rounded-t-2xl bg-[#deffd8] p-2 font-bold shadow"
+              className="flex w-full items-center justify-between rounded-t-2xl bg-[#b7edad] px-4 py-2 font-bold shadow"
               onClick={() => toggleDefinitionVisibility(idx)}
             >
               <span
