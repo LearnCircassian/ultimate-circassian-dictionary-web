@@ -33,7 +33,8 @@ export interface ApiPaginationResponse<T> {
   };
 }
 
-export interface WordObject {
+export interface WordResult {
+  spelling: string;
   title: string;
   html: string;
   fromLang: string;

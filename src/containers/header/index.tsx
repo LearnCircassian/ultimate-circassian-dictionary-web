@@ -18,7 +18,7 @@ export default function Header() {
   };
 
   return (
-    <div className="relative z-50 mx-auto flex w-11/12 flex-row items-center justify-between gap-4 pt-8">
+    <div className="relative z-50 mx-auto flex w-11/12 flex-row items-center justify-between gap-4 pt-12">
       <div className="flex flex-row items-center gap-4">
         <h1
           className={cn("cursor-pointer text-xl font-bold md:visible hidden")}
@@ -29,7 +29,7 @@ export default function Header() {
         <div className="hidden md:flex">
           <button
             className={cn(
-              "flex items-center gap-1 rounded-lg px-2 py-2 font-bold text-lightGreen hover:text-lightGreen/70",
+              "flex items-center gap-1 rounded-lg px-2 py-2 font-bold text-[#a1d199] hover:text-[#a1d199]/50",
               "2xl:text-3xl xl:text-2xl lg:text-xl md:text-lg sm:text-base text-sm",
             )}
             onClick={navigateToHome}
