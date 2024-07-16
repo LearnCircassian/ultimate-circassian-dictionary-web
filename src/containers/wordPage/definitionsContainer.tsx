@@ -58,8 +58,20 @@ export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: s
   return (
     <div className="flex flex-col">
       <div className="flex flex-row items-center justify-start gap-2 px-2">
-        <span className="text-left text-6xl font-black text-cyan-800">{wordSpelling}</span>
-        <span className="mt-3 text-left text-3xl font-black text-cyan-800">
+        <span
+          className={cn(
+            "text-left font-black text-cyan-800",
+            "3xl:text-7xl 2xl:text-6xl xl:text-5xl lg:text-4xl text-4xl",
+          )}
+        >
+          {wordSpelling}
+        </span>
+        <span
+          className={cn(
+            "mt-0 sm:mt-3 text-left font-black text-cyan-800",
+            "3xl:text-3xl 2xl:text-3xl xl:text-2xl lg:text-xl text-lg",
+          )}
+        >
           ({wordDefinitions.length} results)
         </span>
       </div>

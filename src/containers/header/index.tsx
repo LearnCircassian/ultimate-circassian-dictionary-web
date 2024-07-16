@@ -18,7 +18,7 @@ export default function Header() {
   };
 
   return (
-    <div className="relative z-50 mx-auto flex w-11/12 flex-row items-center justify-between gap-4 pt-12">
+    <div className="relative z-50 mx-auto flex w-full flex-row items-center justify-between gap-1 px-1 pt-12 sm:w-11/12 sm:gap-2 sm:px-0 md:gap-4">
       <div className="flex flex-row items-center gap-4">
         <h1
           className={cn("cursor-pointer text-xl font-bold md:visible hidden")}
@@ -44,7 +44,7 @@ export default function Header() {
           </button>
         </div>
       </div>
-      <div className="flex-grow md:flex md:flex-row md:items-center md:gap-4">
+      <div className="flex-grow gap-2 md:flex md:flex-row md:items-center md:gap-4">
         <HeaderSearchContainer />
       </div>
       {isMobileMenuOpen && (

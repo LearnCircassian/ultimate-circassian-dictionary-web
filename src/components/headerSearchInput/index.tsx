@@ -27,26 +27,30 @@ export default function HeaderSearchInput({
       <div
         className={cn(
           "flex items-center justify-center w-full",
-          "px-4 py-3 text-black font-medium rounded-lg shadow",
+          "sm:px-4 px-2 py-3 text-black font-medium rounded-lg shadow",
           "3xl:text-5xl 2xl:text-4xl xl:text-3xl lg:text-2xl md:text-xl sm:text-lg text-lg",
           className,
         )}
-        style={{ backgroundColor: "#f2f1f4", border: "2px solid #155e75" }} // Added border and adjusted background color
+        style={{
+          backgroundColor: "#f2f1f4",
+          border: "2px solid #155e75",
+        }} // Added border and adjusted background color
       >
         <FaSearch className="opacity-80" size={24} color="#155e75" /> {/* Increased icon size */}
         <input
-          className="flex-grow bg-transparent px-2 font-medium text-black outline-none"
+          className="flex-grow bg-transparent px-1 font-medium text-black outline-none sm:px-2"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           onFocus={onFocus} // Optional onFocus handler passed through
           placeholder={placeholder}
         />
-        {value && (
-          <button onClick={() => onChange("")} className="flex items-center hover:opacity-80">
-            <FaTimesCircle className="opacity-80" size={24} color="#757575" />{" "}
-            {/* Increased icon size */}
-          </button>
-        )}
+        <button
+          onClick={() => onChange("")}
+          className={cn("flex items-center hover:opacity-80", { hidden: !value })}
+        >
+          <FaTimesCircle className="opacity-80" size={24} color="#757575" />{" "}
+          {/* Increased icon size */}
+        </button>
       </div>
     </div>
   );
