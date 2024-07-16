@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from "axios";
 import { ApiResponse, WordResult } from "~/interfaces";
 import { err, ok, Result } from "neverthrow";
 import queryString from "query-string";
-import { regularWordToSafeWord } from "~/utils/safeWords";
+import { regularWordToSafeWord, safeWordToRegularWord } from "~/utils/safeWords";
 
 export async function fetchWordAutocompletesPaginated(args: {
   word: string;
@@ -24,7 +24,9 @@ export async function fetchWordAutocompletesPaginated(args: {
       params: params,
     });
 
-    return ok(response.data.data);
+    const results = response.data.data;
+    const resultsAdjusted = results.map((result) => safeWordToRegularWord(result));
+    return ok(resultsAdjusted);
   } catch (e) {
     return err(`Failed to fetch definitions for ${args.word}`);
   }
@@ -39,7 +41,9 @@ export async function fetchWordAutocompletes(word: string) {
       url: url,
     });
 
-    return ok(response.data.data);
+    const results = response.data.data;
+    const resultsAdjusted = results.map((result) => safeWordToRegularWord(result));
+    return ok(resultsAdjusted);
   } catch (e) {
     return err(`Failed to fetch definitions for ${word}`);
   }
@@ -54,7 +58,9 @@ export async function fetchWordAutocompletesWithVerbs(word: string) {
       url: url,
     });
 
-    return ok(response.data.data);
+    const results = response.data.data;
+    const resultsAdjusted = results.map((result) => safeWordToRegularWord(result));
+    return ok(resultsAdjusted);
   } catch (e) {
     return err(`Failed to fetch definitions for ${word}`);
   }
@@ -69,7 +75,11 @@ export async function fetchWordDefinitions(word: string): Promise<Result<WordRes
       url: url,
     });
 
-    return ok(response.data.data);
+    const result = response.data.data;
+    for (const r of result) {
+      r.spelling = safeWordToRegularWord(r.spelling);
+    }
+    return ok(result);
   } catch (e) {
     return err(`Failed to fetch definitions for ${word}`);
   }

@@ -13,12 +13,6 @@ input:focus {
     outline: none;
 }
 
-@media only screen and (max-width: 500px) {
-    body {
-        overflow: hidden
-    }
-}
-
 body {
     overscroll-behavior: none;
 }
@@ -209,33 +203,6 @@ a {
     display: -webkit-box;
 }
 
-/* to handle react format number input */
-.stf-create-input {
-    border: solid 1px transparent;
-    border-radius: 10px;
-    width: 295px;
-    height: 40px;
-    padding: 12px 15px;
-    padding-right: 42px;
-    font-size: 12px;
-    background: #151922;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    color: #ffffff;
-    font-weight: bold;
-}
-
-.stf-create-input::placeholder {
-    color: #ffffff40;
-    font-weight: normal;
-}
-
-.stf-create-input:focus {
-    /* background: rgba(255, 255, 255, 0.15); */
-    outline: none;
-    border: 1px solid #00cc6a;
-}
-
 .filled {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -358,12 +325,6 @@ input[data-autocompleted] {
     100% {
         opacity: 1;
     }
-}
-
-.stvCardBorderAnimation {
-    z-index: 0;
-    color: white;
-    overflow: hidden;
 }
 
 /* .stvCardBorderAnimation:hover {

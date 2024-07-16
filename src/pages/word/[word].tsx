@@ -3,7 +3,7 @@ import Head from "next/head";
 import { GetServerSideProps } from "next";
 import WordPageContainer from "~/containers/wordPage";
 import { useParams } from "next/navigation";
-import { regularWordToSafeWord, safeWordToRegularWord } from "~/utils/safeWords";
+import { safeWordToRegularWord } from "~/utils/safeWords";
 
 export default function WordPage() {
   const { word: safeWord } = useParams<{ word: string }>();
