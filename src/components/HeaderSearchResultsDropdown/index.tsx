@@ -1,10 +1,15 @@
 import { useDebounce } from "use-debounce";
 import React, { useEffect, useRef } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, QueryClient } from "@tanstack/react-query";
 import { Result } from "neverthrow";
 import { containsOnlyEnglishLetters } from "~/utils/lang";
 import { fetchWordAutocompletes, fetchWordAutocompletesWithVerbs } from "~/requests";
 import { cn } from "~/utils/classNames";
+import {
+  findAutocompletesInWordHistoryCache,
+  findSeveralInWordHistoryCache,
+  removeFromWordHistoryCache,
+} from "~/cache/wordHistory";
 
 interface HeaderSearchResultsDropdownProps {
   searchInputValue: string;
@@ -22,12 +27,14 @@ export default function HeaderSearchResultsDropdown({
   const [debouncedSearchInputValue] = useDebounce(searchInputValue, 500);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const { data: wordsResults = [], isLoading } = useQuery({
+  const queryClient = new QueryClient();
+
+  const { data: autocompletesList = [], isLoading: isAutocompletesListLoading } = useQuery({
     staleTime: 60000,
     gcTime: 60000,
     queryKey: ["autocompleteWords", debouncedSearchInputValue],
     queryFn: async () => {
-      if (!debouncedSearchInputValue || debouncedSearchInputValue.length < 2) {
+      if (!debouncedSearchInputValue) {
         return [];
       }
 
@@ -44,6 +51,23 @@ export default function HeaderSearchResultsDropdown({
       return res.value;
     },
   });
+
+  const { data: cachedAutocompletesList = [], refetch: refetchCachedAutocompletesList } = useQuery({
+    staleTime: 60000,
+    gcTime: 60000,
+    queryKey: ["cachedAutocompletesList", debouncedSearchInputValue],
+    queryFn: async (): Promise<string[]> => {
+      if (!debouncedSearchInputValue) {
+        return [];
+      }
+      return findAutocompletesInWordHistoryCache(debouncedSearchInputValue);
+    },
+  });
+
+  function cachedWordDeleteClickHandler(word: string) {
+    removeFromWordHistoryCache(word);
+    refetchCachedAutocompletesList();
+  }
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -67,7 +91,7 @@ export default function HeaderSearchResultsDropdown({
     return null;
   }
 
-  if (isLoading) {
+  if (isAutocompletesListLoading) {
     return (
       <div
         ref={dropdownRef}
@@ -83,7 +107,7 @@ export default function HeaderSearchResultsDropdown({
     );
   }
 
-  if (wordsResults.length === 0) {
+  if (autocompletesList.length === 0 && cachedAutocompletesList.length === 0) {
     return (
       <div
         ref={dropdownRef}
@@ -109,15 +133,35 @@ export default function HeaderSearchResultsDropdown({
       <div className="w-full border-b-2 border-solid border-[#0049d7] px-2 py-4 text-left text-lg font-bold">
         Definitions
       </div>
-      {wordsResults?.map((word) => (
-        <button
-          className="hover:bg-gray-100 w-full rounded-md p-2 text-left text-lg font-medium hover:bg-[#e7e7e7]"
-          key={word}
-          onClick={() => onWordSelection(word)}
-        >
-          {word}
-        </button>
-      ))}
+      {cachedAutocompletesList.sort().map((word) => {
+        return (
+          <div key={word} className="flex w-full flex-row justify-between p-2 hover:bg-[#e7e7e7]">
+            <button
+              className="w-full rounded-md text-left text-lg font-medium text-[#bb90f6]"
+              onClick={() => onWordSelection(word)}
+            >
+              {word}
+            </button>
+            <button
+              className="text-neutral-800 hover:text-neutral-600/50 hover:underline"
+              onClick={() => cachedWordDeleteClickHandler(word)}
+            >
+              Delete
+            </button>
+          </div>
+        );
+      })}
+      {autocompletesList?.map((word) => {
+        return (
+          <button
+            className="hover:bg-gray-100 w-full rounded-md p-2 text-left text-lg font-medium hover:bg-[#e7e7e7]"
+            key={word}
+            onClick={() => onWordSelection(word)}
+          >
+            {word}
+          </button>
+        );
+      })}
     </div>
   );
 }

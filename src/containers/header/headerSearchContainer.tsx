@@ -1,16 +1,26 @@
 import React, { useState } from "react";
 import HeaderSearchInput from "~/components/headerSearchInput";
-import { useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
 import HeaderSearchResultsDropdown from "~/components/HeaderSearchResultsDropdown";
+import { regularWordToSafeWord } from "~/utils/safeWords";
 
 export default function HeaderSearchContainer() {
   const [searchInputValue, setSearchInputValue] = React.useState<string>("");
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
   const router = useRouter();
+  const params = useParams<{ word: string }>();
 
   function wordSelectionHandler(word: string) {
+    const safeWord = regularWordToSafeWord(word);
     setSearchInputValue("");
-    router.push(`/word/${word}`);
+
+    // Check if safeWord is contained in the current URL
+    if ("word" in params && params.word === safeWord) {
+      console.log("Word already in URL");
+      return;
+    }
+
+    router.push(`/word/${safeWord}`);
   }
 
   return (
