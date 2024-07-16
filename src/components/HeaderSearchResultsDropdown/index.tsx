@@ -150,17 +150,21 @@ export default function HeaderSearchResultsDropdown({
           </div>
         );
       })}
-      {autocompletesList?.map((word) => {
-        return (
-          <button
-            className="hover:bg-gray-100 w-full rounded-md p-2 text-left text-lg font-medium hover:bg-[#e7e7e7]"
-            key={word}
-            onClick={() => onWordSelection(word)}
-          >
-            {word}
-          </button>
-        );
-      })}
+      {autocompletesList
+        .filter((word) => {
+          return !cachedAutocompletesList.includes(word);
+        })
+        .map((word) => {
+          return (
+            <button
+              className="hover:bg-gray-100 w-full rounded-md p-2 text-left text-lg font-medium hover:bg-[#e7e7e7]"
+              key={word}
+              onClick={() => onWordSelection(word)}
+            >
+              {word}
+            </button>
+          );
+        })}
     </div>
   );
 }

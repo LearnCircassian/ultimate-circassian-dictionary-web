@@ -13,6 +13,7 @@ export default function HeaderSearchContainer() {
   function clickWordHandler(word: string) {
     const safeWord = regularWordToSafeWord(word);
     setSearchInputValue("");
+    setDropdownVisible(false);
 
     // Check if safeWord is contained in the current URL
     if ("word" in params && params.word === safeWord) {
