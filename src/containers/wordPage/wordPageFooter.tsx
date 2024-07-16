@@ -37,7 +37,7 @@ export default function WordPageFooter() {
   }
 
   return (
-    <footer className="fixed bottom-0 flex w-full items-center justify-between bg-white p-4 shadow-md sm:hidden">
+    <footer className="fixed bottom-0 flex w-full items-center justify-between bg-white p-2 shadow-md sm:hidden">
       <button
         className={cn("flex flex-col items-center justify-center flex-1", {
           "opacity-30": !footerWords.leftFooterBtnWord,
@@ -45,15 +45,15 @@ export default function WordPageFooter() {
         disabled={!footerWords.leftFooterBtnWord}
         onClick={() => clickWordHandler(footerWords.leftFooterBtnWord)}
       >
-        <HiArrowLeft size={28} className="rounded-full bg-[#FFFFFF66] p-2 text-black" />
-        <span className="text-sm text-black">{footerWords.leftFooterBtnWord}</span>
+        <HiArrowLeft size={36} className="rounded-full bg-[#FFFFFF66] p-2 text-black" />
+        <span className="text-md text-black">{footerWords.leftFooterBtnWord}</span>
       </button>
       <button
         className="flex flex-1 flex-col items-center justify-center"
         onClick={() => router.push("/")}
       >
-        <HiHome size={28} className="rounded-full bg-[#FFFFFF66] p-2 text-black" />
-        <span className="text-sm text-black">Home</span>
+        <HiHome size={36} className="rounded-full bg-[#FFFFFF66] p-2 text-black" />
+        <span className="text-md text-black">Home</span>
       </button>
       <button
         className={cn("flex flex-col items-center justify-center flex-1", {
@@ -62,8 +62,8 @@ export default function WordPageFooter() {
         disabled={!footerWords.rightFooterBtnWord}
         onClick={() => clickWordHandler(footerWords.rightFooterBtnWord)}
       >
-        <HiArrowRight size={28} className="rounded-full bg-[#FFFFFF66] p-2 text-black" />
-        <span className="text-sm text-black">{footerWords.rightFooterBtnWord}</span>
+        <HiArrowRight size={36} className="rounded-full bg-[#FFFFFF66] p-2 text-black" />
+        <span className="text-md text-black">{footerWords.rightFooterBtnWord}</span>
       </button>
     </footer>
   );
