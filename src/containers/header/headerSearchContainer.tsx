@@ -10,7 +10,7 @@ export default function HeaderSearchContainer() {
   const router = useRouter();
   const params = useParams<{ word: string }>();
 
-  function wordSelectionHandler(word: string) {
+  function clickWordHandler(word: string) {
     const safeWord = regularWordToSafeWord(word);
     setSearchInputValue("");
 
@@ -36,7 +36,7 @@ export default function HeaderSearchContainer() {
       {dropdownVisible && (
         <HeaderSearchResultsDropdown
           searchInputValue={searchInputValue}
-          onWordSelection={wordSelectionHandler}
+          onWordSelection={clickWordHandler}
           setDropdownVisible={setDropdownVisible}
         />
       )}

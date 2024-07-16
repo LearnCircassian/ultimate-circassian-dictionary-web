@@ -98,7 +98,7 @@ export function addToWordHistoryCache(word: WordResult[]) {
 
   // If word does not exist, add it to the beginning of the array
   if (existingIndex === -1) {
-    last300UsedWords.unshift(word);
+    last300UsedWords.push(word);
     _saveWordHistoryCache(last300UsedWords);
   }
 }
@@ -117,4 +117,28 @@ export function removeFromWordHistoryCache(word: string) {
 
   // Save the updated history
   _saveWordHistoryCache(newLast300UsedWords);
+}
+
+export function findLeftAndRightOfCachedWord(word: string): { left: string; right: string } {
+  const last300UsedWords = _loadWordHistoryCache();
+  const wordIndex = last300UsedWords.findIndex((wordResults) => {
+    if (wordResults.length === 0) {
+      return false;
+    }
+    const wordRes = wordResults[0];
+    return wordRes.spelling.toLowerCase() === word.toLowerCase();
+  });
+
+  // in case the word is not found, we assume this is a new word, therefore the left will be the last value
+  if (wordIndex === -1) {
+    return {
+      left: last300UsedWords[last300UsedWords.length - 1]?.[0]?.spelling ?? "",
+      right: "",
+    };
+  }
+
+  const leftWord = last300UsedWords[wordIndex - 1]?.[0]?.spelling ?? "";
+  const rightWord = last300UsedWords[wordIndex + 1]?.[0]?.spelling ?? "";
+
+  return { left: leftWord, right: rightWord };
 }

@@ -41,7 +41,7 @@ export default function HeaderSearchInput({
           placeholder={placeholder}
         />
         {value && (
-          <button onClick={() => onChange("")} className="flex items-center">
+          <button onClick={() => onChange("")} className="flex items-center hover:opacity-80">
             <FaTimesCircle className="opacity-80" size={20} color="#757575" />
           </button>
         )}
