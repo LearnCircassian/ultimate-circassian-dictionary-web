@@ -69,6 +69,21 @@ export function findAutocompletesInWordHistoryCache(word: string): string[] {
   return listToReturn;
 }
 
+export function findAllAutocompletesInWordHistoryCache(): string[] {
+  const last300UsedWords = _loadWordHistoryCache();
+  const listToReturn: string[] = [];
+
+  for (const wordResults of last300UsedWords) {
+    if (wordResults.length === 0) {
+      continue;
+    }
+    const wordRes = wordResults[0];
+    listToReturn.push(wordRes.spelling);
+  }
+
+  return listToReturn;
+}
+
 export function addToWordHistoryCache(word: WordResult[]) {
   const last300UsedWords = _loadWordHistoryCache();
 

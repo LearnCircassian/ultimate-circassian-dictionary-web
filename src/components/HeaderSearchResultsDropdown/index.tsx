@@ -1,13 +1,13 @@
 import { useDebounce } from "use-debounce";
 import React, { useEffect, useRef } from "react";
-import { useQuery, useMutation, QueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { Result } from "neverthrow";
 import { containsOnlyEnglishLetters } from "~/utils/lang";
 import { fetchWordAutocompletes, fetchWordAutocompletesWithVerbs } from "~/requests";
 import { cn } from "~/utils/classNames";
 import {
+  findAllAutocompletesInWordHistoryCache,
   findAutocompletesInWordHistoryCache,
-  findSeveralInWordHistoryCache,
   removeFromWordHistoryCache,
 } from "~/cache/wordHistory";
 
@@ -27,7 +27,6 @@ export default function HeaderSearchResultsDropdown({
   const [debouncedSearchInputValue] = useDebounce(searchInputValue, 500);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const queryClient = new QueryClient();
 
   const { data: autocompletesList = [], isLoading: isAutocompletesListLoading } = useQuery({
     staleTime: 60000,
@@ -57,8 +56,8 @@ export default function HeaderSearchResultsDropdown({
     gcTime: 60000,
     queryKey: ["cachedAutocompletesList", debouncedSearchInputValue],
     queryFn: async (): Promise<string[]> => {
-      if (!debouncedSearchInputValue) {
-        return [];
+      if (debouncedSearchInputValue.trim() === "") {
+        return findAllAutocompletesInWordHistoryCache();
       }
       return findAutocompletesInWordHistoryCache(debouncedSearchInputValue);
     },
@@ -87,7 +86,7 @@ export default function HeaderSearchResultsDropdown({
     };
   }, [setDropdownVisible]);
 
-  if (!debouncedSearchInputValue || debouncedSearchInputValue.length < 2) {
+  if (debouncedSearchInputValue.trim() === "" && cachedAutocompletesList.length === 0) {
     return null;
   }
 
