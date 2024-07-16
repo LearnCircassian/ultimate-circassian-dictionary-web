@@ -51,7 +51,7 @@ export default function WordHistoryContainer() {
       </div>
       <div
         className={cn(
-          "bg-[#f1f1ff] p-2 text-black shadow-sm overflow-y-auto rounded-b-2xl",
+          "bg-[#f1f1ff] p-2 text-black shadow-sm rounded-b-2xl",
           "2xl:text-3xl xl:text-2xl lg:text-xl md:text-lg sm:text-base text-sm",
         )}
       >

@@ -39,7 +39,7 @@ export default function WordPageFooter() {
   return (
     <footer className="fixed bottom-0 flex w-full items-center justify-between bg-white p-4 shadow-md sm:hidden">
       <button
-        className={cn("flex flex-col items-center justify-center flex-[1]", {
+        className={cn("flex flex-col items-center justify-center flex-1", {
           "opacity-30": !footerWords.leftFooterBtnWord,
         })}
         disabled={!footerWords.leftFooterBtnWord}
@@ -49,14 +49,14 @@ export default function WordPageFooter() {
         <span className="text-sm text-black">{footerWords.leftFooterBtnWord}</span>
       </button>
       <button
-        className="flex flex-[1] flex-col items-center justify-center"
+        className="flex flex-1 flex-col items-center justify-center"
         onClick={() => router.push("/")}
       >
         <HiHome size={28} className="rounded-full bg-[#FFFFFF66] p-2 text-black" />
         <span className="text-sm text-black">Home</span>
       </button>
       <button
-        className={cn("flex flex-col items-center justify-center flex-[1]", {
+        className={cn("flex flex-col items-center justify-center flex-1", {
           "opacity-30": !footerWords.rightFooterBtnWord,
         })}
         disabled={!footerWords.rightFooterBtnWord}
