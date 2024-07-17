@@ -2,6 +2,8 @@
 import { WordResult } from "~/interfaces";
 import { WORD_HISTORY_CACHE_KEY } from "~/constants/cache";
 
+const MAX_WORD_HISTORY_CACHE = 100;
+
 export function _loadWordHistoryCache(): WordResult[][] {
   try {
     const serializedState = localStorage.getItem(WORD_HISTORY_CACHE_KEY);
@@ -25,8 +27,8 @@ function _saveWordHistoryCache(state: WordResult[][]) {
 }
 
 export function findInWordHistoryCache(word: string): WordResult[] | undefined {
-  const last300UsedWords = _loadWordHistoryCache();
-  return last300UsedWords.find((wordResults) => {
+  const lastUsedWords = _loadWordHistoryCache();
+  return lastUsedWords.find((wordResults) => {
     if (wordResults.length === 0) {
       return false;
     }
@@ -36,10 +38,10 @@ export function findInWordHistoryCache(word: string): WordResult[] | undefined {
 }
 
 export function findSeveralInWordHistoryCache(words: string[]): WordResult[] | undefined {
-  const last300UsedWords = _loadWordHistoryCache();
+  const lastUsedWords = _loadWordHistoryCache();
   const listToReturn: WordResult[] = [];
 
-  for (const wordResults of last300UsedWords) {
+  for (const wordResults of lastUsedWords) {
     if (wordResults.length === 0) {
       continue;
     }
@@ -53,10 +55,10 @@ export function findSeveralInWordHistoryCache(words: string[]): WordResult[] | u
 }
 
 export function findAutocompletesInWordHistoryCache(word: string): string[] {
-  const last300UsedWords = _loadWordHistoryCache();
+  const lastUsedWords = _loadWordHistoryCache();
   const listToReturn: string[] = [];
 
-  for (const wordResults of last300UsedWords) {
+  for (const wordResults of lastUsedWords) {
     if (wordResults.length === 0) {
       continue;
     }
@@ -70,10 +72,10 @@ export function findAutocompletesInWordHistoryCache(word: string): string[] {
 }
 
 export function findAllAutocompletesInWordHistoryCache(): string[] {
-  const last300UsedWords = _loadWordHistoryCache();
+  const lastUsedWords = _loadWordHistoryCache();
   const listToReturn: string[] = [];
 
-  for (const wordResults of last300UsedWords) {
+  for (const wordResults of lastUsedWords) {
     if (wordResults.length === 0) {
       continue;
     }
@@ -85,10 +87,14 @@ export function findAllAutocompletesInWordHistoryCache(): string[] {
 }
 
 export function addToWordHistoryCache(word: WordResult[]) {
-  const last300UsedWords = _loadWordHistoryCache();
+  if (word.length === 0) {
+    return;
+  }
+
+  const lastUsedWords = _loadWordHistoryCache();
 
   // Check if word already exists in history
-  const existingIndex = last300UsedWords.findIndex((wordResults) => {
+  const existingIndex = lastUsedWords.findIndex((wordResults) => {
     if (wordResults.length === 0) {
       return false; // remove empty arrays
     }
@@ -98,16 +104,22 @@ export function addToWordHistoryCache(word: WordResult[]) {
 
   // If word does not exist, add it to the beginning of the array
   if (existingIndex === -1) {
-    last300UsedWords.push(word);
-    _saveWordHistoryCache(last300UsedWords);
+    lastUsedWords.unshift(word); // Add to the beginning of the array
+
+    // Ensure the cache does not exceed 100 instances
+    if (lastUsedWords.length > MAX_WORD_HISTORY_CACHE) {
+      lastUsedWords.pop(); // Remove the oldest word
+    }
+
+    _saveWordHistoryCache(lastUsedWords);
   }
 }
 
 export function removeFromWordHistoryCache(word: string) {
-  const last300UsedWords = _loadWordHistoryCache();
+  const lastUsedWords = _loadWordHistoryCache();
 
   // Filter out the word to remove
-  const newLast300UsedWords = last300UsedWords.filter((wordResults) => {
+  const newLastUsedWords = lastUsedWords.filter((wordResults) => {
     if (wordResults.length === 0) {
       return false;
     }
@@ -116,12 +128,12 @@ export function removeFromWordHistoryCache(word: string) {
   });
 
   // Save the updated history
-  _saveWordHistoryCache(newLast300UsedWords);
+  _saveWordHistoryCache(newLastUsedWords);
 }
 
 export function findLeftAndRightOfCachedWord(word: string): { left: string; right: string } {
-  const last300UsedWords = _loadWordHistoryCache();
-  const wordIndex = last300UsedWords.findIndex((wordResults) => {
+  const lastUsedWords = _loadWordHistoryCache();
+  const wordIndex = lastUsedWords.findIndex((wordResults) => {
     if (wordResults.length === 0) {
       return false;
     }
@@ -132,13 +144,13 @@ export function findLeftAndRightOfCachedWord(word: string): { left: string; righ
   // in case the word is not found, we assume this is a new word, therefore the left will be the last value
   if (wordIndex === -1) {
     return {
-      left: last300UsedWords[last300UsedWords.length - 1]?.[0]?.spelling ?? "",
+      left: lastUsedWords[lastUsedWords.length - 1]?.[0]?.spelling ?? "",
       right: "",
     };
   }
 
-  const leftWord = last300UsedWords[wordIndex - 1]?.[0]?.spelling ?? "";
-  const rightWord = last300UsedWords[wordIndex + 1]?.[0]?.spelling ?? "";
+  const leftWord = lastUsedWords[wordIndex - 1]?.[0]?.spelling ?? "";
+  const rightWord = lastUsedWords[wordIndex + 1]?.[0]?.spelling ?? "";
 
   return { left: leftWord, right: rightWord };
 }

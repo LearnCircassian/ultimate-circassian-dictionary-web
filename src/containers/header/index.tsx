@@ -56,6 +56,13 @@ export default function Header() {
             <FaHome />
             Home
           </button>
+          <button
+            className="flex w-full items-center justify-center gap-2 py-4 text-lg font-bold text-lightGreen hover:text-lightGreen/70 "
+            onClick={toggleMobileMenu}
+          >
+            <FaTimes />
+            Close
+          </button>
         </div>
       )}
     </div>
