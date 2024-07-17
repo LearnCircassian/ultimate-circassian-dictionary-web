@@ -1,6 +1,8 @@
 import React from "react";
 import { USED_DICTS } from "~/constants/dicts";
 import { RANDOM_COLORS } from "~/constants/colors";
+import Image from "next/image";
+import { cn } from "~/utils/classNames";
 
 export default function HomePageContainer() {
   return (

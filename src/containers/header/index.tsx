@@ -3,6 +3,7 @@ import { FaHome, FaBars, FaTimes } from "react-icons/fa";
 import HeaderSearchContainer from "~/containers/header/headerSearchContainer";
 import { useRouter } from "next/navigation";
 import { cn } from "~/utils/classNames";
+import Image from "next/image";
 
 export default function Header() {
   const router = useRouter();
@@ -19,18 +20,24 @@ export default function Header() {
 
   return (
     <div className="relative z-50 mx-auto flex w-full flex-row items-center justify-between gap-1 px-1 pt-12 sm:w-11/12 sm:gap-2 sm:px-0 md:gap-4">
-      <div className="flex flex-row items-center gap-4">
-        <h1
-          className={cn("cursor-pointer text-xl font-bold md:visible hidden")}
-          onClick={navigateToHome}
-        >
-          Logo
-        </h1>
+      <div className="flex flex-row items-center gap-1 sm:gap-4">
+        <div className="size-0 sm:size-[75px] md:size-[100px] lg:size-[120px] xl:size-[125px]">
+          <Image
+            src="/fav/icon-1042x1042.png"
+            className={cn("cursor-pointer text-xl font-bold")}
+            onClick={navigateToHome}
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: "100%", height: "auto" }} // optional
+            alt="logo"
+          />
+        </div>
         <div className="hidden md:flex">
           <button
             className={cn(
               "flex items-center gap-1 rounded-lg px-2 py-2 font-bold text-[#a1d199] hover:text-[#a1d199]/50",
-              "2xl:text-3xl xl:text-2xl lg:text-xl md:text-lg sm:text-base text-sm",
+              "3xl:text-5xl 2xl:text-4xl xl:text-2xl lg:text-xl text-xl",
             )}
             onClick={navigateToHome}
           >
@@ -40,7 +47,7 @@ export default function Header() {
         </div>
         <div className="md:hidden">
           <button onClick={toggleMobileMenu}>
-            {isMobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+            {isMobileMenuOpen ? <FaTimes size={36} /> : <FaBars size={36} />}
           </button>
         </div>
       </div>
