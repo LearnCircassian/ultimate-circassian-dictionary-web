@@ -1,18 +1,37 @@
 // Function to load state from localStorage
-import { WordDefinitionsResults } from "~/interfaces";
+import { getAllSupportedLangs, WordDefinitionsResults } from "~/interfaces";
 import { WORD_HISTORY_CACHE_KEY } from "~/constants/cache";
 
 const MAX_WORD_HISTORY_CACHE = 100;
 
+function isObjectValid(obj: WordDefinitionsResults[]): boolean {
+  for (const o of obj) {
+    if (!o.spelling || !o.title || !o.html || !o.fromLangs || !o.toLangs) {
+      return false;
+    }
+  }
+  return true;
+}
+
 export function _loadWordHistoryCache(): WordDefinitionsResults[][] {
+  if (typeof window === "undefined") {
+    return [];
+  }
   try {
     const serializedState = localStorage.getItem(WORD_HISTORY_CACHE_KEY);
     if (serializedState === null) {
       return [];
     }
-    return JSON.parse(serializedState);
+    const objectList: WordDefinitionsResults[][] = JSON.parse(serializedState);
+    for (const o of objectList) {
+      if (!isObjectValid(o)) {
+        _clearWordHistoryCache();
+        return [];
+      }
+    }
+    return objectList;
   } catch (err) {
-    _resetWordHistoryCache();
+    _clearWordHistoryCache();
     return [];
   }
 }
@@ -27,7 +46,7 @@ function _saveWordHistoryCache(state: WordDefinitionsResults[][]) {
   }
 }
 
-function _resetWordHistoryCache() {
+function _clearWordHistoryCache() {
   localStorage.removeItem(WORD_HISTORY_CACHE_KEY);
 }
 

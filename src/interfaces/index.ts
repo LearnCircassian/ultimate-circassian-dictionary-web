@@ -40,12 +40,13 @@ export interface ApiWordDefinitionsResultsResponse {
   from_langs: string[];
   to_langs: string[];
 }
+
 export interface WordDefinitionsResults {
   spelling: string;
   title: string;
   html: string;
-  fromLang: SupportedLang[];
-  toLang: SupportedLang[];
+  fromLangs: SupportedLang[];
+  toLangs: SupportedLang[];
 }
 
 export function getAllSupportedLangs(): SupportedLang[] {

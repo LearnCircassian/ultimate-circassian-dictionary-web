@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { WordDefinitionsResults } from "~/interfaces";
 import parse from "html-react-parser";
 import { HiChevronDown } from "react-icons/hi";
@@ -10,7 +10,7 @@ import { getSearchFilterPrefsCache } from "~/cache/searchFilterPrefs";
 
 export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: string }) {
   const {
-    data: wordDefinitions = [] as WordDefinitionsResults[],
+    data: allDefResults = [] as WordDefinitionsResults[],
     isLoading: isWordDefinitionsLoading,
     isError: isWordDefinitionsErrored,
   } = useQuery({
@@ -32,10 +32,23 @@ export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: s
         console.error(`Failed to find word definitions for ${wordSpelling}`);
         throw new Error(`Failed to find word definitions for ${wordSpelling}`);
       }
+      console.log("wordObjectRes:", wordObjectRes);
       addToWordHistoryCache(wordObjectRes.value);
       return wordObjectRes.value;
     },
   });
+
+  console.log("allDefResults:", allDefResults);
+
+  const filteredDefResults = useMemo(() => {
+    const searchFilterPrefs = getSearchFilterPrefsCache();
+    const toLangsWhitelist = searchFilterPrefs.toLang;
+
+    return allDefResults.filter((wd) => {
+      const toLangs = wd.toLangs;
+      return toLangs.some((toLang) => toLangsWhitelist.includes(toLang));
+    });
+  }, [allDefResults]);
 
   if (isWordDefinitionsLoading) {
     return (
@@ -68,17 +81,21 @@ export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: s
         >
           {wordSpelling}
         </span>
-        <span
+        <div
           className={cn(
             "mt-0 sm:mt-3 text-left font-black text-cyan-800",
             "3xl:text-3xl 2xl:text-3xl xl:text-2xl lg:text-xl text-lg",
           )}
         >
-          ({wordDefinitions.length} results)
-        </span>
+          <span>({allDefResults.length} total results</span>
+          <span className={cn({ hidden: allDefResults.length === filteredDefResults.length })}>
+            , {allDefResults.length - filteredDefResults.length} results were filtered out
+          </span>
+          <span>)</span>
+        </div>
       </div>
 
-      <WordDefinitions wordDefinitions={wordDefinitions} />
+      <WordDefinitions wordDefinitions={filteredDefResults} />
     </div>
   );
 }
@@ -112,7 +129,7 @@ function WordDefinitions({ wordDefinitions }: { wordDefinitions: WordDefinitions
             <span
               className={cn("2xl:text-4xl xl:text-3xl lg:text-2xl md:text-xl sm:text-lg text-md")}
             >
-              {wd.title} ({wd.fromLang} {"->"} {wd.toLang})
+              {wd.title} ({wd.fromLangs.join("/")} {"->"} {wd.toLangs.join("/")})
             </span>
             <HiChevronDown className="ml-2" />
           </button>

@@ -6,26 +6,36 @@ interface SearchFilterPrefs {
   toLang: SupportedLang[];
 }
 
+const DEFAULT_SEARCH_FILTER_PREFS: SearchFilterPrefs = {
+  fromLang: getAllSupportedLangs(),
+  toLang: getAllSupportedLangs(),
+};
+
 export function getSearchFilterPrefsCache(): SearchFilterPrefs {
-  const searchFilterPrefs = localStorage.getItem(SEARCH_FILTER_PREFS_CACHE_KEY);
-  if (!searchFilterPrefs) {
-    return {
-      fromLang: getAllSupportedLangs(),
-      toLang: getAllSupportedLangs(),
-    };
+  try {
+    if (typeof window === "undefined") {
+      return DEFAULT_SEARCH_FILTER_PREFS;
+    }
+    const searchFilterPrefs = localStorage.getItem(SEARCH_FILTER_PREFS_CACHE_KEY);
+    if (!searchFilterPrefs) {
+      return DEFAULT_SEARCH_FILTER_PREFS;
+    }
+    return JSON.parse(searchFilterPrefs);
+  } catch (err) {
+    _clearSearchFilterPrefs();
+    return DEFAULT_SEARCH_FILTER_PREFS;
   }
-  return JSON.parse(searchFilterPrefs);
 }
 
 export function saveSearchFilterPrefsCache(searchFilterPrefs: SearchFilterPrefs) {
   localStorage.setItem(SEARCH_FILTER_PREFS_CACHE_KEY, JSON.stringify(searchFilterPrefs));
 }
 
-export function clearSearchFilterPrefs() {
+export function _clearSearchFilterPrefs() {
   localStorage.removeItem(SEARCH_FILTER_PREFS_CACHE_KEY);
 }
 
-export function resetSearchFilterPrefs() {
+export function _resetSearchFilterPrefs() {
   saveSearchFilterPrefsCache({
     fromLang: getAllSupportedLangs(),
     toLang: getAllSupportedLangs(),

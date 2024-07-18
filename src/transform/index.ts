@@ -41,7 +41,7 @@ export function transformWordDefinitionsResults(
     spelling: a.spelling,
     title: a.title,
     html: a.html,
-    fromLang: a.from_langs.map(getSupportedLangForString),
-    toLang: a.to_langs.map(getSupportedLangForString),
+    fromLangs: a.from_langs.map(getSupportedLangForString),
+    toLangs: a.to_langs.map(getSupportedLangForString),
   };
 }
