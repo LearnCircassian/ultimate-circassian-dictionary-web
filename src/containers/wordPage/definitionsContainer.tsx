@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { WordResult } from "~/interfaces";
+import { WordDefinitionsResults } from "~/interfaces";
 import parse from "html-react-parser";
 import { HiChevronDown } from "react-icons/hi";
 import { cn } from "~/utils/classNames";
@@ -9,7 +9,7 @@ import { addToWordHistoryCache, findInWordHistoryCache } from "~/cache/wordHisto
 
 export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: string }) {
   const {
-    data: wordDefinitions = [] as WordResult[],
+    data: wordDefinitions = [] as WordDefinitionsResults[],
     isLoading: isWordDefinitionsLoading,
     isError: isWordDefinitionsErrored,
   } = useQuery({
@@ -17,7 +17,7 @@ export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: s
     gcTime: 60000,
     retry: 1,
     queryKey: ["wordDefinitions", wordSpelling],
-    queryFn: async (): Promise<WordResult[]> => {
+    queryFn: async (): Promise<WordDefinitionsResults[]> => {
       if (!wordSpelling || wordSpelling.trim() === "") {
         return [];
       }
@@ -81,7 +81,7 @@ export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: s
   );
 }
 
-function WordDefinitions({ wordDefinitions }: { wordDefinitions: WordResult[] }) {
+function WordDefinitions({ wordDefinitions }: { wordDefinitions: WordDefinitionsResults[] }) {
   const [definitionVisible, setDefinitionVisible] = useState<boolean[]>(() =>
     Array(wordDefinitions.length).fill(true),
   );

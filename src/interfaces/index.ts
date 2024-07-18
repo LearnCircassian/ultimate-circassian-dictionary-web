@@ -33,10 +33,32 @@ export interface ApiPaginationResponse<T> {
   };
 }
 
-export interface WordResult {
+export interface WordDefinitionsResults {
   spelling: string;
   title: string;
   html: string;
   fromLang: string;
   toLang: string;
+}
+
+export enum SupportedLang {
+  Ady = "Ady",
+  Kbd = "Kbd",
+  En = "En",
+  Ru = "Ru",
+  Tr = "Tr",
+  Ar = "Ar",
+  He = "He",
+}
+
+export interface ApiAutocompleteResponse {
+  key: string;
+  from_langs: string[];
+  toLangs: string[];
+}
+
+export interface Autocomplete {
+  key: string;
+  fromLangs: SupportedLang[];
+  toLangs: SupportedLang[];
 }

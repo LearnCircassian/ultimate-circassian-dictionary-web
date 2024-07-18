@@ -3,13 +3,18 @@ import React, { useEffect, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Result } from "neverthrow";
 import { containsOnlyEnglishLetters } from "~/utils/lang";
-import { fetchWordAutocompletes, fetchWordAutocompletesWithVerbs } from "~/requests";
+import {
+  fetchWordAutocompletes,
+  fetchWordAutocompletesThatContains,
+  fetchWordAutocompletesWithVerbs,
+} from "~/requests";
 import { cn } from "~/utils/classNames";
 import {
   findAllAutocompletesInWordHistoryCache,
   findAutocompletesInWordHistoryCache,
   removeFromWordHistoryCache,
 } from "~/cache/wordHistory";
+import { Autocomplete } from "~/interfaces";
 
 interface HeaderSearchResultsDropdownProps {
   searchInputValue: string;
@@ -32,13 +37,15 @@ export default function HeaderSearchResultsDropdown({
     staleTime: 60000,
     gcTime: 60000,
     queryKey: ["autocompleteWords", debouncedSearchInputValue],
-    queryFn: async () => {
+    queryFn: async (): Promise<Autocomplete[]> => {
       if (!debouncedSearchInputValue) {
         return [];
       }
 
-      let res: Result<string[], string>;
-      if (containsOnlyEnglishLetters(debouncedSearchInputValue)) {
+      let res: Result<Autocomplete[], string>;
+      if (4 <= debouncedSearchInputValue.length) {
+        res = await fetchWordAutocompletesThatContains(debouncedSearchInputValue);
+      } else if (containsOnlyEnglishLetters(debouncedSearchInputValue)) {
         res = await fetchWordAutocompletesWithVerbs(debouncedSearchInputValue);
       } else {
         res = await fetchWordAutocompletes(debouncedSearchInputValue);
@@ -47,6 +54,7 @@ export default function HeaderSearchResultsDropdown({
       if (res.isErr()) {
         return [];
       }
+
       return res.value;
     },
   });
@@ -152,16 +160,29 @@ export default function HeaderSearchResultsDropdown({
       })}
       {autocompletesList
         .filter((word) => {
-          return !cachedAutocompletesList.includes(word);
+          return !cachedAutocompletesList.includes(word.key);
         })
         .map((word) => {
+          // Bold the substring that matches searchInputValue
+          const index = word.key.toLowerCase().indexOf(debouncedSearchInputValue.toLowerCase());
+          const before = word.key.slice(0, index);
+          const bold = word.key.slice(index, index + debouncedSearchInputValue.length);
+          const after = word.key.slice(index + debouncedSearchInputValue.length);
+
           return (
             <button
               className="hover:bg-gray-100 w-full rounded-md p-2 text-left text-lg font-medium hover:bg-[#e7e7e7]"
-              key={word}
-              onClick={() => onWordSelection(word)}
+              key={word.key}
+              onClick={() => onWordSelection(word.key)}
             >
-              {word}
+              <div className="flex flex-row gap-2">
+                <span>[{word.fromLangs.join(", ")}]</span>
+                <span>
+                  {before}
+                  <span className="font-bold">{bold}</span>
+                  {after}
+                </span>
+              </div>
             </button>
           );
         })}

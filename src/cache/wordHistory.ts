@@ -1,10 +1,10 @@
 // Function to load state from localStorage
-import { WordResult } from "~/interfaces";
+import { WordDefinitionsResults } from "~/interfaces";
 import { WORD_HISTORY_CACHE_KEY } from "~/constants/cache";
 
 const MAX_WORD_HISTORY_CACHE = 100;
 
-export function _loadWordHistoryCache(): WordResult[][] {
+export function _loadWordHistoryCache(): WordDefinitionsResults[][] {
   try {
     const serializedState = localStorage.getItem(WORD_HISTORY_CACHE_KEY);
     if (serializedState === null) {
@@ -17,7 +17,7 @@ export function _loadWordHistoryCache(): WordResult[][] {
 }
 
 // Function to save state to localStorage
-function _saveWordHistoryCache(state: WordResult[][]) {
+function _saveWordHistoryCache(state: WordDefinitionsResults[][]) {
   try {
     const serializedState = JSON.stringify(state);
     localStorage.setItem(WORD_HISTORY_CACHE_KEY, serializedState);
@@ -26,7 +26,7 @@ function _saveWordHistoryCache(state: WordResult[][]) {
   }
 }
 
-export function findInWordHistoryCache(word: string): WordResult[] | undefined {
+export function findInWordHistoryCache(word: string): WordDefinitionsResults[] | undefined {
   const lastUsedWords = _loadWordHistoryCache();
   return lastUsedWords.find((wordResults) => {
     if (wordResults.length === 0) {
@@ -37,9 +37,11 @@ export function findInWordHistoryCache(word: string): WordResult[] | undefined {
   });
 }
 
-export function findSeveralInWordHistoryCache(words: string[]): WordResult[] | undefined {
+export function findSeveralInWordHistoryCache(
+  words: string[],
+): WordDefinitionsResults[] | undefined {
   const lastUsedWords = _loadWordHistoryCache();
-  const listToReturn: WordResult[] = [];
+  const listToReturn: WordDefinitionsResults[] = [];
 
   for (const wordResults of lastUsedWords) {
     if (wordResults.length === 0) {
@@ -86,7 +88,7 @@ export function findAllAutocompletesInWordHistoryCache(): string[] {
   return listToReturn;
 }
 
-export function addToWordHistoryCache(word: WordResult[]) {
+export function addToWordHistoryCache(word: WordDefinitionsResults[]) {
   if (word.length === 0) {
     return;
   }
