@@ -10,7 +10,6 @@ import useModal from "~/hooks/useModal"; // Import useModal hook
 export default function Header() {
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { show, hide } = useModal(); // Use the useModal hook here
 
   const navigateToHome = () => {
     router.push("/");
@@ -19,19 +18,6 @@ export default function Header() {
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
-  const openFilterModal = () => {
-    // Example of showing a modal with a component and specific configurations
-    show(
-      <SearchFilterModal hide={hide} />, // Replace ComponentToRender with your actual component
-      {
-        padding: 16,
-        width: "407px",
-        showClose: false,
-        unstyled: true,
-      },
-    );
   };
 
   return (
@@ -67,14 +53,8 @@ export default function Header() {
           </button>
         </div>
       </div>
-      <div className="flex-grow gap-2 md:flex md:flex-row md:items-center md:gap-4">
+      <div className="flex flex-grow flex-row gap-2">
         <HeaderSearchContainer />
-        <button
-          className="flex items-center gap-2 px-4 py-2 text-lg font-bold text-[#3182ce] hover:text-[#3182ce]/50"
-          onClick={openFilterModal}
-        >
-          Filter
-        </button>
       </div>
       {isMobileMenuOpen && (
         <div className="absolute left-0 top-16 z-60 w-full bg-white shadow-lg md:hidden">

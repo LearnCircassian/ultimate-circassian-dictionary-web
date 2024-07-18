@@ -3,6 +3,8 @@ import HeaderSearchInput from "~/components/headerSearchInput";
 import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
 import HeaderSearchResultsDropdown from "~/components/HeaderSearchResultsDropdown";
 import { regularWordToSafeWord } from "~/utils/wordFormatting";
+import SearchFilterModal from "~/components/searchFilterModal";
+import useModal from "~/hooks/useModal";
 
 export default function HeaderSearchContainer() {
   const [searchInputValue, setSearchInputValue] = React.useState<string>("");

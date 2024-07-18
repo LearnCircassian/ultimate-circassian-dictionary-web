@@ -1,7 +1,8 @@
 import React from "react";
-import { FaSearch, FaTimesCircle } from "react-icons/fa";
+import { FaFilter, FaSearch, FaTimesCircle } from "react-icons/fa";
 import { cn } from "~/utils/classNames";
-import { replaceAllPalochkaLettersToOne, replaceAllOneToPalochka } from "~/utils/wordFormatting";
+import useModal from "~/hooks/useModal";
+import SearchFilterModal from "~/components/searchFilterModal";
 
 interface HeaderSearchInputProps {
   value: string;
@@ -18,9 +19,24 @@ export default function HeaderSearchInput({
   className,
   placeholder,
 }: HeaderSearchInputProps) {
+  const { show, hide } = useModal(); // Use the useModal hook here
+
   function inputChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
     onChange(e.target.value);
   }
+
+  const openFilterModal = () => {
+    // Example of showing a modal with a component and specific configurations
+    show(
+      <SearchFilterModal hide={hide} />, // Replace ComponentToRender with your actual component
+      {
+        padding: 16,
+        width: "407px",
+        showClose: false,
+        unstyled: true,
+      },
+    );
+  };
 
   return (
     <div
@@ -54,6 +70,12 @@ export default function HeaderSearchInput({
           {/* Increased icon size */}
         </button>
       </div>
+      <button
+        className="flex items-center gap-2 px-4 py-2 text-lg font-bold text-[#3182ce] hover:text-[#3182ce]/50 xl:text-xl 2xl:text-2xl 3xl:text-3xl"
+        onClick={openFilterModal}
+      >
+        <FaFilter className="text-xl" /> Filter
+      </button>
     </div>
   );
 }
