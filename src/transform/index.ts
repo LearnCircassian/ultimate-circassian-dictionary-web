@@ -1,5 +1,16 @@
-import { ApiAutocompleteResponse, Autocomplete, SupportedLang } from "~/interfaces";
-import { replaceAllOneToPalochka, safeWordToRegularWord } from "~/utils/wordFormatting";
+import {
+  ApiAutocompleteResponse,
+  ApiWordDefinitionsResultsResponse,
+  Autocomplete,
+  getSupportedLangForString,
+  SupportedLang,
+  WordDefinitionsResults,
+} from "~/interfaces";
+import {
+  replaceAllOneToPalochka,
+  replaceAllPalochkaLettersToOne,
+  safeWordToRegularWord,
+} from "~/utils/wordFormatting";
 
 export function transformAutocomplete(a: ApiAutocompleteResponse): Autocomplete {
   // Transform the key from safe word to regular word
@@ -7,23 +18,31 @@ export function transformAutocomplete(a: ApiAutocompleteResponse): Autocomplete 
   safeKey = replaceAllOneToPalochka(safeKey);
 
   // Transform the languages from string to SupportedLang enum
-  const fromLangs = a.from_langs.map((lang) => {
-    const supportedLang = SupportedLang[lang as keyof typeof SupportedLang];
-    if (!supportedLang) {
-      throw new Error(`Invalid language enum: ${lang}`);
-    }
-    return supportedLang;
-  });
+  const fromLangs = a.from_langs.map(getSupportedLangForString);
 
   // Transform the languages from string to SupportedLang enum
-  const toLangs = a.toLangs.map((lang) => {
-    const supportedLang = SupportedLang[lang as keyof typeof SupportedLang];
-    if (!supportedLang) {
-      throw new Error(`Invalid language enum: ${lang}`);
-    }
-    return supportedLang;
-  });
+  const toLangs = a.toLangs.map(getSupportedLangForString);
 
   // Return the transformed autocomplete
   return { key: safeKey, fromLangs, toLangs };
+}
+
+export function transformWordDefinitionsResults(
+  a: ApiWordDefinitionsResultsResponse,
+): WordDefinitionsResults {
+  // Transform the spelling from safe word to regular word
+  a.spelling = safeWordToRegularWord(a.spelling);
+  a.spelling = replaceAllPalochkaLettersToOne(a.spelling);
+
+  // Transform the title from safe word to regular word
+  a.html = replaceAllPalochkaLettersToOne(a.html);
+
+  // Return the transformed word definitions results
+  return {
+    spelling: a.spelling,
+    title: a.title,
+    html: a.html,
+    fromLang: getSupportedLangForString(a.fromLang),
+    toLang: getSupportedLangForString(a.toLang),
+  };
 }

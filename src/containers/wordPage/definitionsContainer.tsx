@@ -6,6 +6,7 @@ import { cn } from "~/utils/classNames";
 import { useQuery } from "@tanstack/react-query";
 import { fetchExactWordDefinitions } from "~/requests";
 import { addToWordHistoryCache, findInWordHistoryCache } from "~/cache/wordHistory";
+import { getSearchFilterPrefsCache } from "~/cache/searchFilterPrefs";
 
 export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: string }) {
   const {
@@ -28,6 +29,7 @@ export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: s
 
       const wordObjectRes = await fetchExactWordDefinitions(wordSpelling);
       if (wordObjectRes.isErr()) {
+        console.error(`Failed to find word definitions for ${wordSpelling}`);
         throw new Error(`Failed to find word definitions for ${wordSpelling}`);
       }
       addToWordHistoryCache(wordObjectRes.value);

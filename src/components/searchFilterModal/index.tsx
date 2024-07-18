@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import XSvg from "~/components/svg/xSvg";
 import { cn } from "~/utils/classNames";
-import { SupportedLang } from "~/interfaces";
+import { getAllSupportedLangs, SupportedLang } from "~/interfaces";
 import { getSearchFilterPrefsCache, saveSearchFilterPrefsCache } from "~/cache/searchFilterPrefs";
 import { useRouter } from "next/navigation"; // Assuming SupportedLang enum is imported from interfaces
 
@@ -33,11 +33,11 @@ export default function SearchFilterModal({ hide }: SearchFilterModalProps) {
   }
 
   function handleSelectAllFromLang() {
-    setSelectedFromLangCheckboxes(Object.values(SupportedLang));
+    setSelectedFromLangCheckboxes(getAllSupportedLangs());
   }
 
   function handleSelectAllToLang() {
-    setSelectedToLangCheckboxes(Object.values(SupportedLang));
+    setSelectedToLangCheckboxes(getAllSupportedLangs());
   }
 
   function handleDeselectAllFromLang() {
@@ -98,7 +98,7 @@ export default function SearchFilterModal({ hide }: SearchFilterModalProps) {
               </div>
             </div>
             <div className="mt-4 flex flex-col gap-2">
-              {Object.values(SupportedLang).map((lang) => (
+              {getAllSupportedLangs().map((lang) => (
                 <div key={lang} className="flex items-center gap-2">
                   <input
                     type="checkbox"
@@ -137,7 +137,7 @@ export default function SearchFilterModal({ hide }: SearchFilterModalProps) {
               </div>
             </div>
             <div className="mt-4 flex flex-col gap-2">
-              {Object.values(SupportedLang).map((lang) => (
+              {getAllSupportedLangs().map((lang) => (
                 <div key={lang} className="flex items-center gap-2">
                   <input
                     type="checkbox"

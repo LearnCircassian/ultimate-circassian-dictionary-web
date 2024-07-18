@@ -8,10 +8,14 @@ interface SearchFilterPrefs {
 
 export function getSearchFilterPrefsCache(): SearchFilterPrefs {
   const searchFilterPrefs = localStorage.getItem(SEARCH_FILTER_PREFS_CACHE_KEY);
+  const fromLang = getAllSupportedLangs();
+  const toLang = getAllSupportedLangs();
+  fromLang.push(SupportedLang.AdyKbd);
+  toLang.push(SupportedLang.AdyKbd);
   if (!searchFilterPrefs) {
     return {
-      fromLang: getAllSupportedLangs(),
-      toLang: getAllSupportedLangs(),
+      fromLang: fromLang,
+      toLang: toLang,
     };
   }
   return JSON.parse(searchFilterPrefs);

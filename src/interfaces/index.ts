@@ -33,19 +33,53 @@ export interface ApiPaginationResponse<T> {
   };
 }
 
+export interface ApiWordDefinitionsResultsResponse {
+  spelling: string;
+  title: string;
+  html: string;
+  fromLang: SupportedLang;
+  toLang: SupportedLang;
+}
+
 export interface WordDefinitionsResults {
   spelling: string;
   title: string;
   html: string;
-  fromLang: string;
-  toLang: string;
+  fromLang: SupportedLang;
+  toLang: SupportedLang;
 }
 
 export function getAllSupportedLangs(): SupportedLang[] {
-  return Object.values(SupportedLang);
+  return Object.values(SupportedLang).filter((lang) => {
+    return lang.toString() !== SupportedLang.AdyKbd.toString();
+  });
+}
+
+export function getSupportedLangForString(s: string): SupportedLang {
+  switch (s) {
+    case "Ady/Kbd":
+      return SupportedLang.AdyKbd;
+    case "Ady":
+      return SupportedLang.Ady;
+    case "Kbd":
+      return SupportedLang.Kbd;
+    case "En":
+      return SupportedLang.En;
+    case "Ru":
+      return SupportedLang.Ru;
+    case "Tr":
+      return SupportedLang.Tr;
+    case "Ar":
+      return SupportedLang.Ar;
+    case "He":
+      return SupportedLang.He;
+    default:
+      throw new Error(`Invalid language: ${s}`);
+  }
 }
 
 export enum SupportedLang {
+  AdyKbd = "Ady/Kbd",
   Ady = "Ady",
   Kbd = "Kbd",
   En = "En",

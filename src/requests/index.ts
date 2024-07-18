@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from "axios";
 import {
   ApiAutocompleteResponse,
   ApiResponse,
+  ApiWordDefinitionsResultsResponse,
   Autocomplete,
   WordDefinitionsResults,
 } from "~/interfaces";
@@ -13,7 +14,7 @@ import {
   replaceAllPalochkaLettersToOne,
   safeWordToRegularWord,
 } from "~/utils/wordFormatting";
-import { transformAutocomplete } from "~/transform";
+import { transformAutocomplete, transformWordDefinitionsResults } from "~/transform";
 import { getSearchFilterPrefsCache } from "~/cache/searchFilterPrefs";
 
 export async function fetchWordAutocompletesPaginated(args: {
@@ -134,20 +135,17 @@ export async function fetchExactWordDefinitions(
 ): Promise<Result<WordDefinitionsResults[], string>> {
   let wordAdjusted = regularWordToSafeWord(word).trim().toLowerCase();
   wordAdjusted = replaceAllPalochkaLettersToOne(wordAdjusted);
+
   try {
     const url = `${API_URL}/public/def/${wordAdjusted}`;
-    const response: AxiosResponse<ApiResponse<WordDefinitionsResults[]>> = await axios({
+    const response: AxiosResponse<ApiResponse<ApiWordDefinitionsResultsResponse[]>> = await axios({
       method: "GET",
       url: url,
     });
 
-    const result = response.data.data;
-    for (const r of result) {
-      r.spelling = safeWordToRegularWord(r.spelling);
-      r.spelling = replaceAllPalochkaLettersToOne(r.spelling);
-      r.html = replaceAllPalochkaLettersToOne(r.html);
-    }
-    return ok(result);
+    const rawResults = response.data.data;
+    const transformedResults = rawResults.map(transformWordDefinitionsResults);
+    return ok(transformedResults);
   } catch (e) {
     return err(`Failed to fetch definitions for ${word}`);
   }
