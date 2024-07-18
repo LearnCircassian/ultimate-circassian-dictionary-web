@@ -32,13 +32,10 @@ export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: s
         console.error(`Failed to find word definitions for ${wordSpelling}`);
         throw new Error(`Failed to find word definitions for ${wordSpelling}`);
       }
-      console.log("wordObjectRes:", wordObjectRes);
       addToWordHistoryCache(wordObjectRes.value);
       return wordObjectRes.value;
     },
   });
-
-  console.log("allDefResults:", allDefResults);
 
   const filteredDefResults = useMemo(() => {
     const searchFilterPrefs = getSearchFilterPrefsCache();

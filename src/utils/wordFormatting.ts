@@ -22,10 +22,6 @@ export function replaceAllPalochkaLettersToOne(text: string) {
   // Regular expression to match Cyrillic characters (Unicode range for Cyrillic)
   const cyrillicRegex = /^[\u0400-\u04FF]/;
 
-  if (text.startsWith("к1")) {
-    console.log("text", text);
-  }
-
   let isLetterStartsWithCyrillicOrPalochka = false;
   text = text.toLowerCase();
   isLetterStartsWithCyrillicOrPalochka ||= cyrillicRegex.test(text.charAt(0));
