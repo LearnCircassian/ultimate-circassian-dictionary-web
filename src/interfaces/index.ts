@@ -37,8 +37,8 @@ export interface ApiWordDefinitionsResultsResponse {
   spelling: string;
   title: string;
   html: string;
-  from_lang: string[];
-  to_lang: string[];
+  from_langs: string[];
+  to_langs: string[];
 }
 export interface WordDefinitionsResults {
   spelling: string;
