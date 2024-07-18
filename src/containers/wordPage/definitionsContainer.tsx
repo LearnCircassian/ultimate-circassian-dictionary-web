@@ -4,7 +4,7 @@ import parse from "html-react-parser";
 import { HiChevronDown } from "react-icons/hi";
 import { cn } from "~/utils/classNames";
 import { useQuery } from "@tanstack/react-query";
-import { fetchWordDefinitions } from "~/requests";
+import { fetchExactWordDefinitions } from "~/requests";
 import { addToWordHistoryCache, findInWordHistoryCache } from "~/cache/wordHistory";
 
 export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: string }) {
@@ -26,7 +26,7 @@ export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: s
         return foundResults;
       }
 
-      const wordObjectRes = await fetchWordDefinitions(wordSpelling);
+      const wordObjectRes = await fetchExactWordDefinitions(wordSpelling);
       if (wordObjectRes.isErr()) {
         throw new Error(`Failed to find word definitions for ${wordSpelling}`);
       }

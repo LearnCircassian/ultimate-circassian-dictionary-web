@@ -1,9 +1,10 @@
 import { ApiAutocompleteResponse, Autocomplete, SupportedLang } from "~/interfaces";
-import { safeWordToRegularWord } from "~/utils/safeWords";
+import { replaceAllOneToPalochka, safeWordToRegularWord } from "~/utils/wordFormatting";
 
 export function transformAutocomplete(a: ApiAutocompleteResponse): Autocomplete {
   // Transform the key from safe word to regular word
-  const safeKey = safeWordToRegularWord(a.key);
+  let safeKey = safeWordToRegularWord(a.key);
+  safeKey = replaceAllOneToPalochka(safeKey);
 
   // Transform the languages from string to SupportedLang enum
   const fromLangs = a.from_langs.map((lang) => {

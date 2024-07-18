@@ -3,7 +3,7 @@ import { HiArrowLeft, HiArrowRight, HiHome } from "react-icons/hi";
 import React from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
-import { regularWordToSafeWord, safeWordToRegularWord } from "~/utils/safeWords";
+import { regularWordToSafeWord, safeWordToRegularWord } from "~/utils/wordFormatting";
 import { findLeftAndRightOfCachedWord } from "~/cache/wordHistory";
 
 export default function WordPageFooter() {

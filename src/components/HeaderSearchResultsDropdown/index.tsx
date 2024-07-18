@@ -15,6 +15,7 @@ import {
   removeFromWordHistoryCache,
 } from "~/cache/wordHistory";
 import { Autocomplete } from "~/interfaces";
+import { replaceAllOneToPalochka } from "~/utils/wordFormatting";
 
 interface HeaderSearchResultsDropdownProps {
   searchInputValue: string;
@@ -67,7 +68,9 @@ export default function HeaderSearchResultsDropdown({
       if (debouncedSearchInputValue.trim() === "") {
         return findAllAutocompletesInWordHistoryCache();
       }
-      return findAutocompletesInWordHistoryCache(debouncedSearchInputValue);
+      return findAutocompletesInWordHistoryCache(debouncedSearchInputValue).map((w) => {
+        return replaceAllOneToPalochka(w);
+      });
     },
   });
 
@@ -119,11 +122,14 @@ export default function HeaderSearchResultsDropdown({
       <div
         ref={dropdownRef}
         className={cn(
-          "absolute left-1/2 top-[80px] max-h-80 flex -translate-x-1/2 transform flex-col items-center justify-center gap-2 overflow-y-auto rounded-b-[16px] bg-white shadow-lg",
+          "absolute py-4 left-1/2 top-[80px] max-h-80 flex -translate-x-1/2 transform flex-col items-center justify-center overflow-y-auto rounded-b-[16px] bg-white shadow-lg",
           SIZE_STYLE,
         )}
       >
-        <div className="my-4 text-3xl font-semibold text-black">No results found</div>
+        <p className="text-3xl font-semibold text-black">No results found</p>
+        <p className="text-2xl font-semibold text-black">
+          (Make sure you selected the right filters before searching)
+        </p>
       </div>
     );
   }
@@ -133,7 +139,7 @@ export default function HeaderSearchResultsDropdown({
       ref={dropdownRef}
       className={cn(
         "scrollbar-gray absolute left-1/2 top-[80px] flex -translate-x-1/2 transform flex-col items-center justify-start gap-2 overflow-y-auto rounded-b-[16px] bg-white p-4 shadow-lg",
-        "6xl:max-h-[1024px] 5xl:max-h-[920px] 4xl:max-h-[860px] 3xl:max-h-[700px] 2xl:max-h-[600px] xl:max-h-[600px] lg:max-h-[600px] md:max-h-[600px] max-h-[600px]",
+        "6xl:max-h-[1440px] 5xl:max-h-[1200px] 4xl:max-h-[1024px] 3xl:max-h-[900px] 2xl:max-h-[800px] xl:max-h-[700px] lg:max-h-[600px] md:max-h-[600px] max-h-[600px]",
         SIZE_STYLE,
       )}
     >
@@ -144,7 +150,10 @@ export default function HeaderSearchResultsDropdown({
         return (
           <div key={word} className="flex w-full flex-row justify-between p-2 hover:bg-[#e7e7e7]">
             <button
-              className="w-full rounded-md text-left text-lg font-medium text-[#bb90f6]"
+              className={cn(
+                "w-full rounded-md text-left font-medium text-[#bb90f6]",
+                "text-lg 4xl:text-4xl 3xl:text-3xl 2xl:text-2xl xl:text-xl",
+              )}
               onClick={() => onWordSelection(word)}
             >
               {word}
@@ -171,7 +180,10 @@ export default function HeaderSearchResultsDropdown({
 
           return (
             <button
-              className="hover:bg-gray-100 w-full rounded-md p-2 text-left text-lg font-medium hover:bg-[#e7e7e7]"
+              className={cn(
+                "hover:bg-gray-100 w-full rounded-md p-2 text-left font-medium hover:bg-[#e7e7e7]",
+                "text-lg 4xl:text-4xl 3xl:text-3xl 2xl:text-2xl xl:text-xl",
+              )}
               key={word.key}
               onClick={() => onWordSelection(word.key)}
             >

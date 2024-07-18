@@ -6,7 +6,7 @@ import {
 } from "~/cache/wordHistory";
 import { cn } from "~/utils/classNames";
 import { HiChevronDown } from "react-icons/hi";
-import { regularWordToSafeWord } from "~/utils/safeWords";
+import { regularWordToSafeWord } from "~/utils/wordFormatting";
 import { useParams, useRouter } from "next/navigation";
 import { FaTimesCircle } from "react-icons/fa"; // Import the X icon
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import HeaderSearchInput from "~/components/headerSearchInput";
 import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
 import HeaderSearchResultsDropdown from "~/components/HeaderSearchResultsDropdown";
-import { regularWordToSafeWord } from "~/utils/safeWords";
+import { regularWordToSafeWord } from "~/utils/wordFormatting";
 
 export default function HeaderSearchContainer() {
   const [searchInputValue, setSearchInputValue] = React.useState<string>("");

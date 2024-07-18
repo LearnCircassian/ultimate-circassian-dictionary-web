@@ -41,6 +41,10 @@ export interface WordDefinitionsResults {
   toLang: string;
 }
 
+export function getAllSupportedLangs(): SupportedLang[] {
+  return Object.values(SupportedLang);
+}
+
 export enum SupportedLang {
   Ady = "Ady",
   Kbd = "Kbd",

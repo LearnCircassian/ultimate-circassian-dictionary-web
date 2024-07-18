@@ -1,6 +1,7 @@
 import React from "react";
 import { FaSearch, FaTimesCircle } from "react-icons/fa";
 import { cn } from "~/utils/classNames";
+import { replaceAllPalochkaLettersToOne, replaceAllOneToPalochka } from "~/utils/wordFormatting";
 
 interface HeaderSearchInputProps {
   value: string;
@@ -17,6 +18,10 @@ export default function HeaderSearchInput({
   className,
   placeholder,
 }: HeaderSearchInputProps) {
+  function inputChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
+    onChange(e.target.value);
+  }
+
   return (
     <div
       className={cn(
@@ -40,14 +45,11 @@ export default function HeaderSearchInput({
         <input
           className="flex-grow bg-transparent px-1 font-medium text-black outline-none sm:px-2"
           value={value}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={inputChangeHandler}
           onFocus={onFocus} // Optional onFocus handler passed through
           placeholder={placeholder}
         />
-        <button
-          onClick={() => onChange("")}
-          className={cn("flex items-center hover:opacity-80", { hidden: !value })}
-        >
+        <button className={cn("flex items-center hover:opacity-80", { hidden: !value })}>
           <FaTimesCircle className="opacity-80" size={24} color="#757575" />{" "}
           {/* Increased icon size */}
         </button>
