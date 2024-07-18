@@ -37,28 +37,23 @@ export interface ApiWordDefinitionsResultsResponse {
   spelling: string;
   title: string;
   html: string;
-  fromLang: SupportedLang;
-  toLang: SupportedLang;
+  from_lang: string[];
+  to_lang: string[];
 }
-
 export interface WordDefinitionsResults {
   spelling: string;
   title: string;
   html: string;
-  fromLang: SupportedLang;
-  toLang: SupportedLang;
+  fromLang: SupportedLang[];
+  toLang: SupportedLang[];
 }
 
 export function getAllSupportedLangs(): SupportedLang[] {
-  return Object.values(SupportedLang).filter((lang) => {
-    return lang.toString() !== SupportedLang.AdyKbd.toString();
-  });
+  return Object.values(SupportedLang);
 }
 
 export function getSupportedLangForString(s: string): SupportedLang {
   switch (s) {
-    case "Ady/Kbd":
-      return SupportedLang.AdyKbd;
     case "Ady":
       return SupportedLang.Ady;
     case "Kbd":
@@ -79,7 +74,6 @@ export function getSupportedLangForString(s: string): SupportedLang {
 }
 
 export enum SupportedLang {
-  AdyKbd = "Ady/Kbd",
   Ady = "Ady",
   Kbd = "Kbd",
   En = "En",

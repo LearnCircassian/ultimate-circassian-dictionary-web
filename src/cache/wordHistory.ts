@@ -12,6 +12,7 @@ export function _loadWordHistoryCache(): WordDefinitionsResults[][] {
     }
     return JSON.parse(serializedState);
   } catch (err) {
+    _resetWordHistoryCache();
     return [];
   }
 }
@@ -24,6 +25,10 @@ function _saveWordHistoryCache(state: WordDefinitionsResults[][]) {
   } catch (err) {
     // Handle write errors here
   }
+}
+
+function _resetWordHistoryCache() {
+  localStorage.removeItem(WORD_HISTORY_CACHE_KEY);
 }
 
 export function findInWordHistoryCache(word: string): WordDefinitionsResults[] | undefined {

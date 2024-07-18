@@ -3,7 +3,6 @@ import {
   ApiWordDefinitionsResultsResponse,
   Autocomplete,
   getSupportedLangForString,
-  SupportedLang,
   WordDefinitionsResults,
 } from "~/interfaces";
 import {
@@ -42,7 +41,7 @@ export function transformWordDefinitionsResults(
     spelling: a.spelling,
     title: a.title,
     html: a.html,
-    fromLang: getSupportedLangForString(a.fromLang),
-    toLang: getSupportedLangForString(a.toLang),
+    fromLang: a.from_lang.map(getSupportedLangForString),
+    toLang: a.to_lang.map(getSupportedLangForString),
   };
 }
