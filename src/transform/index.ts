@@ -20,7 +20,7 @@ export function transformAutocomplete(a: ApiAutocompleteResponse): Autocomplete 
   const fromLangs = a.from_langs.map(getSupportedLangForString);
 
   // Transform the languages from string to SupportedLang enum
-  const toLangs = a.toLangs.map(getSupportedLangForString);
+  const toLangs = a.to_langs.map(getSupportedLangForString);
 
   // Return the transformed autocomplete
   return { key: safeKey, fromLangs, toLangs };

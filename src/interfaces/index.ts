@@ -86,7 +86,7 @@ export enum SupportedLang {
 export interface ApiAutocompleteResponse {
   key: string;
   from_langs: string[];
-  toLangs: string[];
+  to_langs: string[];
 }
 
 export interface Autocomplete {
