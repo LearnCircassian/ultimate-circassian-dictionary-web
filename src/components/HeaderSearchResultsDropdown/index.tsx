@@ -146,30 +146,37 @@ export default function HeaderSearchResultsDropdown({
       <div className="w-full border-b-2 border-solid border-[#0049d7] px-2 py-4 text-left text-lg font-bold">
         Definitions
       </div>
-      {cachedAutocompletesList.sort().map((word) => {
-        return (
-          <div key={word} className="flex w-full flex-row justify-between p-2 hover:bg-[#e7e7e7]">
-            <button
-              className={cn(
-                "w-full rounded-md text-left font-medium text-[#bb90f6]",
-                "text-lg 4xl:text-4xl 3xl:text-3xl 2xl:text-2xl xl:text-xl",
-              )}
-              onClick={() => onWordSelection(word)}
-            >
-              {word}
-            </button>
-            <button
-              className="text-neutral-800 hover:text-neutral-600/50 hover:underline"
-              onClick={() => cachedWordDeleteClickHandler(word)}
-            >
-              Delete
-            </button>
-          </div>
-        );
-      })}
+      {cachedAutocompletesList
+        .sort((a, b) => {
+          return a.localeCompare(b);
+        })
+        .map((word) => {
+          return (
+            <div key={word} className="flex w-full flex-row justify-between p-2 hover:bg-[#e7e7e7]">
+              <button
+                className={cn(
+                  "w-full rounded-md text-left font-medium text-[#bb90f6]",
+                  "text-lg 4xl:text-4xl 3xl:text-3xl 2xl:text-2xl xl:text-xl",
+                )}
+                onClick={() => onWordSelection(word)}
+              >
+                {word}
+              </button>
+              <button
+                className="text-neutral-800 hover:text-neutral-600/50 hover:underline"
+                onClick={() => cachedWordDeleteClickHandler(word)}
+              >
+                Delete
+              </button>
+            </div>
+          );
+        })}
       {autocompletesList
-        .filter((word) => {
-          return !cachedAutocompletesList.includes(word.key);
+        .filter((a) => {
+          return !cachedAutocompletesList.includes(a.key);
+        })
+        .sort((a, b) => {
+          return a.key.localeCompare(b.key);
         })
         .map((word) => {
           // Bold the substring that matches searchInputValue
