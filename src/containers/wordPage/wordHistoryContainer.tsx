@@ -47,7 +47,6 @@ export default function WordHistoryContainer() {
         <span className={cn("2xl:text-4xl xl:text-3xl lg:text-2xl md:text-xl sm:text-lg text-md")}>
           Search History
         </span>
-        <HiChevronDown className="ml-2" />
       </div>
       <div
         className={cn(
