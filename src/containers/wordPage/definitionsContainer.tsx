@@ -49,9 +49,9 @@ export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: s
 
   if (isWordDefinitionsLoading) {
     return (
-      <div className="flex h-full items-center justify-center">
+      <div className="flex size-full items-center justify-center">
         <div className="flex items-center justify-center p-4">
-          <div className="border-blue-500 size-8 animate-spin rounded-full border-4 border-solid border-t-transparent"></div>
+          <div className="border-blue-500 size-12 animate-spin rounded-full border-4 border-solid border-t-transparent"></div>
         </div>
       </div>
     );
@@ -59,7 +59,7 @@ export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: s
 
   if (isWordDefinitionsErrored) {
     return (
-      <div className="mt-4 flex h-full items-center justify-center">
+      <div className="mt-4 flex size-full items-center  justify-center">
         <p className="text-3xl text-red">
           Failed to load word &apos;{wordSpelling}&apos; definitions. Please try again later.
         </p>
