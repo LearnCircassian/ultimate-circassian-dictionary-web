@@ -4,8 +4,10 @@ import HeaderSearchContainer from "~/containers/header/headerSearchContainer";
 import { useRouter } from "next/navigation";
 import { cn } from "~/utils/classNames";
 import Image from "next/image";
+import useWindowSize from "~/hooks/useWindowDimensions";
 
 export default function Header() {
+  const { width } = useWindowSize();
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -54,7 +56,7 @@ export default function Header() {
           </div>
           <div className="md:hidden">
             <button onClick={toggleMobileMenu}>
-              {isMobileMenuOpen ? <FaTimes size={36} /> : <FaBars size={36} />}
+              <FaTimes size={width < 300 ? 26 : 36} />
             </button>
           </div>
         </div>

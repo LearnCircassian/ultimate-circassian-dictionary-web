@@ -127,8 +127,10 @@ export default function HeaderSearchResultsDropdown({
           SIZE_STYLE,
         )}
       >
-        <p className="text-3xl font-semibold text-black">No results found</p>
-        <p className="text-2xl font-semibold text-black">
+        <p className="text-center text-xl font-semibold text-black md:text-2xl lg:text-2xl xl:text-2xl 2xl:text-3xl">
+          No results found
+        </p>
+        <p className="text-center text-xs font-semibold text-black/70 md:text-base lg:text-lg xl:text-xl 2xl:text-xl">
           (Make sure you selected the right filters before searching)
         </p>
       </div>

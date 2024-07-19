@@ -6,8 +6,10 @@ import SearchFilterModal from "~/components/searchFilterModal";
 import HeaderSearchResultsDropdown from "~/components/HeaderSearchResultsDropdown";
 import { useParams, useRouter } from "next/navigation";
 import { regularWordToSafeWord } from "~/utils/wordFormatting";
+import useWindowSize from "~/hooks/useWindowDimensions";
 
 export default function HeaderSearchContainer() {
+  const { width } = useWindowSize();
   const [inputValue, setInputValue] = React.useState<string>("");
   const router = useRouter();
   const params = useParams<{ word: string }>();
@@ -57,7 +59,7 @@ export default function HeaderSearchContainer() {
         <div
           className={cn(
             "flex items-center justify-center w-full",
-            "sm:px-4 px-2 py-3 text-black font-medium rounded-lg shadow",
+            "sm:px-4 xs:px-2 px-1 py-3 text-black font-medium rounded-lg shadow",
             "3xl:text-5xl 2xl:text-4xl xl:text-3xl lg:text-2xl md:text-xl sm:text-lg text-lg",
           )}
           style={{
@@ -65,7 +67,8 @@ export default function HeaderSearchContainer() {
             border: "2px solid #155e75",
           }} // Added border and adjusted background color
         >
-          <FaSearch className="opacity-80" size={24} color="#155e75" /> {/* Increased icon size */}
+          <FaSearch className="opacity-80" size={width < 300 ? 16 : 24} color="#155e75" />{" "}
+          {/* Increased icon size */}
           <input
             className="flex-grow bg-transparent px-1 font-medium text-black outline-none sm:px-2"
             value={inputValue}
