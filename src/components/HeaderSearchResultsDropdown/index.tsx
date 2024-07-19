@@ -176,14 +176,28 @@ export default function HeaderSearchResultsDropdown({
           return !cachedAutocompletesList.includes(a.key);
         })
         .sort((a, b) => {
+          const searchInputValAdjusted = replaceStickLettersToPalochka(debouncedSearchInputValue);
+          // Prioritize words that start with debouncedSearchInputValue
+          const aStartsWith = a.key.toLowerCase().startsWith(searchInputValAdjusted.toLowerCase());
+          const bStartsWith = b.key.toLowerCase().startsWith(searchInputValAdjusted.toLowerCase());
+
+          if (aStartsWith && !bStartsWith) {
+            return -1;
+          }
+          if (!aStartsWith && bStartsWith) {
+            return 1;
+          }
+
+          // If both or neither start with debouncedSearchInputValue, sort alphabetically
           return a.key.localeCompare(b.key);
         })
         .map((word) => {
           // Bold the substring that matches searchInputValue
-          const index = word.key.toLowerCase().indexOf(debouncedSearchInputValue.toLowerCase());
+          const searchInputValAdjusted = replaceStickLettersToPalochka(debouncedSearchInputValue);
+          const index = word.key.toLowerCase().indexOf(searchInputValAdjusted.toLowerCase());
           const before = word.key.slice(0, index);
-          const bold = word.key.slice(index, index + debouncedSearchInputValue.length);
-          const after = word.key.slice(index + debouncedSearchInputValue.length);
+          const bold = word.key.slice(index, index + searchInputValAdjusted.length);
+          const after = word.key.slice(index + searchInputValAdjusted.length);
 
           return (
             <button
