@@ -111,9 +111,9 @@ const config: Config = {
         "create-stv-form": "1fr 3fr",
         "create-stv-page": "1fr 320px",
         "profile-table-manager":
-            "minmax(100px,150px) minmax(80px,120px) minmax(200px, 260px) minmax(144px, 1fr) minmax(220px,1fr)",
+          "minmax(100px,150px) minmax(80px,120px) minmax(200px, 260px) minmax(144px, 1fr) minmax(220px,1fr)",
         "profile-table-investor":
-            "minmax(100px,150px) minmax(80px,120px) minmax(50px,70px) minmax(200px, 260px) minmax(144px, 1fr) minmax(220px,1fr)",
+          "minmax(100px,150px) minmax(80px,120px) minmax(50px,70px) minmax(200px, 260px) minmax(144px, 1fr) minmax(220px,1fr)",
         "leaderboard-table-1280": "28px 1fr 60px",
         "leaderboard-table-1324": "40px 1fr 60px",
         "leaderboard-table": "60px 1fr 100px",
@@ -223,81 +223,7 @@ const config: Config = {
       margin: {
         52: "3.25rem",
       },
-      colors: {
-        traderCardBg: "#10141C",
-        tooltipBg: "#43434A",
-        feedItemHover: "#181B21",
-        bgNavigation: "#0e1118",
-        componentBody: "#10131B",
-        inputBg: "#1C1F27",
-        navy: "#0B263F",
-        blue: "#082034",
-        blue2: "#5BA4FF",
-        blue3: "#1d88ec",
-        blue4: "#082034",
-        gray: "#949292",
-        "text-gray": "#888A8F",
-        "gray-explorer": "#6e6e71",
-        white50: "ffffff50",
-        darkGreen: "#039350",
-        boostGreenHover: "#00A355",
-        green: "#00CC6A",
-        greenButtonHover: "#039350",
-        lightGreen: "#00bc35",
-        purple: "#B879FF",
-        purpleBtnHover: "#4C2B71",
-        purpleBtn: "#6C3DA2",
-        purpleBtnBorder: "#793FBC",
-        purple2: "#A700A0",
-        purple3: "#6A3BA0",
-        purple4: "#793FBC",
-        red: "#f84646",
-        redButtonHover: "#9D3838",
-        yellow: "#FFC600",
-        yellowDarken: "#CC9E00",
-        dashedGray: "rgba(255, 255, 255, 0.1)",
-        textGreen: "#00CC6A",
-        headerColor: "#FFFFFF",
-        textGrey: "#888A8F",
-        textRed: "#FA3D60",
-        borderColor: "#282b32",
-        sectionColor: "#11141c",
-        bgVeryDark: "#10131B",
-        bgDark: "#1B1F28",
-        customGrey: "#4a4b4f",
-        customGrey2: "#43434A",
-        white: "#FFFFFF",
-        imageMask: "#101118",
-        chatBg: "#12151B",
-        // socials
-        discord: "#5865F2",
-        twitter: "#1D9BF0",
-        twitterHover: "#166AA3",
-        telegram: "#36ADE2",
-        linkTwitter: "#41ABE1",
-        mobileMenuIcon: "#B9BABD",
-        popupBG: "#1D2029",
-        overlay: "#0D1016",
-
-        sliderDefaultGrey: "#FEFFFE12",
-        popupBg: "#151820",
-        // 2.0
-        "black-main": "#0B0C13",
-        "black-input": "#151922",
-
-        "vault-loop-sidebar-bg": "#161921",
-        assetPanelBG: "rgba(21, 24, 32, 0.90)",
-
-        "black-sheet": "#151820",
-
-        // button
-        disabled: "#2D3037",
-        buttonGray: "#434348",
-        //staking
-        pink: "#DB49B5",
-
-        chatItemBg: "rgba(219,224,237,0.08)",
-      },
+      colors: {},
       screens: {
         "<sm": { max: "639px" },
         "<md": { max: "767px" },
@@ -315,7 +241,7 @@ const config: Config = {
         modal: "0 4px 4px 0 rgba(0, 0, 0, 0.52)",
         greenButon: "0px 2px 0px rgba(0, 63, 18, 0.53)",
         greenInnerShadow:
-            "0px 0px 58px 0px rgba(0, 204, 106, 0.21) inset, 0px 0px 4px 0px rgba(255, 255, 255, 0.25) inset",
+          "0px 0px 58px 0px rgba(0, 204, 106, 0.21) inset, 0px 0px 4px 0px rgba(255, 255, 255, 0.25) inset",
         subscribeCardShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.44)",
         emptyAvatarLeaderboard: "0px 0px 30.87721px 0px rgba(255, 224, 115, 0.20)",
         subscriptionBannerCardHoverShadow: "0px 0px 15px 0px #69277B",
@@ -353,64 +279,63 @@ const config: Config = {
         battleRoyalePrize: `linear-gradient(0deg, #FFC600 0.6%, #FFEEB4 73.33%)`,
         gradient: "linear-gradient(90deg, #37E6AF 0%, #FFC700 170.35%)",
         profileBgGradient:
-            "linear-gradient(180deg, rgba(11, 12, 19, 0.00) 0%, rgba(11, 12, 19, 0.56) 41.15%, #0B0C13 100%)",
+          "linear-gradient(180deg, rgba(11, 12, 19, 0.00) 0%, rgba(11, 12, 19, 0.56) 41.15%, #0B0C13 100%)",
         profileBg: `linear-gradient(180deg, rgba(11, 12, 19, 0.00) 0%, rgba(11, 12, 19, 0.56) 41.15%, #0B0C13 100%), url('~/public/profile-bg.png')`,
         managerProfileBg:
-            "linear-gradient(180deg, rgba(11, 12, 19, 0) 0%, rgba(11, 12, 19, 0.56) 40.18%, #0B0C13 89.5%),url('~/public/managerProfileBg.jpeg')",
+          "linear-gradient(180deg, rgba(11, 12, 19, 0) 0%, rgba(11, 12, 19, 0.56) 40.18%, #0B0C13 89.5%),url('~/public/managerProfileBg.jpeg')",
         investorProfileBg:
-            "linear-gradient(180deg, rgba(11, 12, 19, 0) 0%, rgba(11, 12, 19, 0.56) 40.18%, #0B0C13 89.5%),url('~/public/investorProfileBg.jpeg')",
+          "linear-gradient(180deg, rgba(11, 12, 19, 0) 0%, rgba(11, 12, 19, 0.56) 40.18%, #0B0C13 89.5%),url('~/public/investorProfileBg.jpeg')",
         maintenanceBg:
-            "linear-gradient(180deg, rgba(11, 12, 19, 0) 0%, rgba(11, 12, 19, 0.56) 40.18%, #0B0C13 89.5%),url('~/public/maintenanceBg.jpg')",
+          "linear-gradient(180deg, rgba(11, 12, 19, 0) 0%, rgba(11, 12, 19, 0.56) 40.18%, #0B0C13 89.5%),url('~/public/maintenanceBg.jpg')",
         stakeToBoostCardBg:
-            "linear-gradient(81.85deg, #10131B 19.09%, rgba(0, 0, 0,0) 182.27%, #10131B 182.27%)",
+          "linear-gradient(81.85deg, #10131B 19.09%, rgba(0, 0, 0,0) 182.27%, #10131B 182.27%)",
         tierBronze:
-            "radial-gradient(96.24% 66.02% at 48.48% -15.84%, rgba(255, 255, 255, 0.00) 0%, rgba(195, 74, 34, 0.10) 22.92%, rgba(239, 122, 84, 0.10) 45.83%, rgba(0, 0, 0, 0.00) 100%)",
+          "radial-gradient(96.24% 66.02% at 48.48% -15.84%, rgba(255, 255, 255, 0.00) 0%, rgba(195, 74, 34, 0.10) 22.92%, rgba(239, 122, 84, 0.10) 45.83%, rgba(0, 0, 0, 0.00) 100%)",
         tierSilver:
-            "radial-gradient(80.85% 55.45% at 50.13% -5.28%, rgba(255, 255, 255, 0.10) 0%, rgba(254, 254, 254, 0.10) 22.92%, rgba(146, 146, 146, 0.07) 45.83%, rgba(0, 0, 0, 0.00) 100%)",
+          "radial-gradient(80.85% 55.45% at 50.13% -5.28%, rgba(255, 255, 255, 0.10) 0%, rgba(254, 254, 254, 0.10) 22.92%, rgba(146, 146, 146, 0.07) 45.83%, rgba(0, 0, 0, 0.00) 100%)",
         tierGold:
-            "radial-gradient(80.85% 55.45% at 50.13% -5.28%, rgba(255, 255, 255, 0.20) 0%, rgba(255, 198, 0, 0.20) 22.92%, rgba(255, 200, 92, 0.14) 45.83%, rgba(0, 0, 0, 0.00) 100%)",
+          "radial-gradient(80.85% 55.45% at 50.13% -5.28%, rgba(255, 255, 255, 0.20) 0%, rgba(255, 198, 0, 0.20) 22.92%, rgba(255, 200, 92, 0.14) 45.83%, rgba(0, 0, 0, 0.00) 100%)",
         tierDiamond:
-            "linear-gradient(180deg, rgba(16, 19, 27, 0.00) 0%, #11141B 92.19%), radial-gradient(99.01% 99.01% at 50.90% 0.99%, rgba(255, 255, 255, 0.40) 0%, rgba(226, 48, 255, 0.14) 10.42%, rgba(0, 194, 255, 0.12) 57.81%, rgba(0, 0, 0, 0.00) 100%)",
+          "linear-gradient(180deg, rgba(16, 19, 27, 0.00) 0%, #11141B 92.19%), radial-gradient(99.01% 99.01% at 50.90% 0.99%, rgba(255, 255, 255, 0.40) 0%, rgba(226, 48, 255, 0.14) 10.42%, rgba(0, 194, 255, 0.12) 57.81%, rgba(0, 0, 0, 0.00) 100%)",
         statsCustomBg:
-            "linear-gradient(59deg, #12151B 0%, rgba(18, 21, 27, 1) 45%,rgba(18, 21, 27, 0.07) 100%)",
+          "linear-gradient(59deg, #12151B 0%, rgba(18, 21, 27, 1) 45%,rgba(18, 21, 27, 0.07) 100%)",
         statsCharBg:
-            "linear-gradient(360deg, rgba(0, 204, 106, 0.06) 0%, rgba(0, 204, 106, 0.00) 100%)",
+          "linear-gradient(360deg, rgba(0, 204, 106, 0.06) 0%, rgba(0, 204, 106, 0.00) 100%)",
         globalChatTopGradient: "linear-gradient(360deg,#0E1118 0%, rgba(14, 17, 24, 0.00) 100%)",
         tierBronzeText:
-            "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,140,103,1) 63%, rgba(167,46,7,1) 85%)",
+          "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,140,103,1) 63%, rgba(167,46,7,1) 85%)",
         tierSilverText:
-            "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(159,192,231,1) 57%, rgba(62,83,112,1) 81%)",
+          "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(159,192,231,1) 57%, rgba(62,83,112,1) 81%)",
         tierGoldText:
-            "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,242,119,1) 50%, rgba(255,207,30,1) 70%, rgba(255,98,8,1) 85%)",
+          "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,242,119,1) 50%, rgba(255,207,30,1) 70%, rgba(255,98,8,1) 85%)",
         tierDiamondText:
-            "linear-gradient(184deg, rgba(255,255,255,1) 12%, rgba(216,70,240,1) 56%, rgba(29,155,240,1) 88%, rgba(19,106,165,1) 90%, rgba(0,51,173,1) 115%)",
+          "linear-gradient(184deg, rgba(255,255,255,1) 12%, rgba(216,70,240,1) 56%, rgba(29,155,240,1) 88%, rgba(19,106,165,1) 90%, rgba(0,51,173,1) 115%)",
         tierBronzeBorder:
-            "linear-gradient(175deg, rgba(200,193,186,0.7) 0%, rgba(65,43,17,0.7) 24%, rgba(62,51,14,0.7) 50%, rgba(31,27,12,0.7) 65%, rgba(0,0,0,0.7) 76%, rgba(40,43,50,1) 100%)",
+          "linear-gradient(175deg, rgba(200,193,186,0.7) 0%, rgba(65,43,17,0.7) 24%, rgba(62,51,14,0.7) 50%, rgba(31,27,12,0.7) 65%, rgba(0,0,0,0.7) 76%, rgba(40,43,50,1) 100%)",
         tierSilverBorder:
-            "linear-gradient(159deg, rgba(239,239,239,0.7) 0%, rgba(223,223,223,0.7) 24%, rgba(108,104,89,0.7) 50%, rgba(55,54,51,0.7) 75%, rgba(40,43,50,1) 100%)",
+          "linear-gradient(159deg, rgba(239,239,239,0.7) 0%, rgba(223,223,223,0.7) 24%, rgba(108,104,89,0.7) 50%, rgba(55,54,51,0.7) 75%, rgba(40,43,50,1) 100%)",
         tierGoldBorder:
-            "linear-gradient(165deg, rgba(255,231,149,0.7) 0%, rgba(255,198,0,0.7) 24%, rgba(171,143,43,0.7) 50%, rgba(92,85,57,0.7) 75%, rgba(40,43,50,1) 100%)",
+          "linear-gradient(165deg, rgba(255,231,149,0.7) 0%, rgba(255,198,0,0.7) 24%, rgba(171,143,43,0.7) 50%, rgba(92,85,57,0.7) 75%, rgba(40,43,50,1) 100%)",
         tierDiamondBorder:
-            "linear-gradient(192deg, rgba(208,234,252,1) 0%, rgba(29,155,240,1) 24%, rgba(216,70,240,1) 50%, rgba(19,106,165,1) 75%, rgba(40,43,50,1) 90%)",
+          "linear-gradient(192deg, rgba(208,234,252,1) 0%, rgba(29,155,240,1) 24%, rgba(216,70,240,1) 50%, rgba(19,106,165,1) 75%, rgba(40,43,50,1) 90%)",
         stars: "url('/stake/tiers/stars.png')",
         roadmap1:
-            "radial-gradient(48.50% 48.79% at 50.00% 62.24%, #E4F9FF 0%, #1D9BF0 64.06%, #000 100%)",
+          "radial-gradient(48.50% 48.79% at 50.00% 62.24%, #E4F9FF 0%, #1D9BF0 64.06%, #000 100%)",
         roadmap2:
-            "radial-gradient(48.50% 48.79% at 50.00% 62.24%, #E4FFF2 0%, #00CC6A 64.06%, #000 100%)",
+          "radial-gradient(48.50% 48.79% at 50.00% 62.24%, #E4FFF2 0%, #00CC6A 64.06%, #000 100%)",
         roadmap3:
-            "radial-gradient(48.50% 48.79% at 50.00% 62.24%, #E8E4FF 0%, #8140FF 64.06%, #000 100%)",
+          "radial-gradient(48.50% 48.79% at 50.00% 62.24%, #E8E4FF 0%, #8140FF 64.06%, #000 100%)",
         usageGradient: "linear-gradient(180deg, rgba(0, 204, 106, 0.2) 50%, rgb(0, 204, 106) 50%)",
         subscribeCardGradient:
-            "linear-gradient(180.95deg, rgba(78, 62, 96, 0.75) 8.89%, rgba(50, 40, 62, 0.26) 60.52%)",
+          "linear-gradient(180.95deg, rgba(78, 62, 96, 0.75) 8.89%, rgba(50, 40, 62, 0.26) 60.52%)",
         subscribeCardHover:
-            "linear-gradient(180deg, rgba(85, 47, 128, 0.15) 0%, rgba(0, 0, 0, 0) 57.24%)",
+          "linear-gradient(180deg, rgba(85, 47, 128, 0.15) 0%, rgba(0, 0, 0, 0) 57.24%)",
         marginPercentGreen:
-            "linear-gradient(90deg, rgba(0, 204, 106, 0.70) -13.75%, rgba(60, 170, 177, 0.70) 123.75%)",
+          "linear-gradient(90deg, rgba(0, 204, 106, 0.70) -13.75%, rgba(60, 170, 177, 0.70) 123.75%)",
         marginPercentRed:
-            "linear-gradient(90deg, rgba(248, 70, 70, 0.70) -13.75%, rgba(248, 70, 70, 0.70) 123.75%)",
+          "linear-gradient(90deg, rgba(248, 70, 70, 0.70) -13.75%, rgba(248, 70, 70, 0.70) 123.75%)",
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-            "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
   },

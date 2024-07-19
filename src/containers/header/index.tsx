@@ -22,7 +22,7 @@ export default function Header() {
 
   return (
     <div>
-      <div className="flex w-full flex-row items-center justify-center bg-textRed p-4 shadow">
+      <div className="flex w-full flex-row items-center justify-center bg-red-400 p-4 shadow">
         <p className="text-lg text-white lg:text-4xl">
           The website is in its early stages and is still being developed, some features might not
           work as intended.
@@ -60,20 +60,20 @@ export default function Header() {
             </button>
           </div>
         </div>
-        <div className="flex flex-grow flex-row gap-2">
+        <div className="flex flex-grow flex-col gap-2">
           <HeaderSearchContainer />
         </div>
         {isMobileMenuOpen && (
           <div className="absolute left-0 top-16 z-60 w-full bg-white shadow-lg md:hidden">
             <button
-              className="flex w-full items-center justify-center gap-2 py-4 text-lg font-bold text-lightGreen hover:text-lightGreen/70 "
+              className="text-lightGreen hover:text-lightGreen/70 flex w-full items-center justify-center gap-2 py-4 text-lg font-bold "
               onClick={navigateToHome}
             >
               <FaHome />
               Home
             </button>
             <button
-              className="flex w-full items-center justify-center gap-2 py-4 text-lg font-bold text-lightGreen hover:text-lightGreen/70 "
+              className="text-lightGreen hover:text-lightGreen/70 flex w-full items-center justify-center gap-2 py-4 text-lg font-bold "
               onClick={toggleMobileMenu}
             >
               <FaTimes />
