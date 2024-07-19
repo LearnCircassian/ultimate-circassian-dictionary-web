@@ -9,11 +9,6 @@ interface WordHistoryCache {
   version: string;
 }
 
-const DEFAULT_WORD_HISTORY_CACHE: WordHistoryCache = {
-  savedResults: [],
-  version: CACHE_VERSION,
-};
-
 export function _loadWordHistoryCache(): WordDefinitionsResults[][] {
   if (typeof window === "undefined") {
     return [];
@@ -51,6 +46,7 @@ function _saveWordHistoryCache(state: WordDefinitionsResults[][]) {
 
 function _clearWordHistoryCache() {
   localStorage.removeItem(WORD_HISTORY_CACHE_KEY);
+  _saveWordHistoryCache([]);
 }
 
 export function findInWordHistoryCache(word: string): WordDefinitionsResults[] | undefined {
