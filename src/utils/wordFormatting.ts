@@ -6,7 +6,7 @@ export function regularWordToSafeWord(regularWord: string) {
   return regularWord.replaceAll("/", "&").replaceAll(" ", "_");
 }
 
-export function replaceAllOneToPalochka(text: string) {
+export function replaceStickLettersToPalochka(text: string) {
   text = text.toLowerCase();
   return text
     .replaceAll("1э", "ӏэ")
@@ -15,12 +15,65 @@ export function replaceAllOneToPalochka(text: string) {
     .replaceAll("1е", "ӏе")
     .replaceAll("1я", "ӏя")
     .replaceAll("1у", "ӏу")
-    .replaceAll("1о", "ӏо");
+    .replaceAll("1о", "ӏо")
+    .replaceAll("iэ", "ӏэ")
+    .replaceAll("iы", "ӏы")
+    .replaceAll("iа", "ӏа")
+    .replaceAll("iе", "ӏе")
+    .replaceAll("iя", "ӏя")
+    .replaceAll("iу", "ӏу")
+    .replaceAll("iо", "ӏо")
+    .replaceAll("\u04c0э", "ӏэ")
+    .replaceAll("\u04c0ы", "ӏы")
+    .replaceAll("\u04c0а", "ӏа")
+    .replaceAll("\u04c0е", "ӏе")
+    .replaceAll("\u04c0я", "ӏя")
+    .replaceAll("\u04c0у", "ӏу")
+    .replaceAll("\u04c0о", "ӏо")
+    .replaceAll("\u0049э", "ӏэ")
+    .replaceAll("\u0049ы", "ӏы")
+    .replaceAll("\u0049а", "ӏа")
+    .replaceAll("\u0049е", "ӏе")
+    .replaceAll("\u0049я", "ӏя")
+    .replaceAll("\u0049у", "ӏу")
+    .replaceAll("\u0049о", "ӏо")
+    .replaceAll("\u04cfэ", "ӏэ")
+    .replaceAll("\u04cfы", "ӏы")
+    .replaceAll("\u04cfа", "ӏа")
+    .replaceAll("\u04cfе", "ӏе")
+    .replaceAll("\u04cfя", "ӏя")
+    .replaceAll("\u04cfу", "ӏу")
+    .replaceAll("\u04cfо", "ӏо")
+    .replaceAll("\u0069э", "ӏэ")
+    .replaceAll("\u0069ы", "ӏы")
+    .replaceAll("\u0069а", "ӏа")
+    .replaceAll("\u0069е", "ӏе")
+    .replaceAll("\u0069я", "ӏя")
+    .replaceAll("\u0069у", "ӏу")
+    .replaceAll("\u0069о", "ӏо")
+    .replaceAll("\u006cэ", "ӏэ")
+    .replaceAll("\u006cы", "ӏы")
+    .replaceAll("\u006cа", "ӏа")
+    .replaceAll("\u006cе", "ӏе")
+    .replaceAll("\u006cя", "ӏя")
+    .replaceAll("\u006cу", "ӏу")
+    .replaceAll("\u006cо", "ӏо")
+    .replaceAll("\u0456э", "ӏэ")
+    .replaceAll("\u0456ы", "ӏы")
+    .replaceAll("\u0456а", "ӏа")
+    .replaceAll("\u0456е", "ӏе")
+    .replaceAll("\u0456я", "ӏя")
+    .replaceAll("\u0456у", "ӏу")
+    .replaceAll("\u0456о", "ӏо");
 }
 
-export function replaceAllPalochkaLettersToOne(text: string) {
+export function replaceStickLettersToOne(text: string) {
   // Regular expression to match Cyrillic characters (Unicode range for Cyrillic)
   const cyrillicRegex = /^[\u0400-\u04FF]/;
+
+  if (text.startsWith("к1")) {
+    console.log("text", text);
+  }
 
   let isLetterStartsWithCyrillicOrPalochka = false;
   text = text.toLowerCase();

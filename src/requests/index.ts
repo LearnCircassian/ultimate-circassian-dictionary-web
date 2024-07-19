@@ -11,7 +11,7 @@ import { err, ok, Result } from "neverthrow";
 import queryString from "query-string";
 import {
   regularWordToSafeWord,
-  replaceAllPalochkaLettersToOne,
+  replaceStickLettersToOne,
   safeWordToRegularWord,
 } from "~/utils/wordFormatting";
 import { transformAutocomplete, transformWordDefinitionsResults } from "~/transform";
@@ -23,7 +23,7 @@ export async function fetchWordAutocompletesPaginated(args: {
   size: number;
 }): Promise<Result<Autocomplete[], string>> {
   let wordAdjusted = regularWordToSafeWord(args.word).trim().toLowerCase();
-  wordAdjusted = replaceAllPalochkaLettersToOne(wordAdjusted);
+  wordAdjusted = replaceStickLettersToOne(wordAdjusted);
   const searchFilterPrefs = getSearchFilterPrefsCache();
 
   try {
@@ -52,7 +52,7 @@ export async function fetchWordAutocompletes(
   word: string,
 ): Promise<Result<Autocomplete[], string>> {
   let wordAdjusted = regularWordToSafeWord(word).trim().toLowerCase();
-  wordAdjusted = replaceAllPalochkaLettersToOne(wordAdjusted);
+  wordAdjusted = replaceStickLettersToOne(wordAdjusted);
 
   const searchFilterPrefs = getSearchFilterPrefsCache();
   const params: String = queryString.stringify({
@@ -80,7 +80,7 @@ export async function fetchWordAutocompletesThatContains(
   word: string,
 ): Promise<Result<Autocomplete[], string>> {
   let wordAdjusted = regularWordToSafeWord(word).trim().toLowerCase();
-  wordAdjusted = replaceAllPalochkaLettersToOne(wordAdjusted);
+  wordAdjusted = replaceStickLettersToOne(wordAdjusted);
 
   const searchFilterPrefs = getSearchFilterPrefsCache();
   const params: String = queryString.stringify({
@@ -107,7 +107,7 @@ export async function fetchWordAutocompletesWithVerbs(
   word: string,
 ): Promise<Result<Autocomplete[], string>> {
   let wordAdjusted = regularWordToSafeWord(word).trim().toLowerCase();
-  wordAdjusted = replaceAllPalochkaLettersToOne(wordAdjusted);
+  wordAdjusted = replaceStickLettersToOne(wordAdjusted);
 
   const searchFilterPrefs = getSearchFilterPrefsCache();
   const params: String = queryString.stringify({
@@ -134,7 +134,7 @@ export async function fetchExactWordDefinitions(
   word: string,
 ): Promise<Result<WordDefinitionsResults[], string>> {
   let wordAdjusted = regularWordToSafeWord(word).trim().toLowerCase();
-  wordAdjusted = replaceAllPalochkaLettersToOne(wordAdjusted);
+  wordAdjusted = replaceStickLettersToOne(wordAdjusted);
 
   try {
     const url = `${API_URL}/public/def/${wordAdjusted}`;

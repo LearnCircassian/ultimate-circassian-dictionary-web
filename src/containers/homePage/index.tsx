@@ -1,8 +1,6 @@
 import React from "react";
 import { USED_DICTS } from "~/constants/dicts";
 import { RANDOM_COLORS } from "~/constants/colors";
-import Image from "next/image";
-import { cn } from "~/utils/classNames";
 
 export default function HomePageContainer() {
   return (
@@ -30,6 +28,11 @@ export default function HomePageContainer() {
             </p>
           </div>
         ))}
+      </div>
+      <div className="mt-4 flex flex-row items-center justify-center p-4">
+        <p className="text-6xl">
+          You can content us at: <span className="font-bold">learncircassian@gmail.com</span>
+        </p>
       </div>
     </div>
   );

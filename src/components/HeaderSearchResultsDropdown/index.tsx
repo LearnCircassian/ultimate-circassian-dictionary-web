@@ -15,7 +15,7 @@ import {
   removeFromWordHistoryCache,
 } from "~/cache/wordHistory";
 import { Autocomplete } from "~/interfaces";
-import { replaceAllOneToPalochka } from "~/utils/wordFormatting";
+import { replaceStickLettersToPalochka } from "~/utils/wordFormatting";
 
 interface HeaderSearchResultsDropdownProps {
   searchInputValue: string;
@@ -69,7 +69,7 @@ export default function HeaderSearchResultsDropdown({
         return findAllAutocompletesInWordHistoryCache();
       }
       return findAutocompletesInWordHistoryCache(debouncedSearchInputValue).map((w) => {
-        return replaceAllOneToPalochka(w);
+        return replaceStickLettersToPalochka(w);
       });
     },
   });
