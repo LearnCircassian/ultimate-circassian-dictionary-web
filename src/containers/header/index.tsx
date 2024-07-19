@@ -4,8 +4,6 @@ import HeaderSearchContainer from "~/containers/header/headerSearchContainer";
 import { useRouter } from "next/navigation";
 import { cn } from "~/utils/classNames";
 import Image from "next/image";
-import SearchFilterModal from "~/components/searchFilterModal";
-import useModal from "~/hooks/useModal"; // Import useModal hook
 
 export default function Header() {
   const router = useRouter();
@@ -23,7 +21,7 @@ export default function Header() {
   return (
     <div>
       <div className="flex w-full flex-row items-center justify-center bg-textRed p-4 shadow">
-        <p className="text-4xl text-white">
+        <p className="text-lg text-white lg:text-4xl">
           The website is in its early stages and is still being developed, some features might not
           work as intended.
         </p>

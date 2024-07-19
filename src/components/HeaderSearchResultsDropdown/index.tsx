@@ -16,6 +16,7 @@ import {
 } from "~/cache/wordHistory";
 import { Autocomplete } from "~/interfaces";
 import { replaceStickLettersToPalochka } from "~/utils/wordFormatting";
+import { FaTimesCircle } from "react-icons/fa";
 
 interface HeaderSearchResultsDropdownProps {
   searchInputValue: string;
@@ -138,8 +139,9 @@ export default function HeaderSearchResultsDropdown({
     <div
       ref={dropdownRef}
       className={cn(
-        "scrollbar-gray absolute left-1/2 top-[80px] flex -translate-x-1/2 transform flex-col items-center justify-start gap-2 overflow-y-auto rounded-b-[16px] bg-white p-4 shadow-lg",
+        "scrollbar-gray absolute w-screen left-2/4 sm:left-1/2 top-[80px] flex -translate-x-1/2 transform flex-col items-center justify-start gap-2 overflow-y-auto rounded-b-[16px] bg-white p-4 shadow-lg",
         "6xl:max-h-[1440px] 5xl:max-h-[1200px] 4xl:max-h-[1024px] 3xl:max-h-[900px] 2xl:max-h-[800px] xl:max-h-[700px] lg:max-h-[600px] md:max-h-[600px] max-h-[600px]",
+        "",
         SIZE_STYLE,
       )}
     >
@@ -186,10 +188,16 @@ export default function HeaderSearchResultsDropdown({
                 </span>
               </button>
               <button
-                className="text-neutral-800 hover:text-neutral-600/50 hover:underline"
+                className="hidden text-neutral-800 hover:text-neutral-600/50 hover:underline sm:flex"
                 onClick={() => cachedWordDeleteClickHandler(word)}
               >
                 Delete
+              </button>
+              <button
+                className="visible text-neutral-800 hover:text-neutral-600/50 hover:underline sm:hidden"
+                onClick={() => cachedWordDeleteClickHandler(word)}
+              >
+                <FaTimesCircle className="opacity-80" size={20} color="#757575" />{" "}
               </button>
             </div>
           );

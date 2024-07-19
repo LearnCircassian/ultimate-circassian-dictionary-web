@@ -18,6 +18,7 @@ export function getSearchFilterPrefsCache(): SearchFilterPrefs {
     }
     const searchFilterPrefs = localStorage.getItem(SEARCH_FILTER_PREFS_CACHE_KEY);
     if (!searchFilterPrefs) {
+      saveSearchFilterPrefsCache(DEFAULT_SEARCH_FILTER_PREFS);
       return DEFAULT_SEARCH_FILTER_PREFS;
     }
     return JSON.parse(searchFilterPrefs);

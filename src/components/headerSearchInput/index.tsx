@@ -71,7 +71,11 @@ export default function HeaderSearchInput({
         </button>
       </div>
       <button
-        className="flex items-center gap-2 px-4 py-2 text-lg font-bold text-[#3182ce] hover:text-[#3182ce]/50 xl:text-xl 2xl:text-2xl 3xl:text-3xl"
+        className={cn(
+          "items-center gap-2 px-4 py-2 font-bold text-[#3182ce] hover:text-[#3182ce]/50",
+          "text-lg xl:text-xl 2xl:text-2xl 3xl:text-3xl",
+          "hidden md:flex",
+        )}
         onClick={openFilterModal}
       >
         <FaFilter className="text-xl" /> Filter
