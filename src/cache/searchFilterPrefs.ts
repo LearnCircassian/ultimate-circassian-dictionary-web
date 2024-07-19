@@ -1,44 +1,49 @@
 import { getAllSupportedLangs, SupportedLang } from "~/interfaces";
-import { SEARCH_FILTER_PREFS_CACHE_KEY } from "~/constants/cache";
+import { CACHE_VERSION, SEARCH_FILTER_PREFS_CACHE_KEY } from "~/constants/cache";
 
-interface SearchFilterPrefs {
+interface SearchFilterPrefsCache {
   fromLang: SupportedLang[];
   toLang: SupportedLang[];
+  version: string;
 }
 
-const DEFAULT_SEARCH_FILTER_PREFS: SearchFilterPrefs = {
+const DEFAULT_SEARCH_FILTER_PREFS: SearchFilterPrefsCache = {
   fromLang: getAllSupportedLangs(),
   toLang: getAllSupportedLangs(),
+  version: CACHE_VERSION,
 };
 
-export function getSearchFilterPrefsCache(): SearchFilterPrefs {
+export function getSearchFilterPrefsCache(): SearchFilterPrefsCache {
   try {
     if (typeof window === "undefined") {
       return DEFAULT_SEARCH_FILTER_PREFS;
     }
-    const searchFilterPrefs = localStorage.getItem(SEARCH_FILTER_PREFS_CACHE_KEY);
-    if (!searchFilterPrefs) {
+    const prefs = localStorage.getItem(SEARCH_FILTER_PREFS_CACHE_KEY);
+    if (!prefs) {
       saveSearchFilterPrefsCache(DEFAULT_SEARCH_FILTER_PREFS);
       return DEFAULT_SEARCH_FILTER_PREFS;
     }
-    return JSON.parse(searchFilterPrefs);
+    const parsed: SearchFilterPrefsCache = JSON.parse(prefs);
+    if (parsed.version !== CACHE_VERSION) {
+      _resetSearchFilterPrefs();
+      return DEFAULT_SEARCH_FILTER_PREFS;
+    }
+    return parsed;
   } catch (err) {
-    _clearSearchFilterPrefs();
+    _clearSearchFilterPrefsCache();
     return DEFAULT_SEARCH_FILTER_PREFS;
   }
 }
 
-export function saveSearchFilterPrefsCache(searchFilterPrefs: SearchFilterPrefs) {
+export function saveSearchFilterPrefsCache(searchFilterPrefs: SearchFilterPrefsCache) {
   localStorage.setItem(SEARCH_FILTER_PREFS_CACHE_KEY, JSON.stringify(searchFilterPrefs));
 }
 
-export function _clearSearchFilterPrefs() {
+export function _clearSearchFilterPrefsCache() {
   localStorage.removeItem(SEARCH_FILTER_PREFS_CACHE_KEY);
 }
 
 export function _resetSearchFilterPrefs() {
-  saveSearchFilterPrefsCache({
-    fromLang: getAllSupportedLangs(),
-    toLang: getAllSupportedLangs(),
-  });
+  _clearSearchFilterPrefsCache();
+  saveSearchFilterPrefsCache(DEFAULT_SEARCH_FILTER_PREFS);
 }

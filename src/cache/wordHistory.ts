@@ -1,17 +1,18 @@
 // Function to load state from localStorage
 import { getAllSupportedLangs, WordDefinitionsResults } from "~/interfaces";
-import { WORD_HISTORY_CACHE_KEY } from "~/constants/cache";
+import { CACHE_VERSION, WORD_HISTORY_CACHE_KEY } from "~/constants/cache";
 
 const MAX_WORD_HISTORY_CACHE = 100;
 
-function isObjectValid(obj: WordDefinitionsResults[]): boolean {
-  for (const o of obj) {
-    if (!o.spelling || !o.title || !o.html || !o.fromLangs || !o.toLangs) {
-      return false;
-    }
-  }
-  return true;
+interface WordHistoryCache {
+  savedResults: WordDefinitionsResults[][];
+  version: string;
 }
+
+const DEFAULT_WORD_HISTORY_CACHE: WordHistoryCache = {
+  savedResults: [],
+  version: CACHE_VERSION,
+};
 
 export function _loadWordHistoryCache(): WordDefinitionsResults[][] {
   if (typeof window === "undefined") {
@@ -19,17 +20,15 @@ export function _loadWordHistoryCache(): WordDefinitionsResults[][] {
   }
   try {
     const serializedState = localStorage.getItem(WORD_HISTORY_CACHE_KEY);
-    if (serializedState === null) {
+    if (!serializedState) {
       return [];
     }
-    const objectList: WordDefinitionsResults[][] = JSON.parse(serializedState);
-    for (const o of objectList) {
-      if (!isObjectValid(o)) {
-        _clearWordHistoryCache();
-        return [];
-      }
+    const parsed: WordHistoryCache = JSON.parse(serializedState);
+    if (parsed.version !== CACHE_VERSION) {
+      _clearWordHistoryCache();
+      return [];
     }
-    return objectList;
+    return parsed.savedResults;
   } catch (err) {
     _clearWordHistoryCache();
     return [];
@@ -39,10 +38,14 @@ export function _loadWordHistoryCache(): WordDefinitionsResults[][] {
 // Function to save state to localStorage
 function _saveWordHistoryCache(state: WordDefinitionsResults[][]) {
   try {
-    const serializedState = JSON.stringify(state);
-    localStorage.setItem(WORD_HISTORY_CACHE_KEY, serializedState);
+    const objToSave: WordHistoryCache = {
+      savedResults: state,
+      version: CACHE_VERSION,
+    };
+    const serializedObj = JSON.stringify(objToSave);
+    localStorage.setItem(WORD_HISTORY_CACHE_KEY, serializedObj);
   } catch (err) {
-    // Handle write errors here
+    console.error(`Error saving word history cache: ${err}`);
   }
 }
 

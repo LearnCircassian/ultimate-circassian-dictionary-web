@@ -3,7 +3,8 @@ import XSvg from "~/components/svg/xSvg";
 import { cn } from "~/utils/classNames";
 import { getAllSupportedLangs, SupportedLang } from "~/interfaces";
 import { getSearchFilterPrefsCache, saveSearchFilterPrefsCache } from "~/cache/searchFilterPrefs";
-import { useRouter } from "next/navigation"; // Assuming SupportedLang enum is imported from interfaces
+import { useRouter } from "next/navigation";
+import { CACHE_VERSION } from "~/constants/cache"; // Assuming SupportedLang enum is imported from interfaces
 
 interface SearchFilterModalProps {
   hide: () => void;
@@ -28,6 +29,7 @@ export default function SearchFilterModal({ hide }: SearchFilterModalProps) {
     saveSearchFilterPrefsCache({
       fromLang: selectedFromLangCheckboxes,
       toLang: selectedToLangCheckboxes,
+      version: CACHE_VERSION,
     });
     router.refresh();
   }

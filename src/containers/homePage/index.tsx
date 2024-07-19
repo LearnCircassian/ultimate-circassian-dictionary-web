@@ -29,9 +29,18 @@ export default function HomePageContainer() {
           </div>
         ))}
       </div>
-      <div className="mt-4 flex flex-row items-center justify-center p-4">
-        <p className="text-6xl">
-          You can content us at: <span className="font-bold">learncircassian@gmail.com</span>
+      <div className="mt-4 flex flex-col items-center justify-center gap-8 p-4">
+        <p className="whitespace-normal break-words text-center text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl 3xl:text-4xl 4xl:text-5xl">
+          You can content us at:
+          <br />
+          <span className="font-bold">learncircassian@gmail.com</span>
+        </p>
+        <p className="whitespace-normal break-words text-center text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl 3xl:text-4xl 4xl:text-5xl">
+          You can get the dictionaries that we used at:
+          <br />{" "}
+          <span className="font-bold">
+            https://github.com/bihoqo/circassian-dictionaries-collection
+          </span>
         </p>
       </div>
     </div>
