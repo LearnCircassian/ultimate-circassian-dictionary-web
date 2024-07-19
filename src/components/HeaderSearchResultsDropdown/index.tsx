@@ -148,9 +148,28 @@ export default function HeaderSearchResultsDropdown({
       </div>
       {cachedAutocompletesList
         .sort((a, b) => {
+          const searchInputValAdjusted = replaceStickLettersToPalochka(debouncedSearchInputValue);
+          // Prioritize words that start with debouncedSearchInputValue
+          const aStartsWith = a.toLowerCase().startsWith(searchInputValAdjusted.toLowerCase());
+          const bStartsWith = b.toLowerCase().startsWith(searchInputValAdjusted.toLowerCase());
+
+          if (aStartsWith && !bStartsWith) {
+            return -1;
+          }
+          if (!aStartsWith && bStartsWith) {
+            return 1;
+          }
+
+          // If both or neither start with debouncedSearchInputValue, sort alphabetically
           return a.localeCompare(b);
         })
         .map((word) => {
+          const searchInputValAdjusted = replaceStickLettersToPalochka(debouncedSearchInputValue);
+          const index = word.toLowerCase().indexOf(searchInputValAdjusted.toLowerCase());
+          const before = word.slice(0, index);
+          const bold = word.slice(index, index + searchInputValAdjusted.length);
+          const after = word.slice(index + searchInputValAdjusted.length);
+
           return (
             <div key={word} className="flex w-full flex-row justify-between p-2 hover:bg-[#e7e7e7]">
               <button
@@ -160,7 +179,11 @@ export default function HeaderSearchResultsDropdown({
                 )}
                 onClick={() => onWordSelection(word)}
               >
-                {word}
+                <span>
+                  {before}
+                  <span className="font-bold">{bold}</span>
+                  {after}
+                </span>
               </button>
               <button
                 className="text-neutral-800 hover:text-neutral-600/50 hover:underline"
@@ -192,7 +215,6 @@ export default function HeaderSearchResultsDropdown({
           return a.key.localeCompare(b.key);
         })
         .map((word) => {
-          // Bold the substring that matches searchInputValue
           const searchInputValAdjusted = replaceStickLettersToPalochka(debouncedSearchInputValue);
           const index = word.key.toLowerCase().indexOf(searchInputValAdjusted.toLowerCase());
           const before = word.key.slice(0, index);
