@@ -139,9 +139,10 @@ export default function HeaderSearchResultsDropdown({
     <div
       ref={dropdownRef}
       className={cn(
-        "scrollbar-gray absolute w-screen left-2/4 sm:left-1/2 top-[80px] flex -translate-x-1/2 transform flex-col items-center justify-start gap-2 overflow-y-auto rounded-b-[16px] bg-white p-4 shadow-lg",
+        "scrollbar-gray absolute w-screen left-2/4 sm:left-1/2 top-[80px] flex -translate-x-1/2 transform flex-col items-center justify-start gap-2 rounded-b-[16px] bg-white shadow-lg",
         "6xl:max-h-[1440px] 5xl:max-h-[1200px] 4xl:max-h-[1024px] 3xl:max-h-[900px] 2xl:max-h-[800px] xl:max-h-[700px] lg:max-h-[600px] md:max-h-[600px] max-h-[600px]",
-        "",
+        "w-full overflow-x-hidden text-ellipsis whitespace-normal break-words overflow-y-auto",
+        "p-0 sm:p-1 md:p-2 lg:p-4",
         SIZE_STYLE,
       )}
     >
@@ -233,14 +234,15 @@ export default function HeaderSearchResultsDropdown({
             <button
               className={cn(
                 "hover:bg-gray-100 w-full rounded-md p-2 text-left font-medium hover:bg-[#e7e7e7]",
-                "text-lg 4xl:text-4xl 3xl:text-3xl 2xl:text-2xl xl:text-xl",
               )}
               key={word.key}
               onClick={() => onWordSelection(word.key)}
             >
-              <div className="flex flex-row gap-2">
-                <span>[{word.fromLangs.join(", ")}]</span>
-                <span>
+              <div className="flex flex-row items-center justify-start gap-2">
+                <span className="mt-1 text-xxs sm:text-xs md:text-base">
+                  [{word.fromLangs.join(", ")}]
+                </span>
+                <span className="text-lg xl:text-xl 2xl:text-2xl 3xl:text-3xl 4xl:text-4xl">
                   {before}
                   <span className="font-bold">{bold}</span>
                   {after}
