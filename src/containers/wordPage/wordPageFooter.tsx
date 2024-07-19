@@ -15,7 +15,7 @@ export default function WordPageFooter() {
     gcTime: 60000,
     queryKey: ["footerWords", params?.word],
     queryFn: async () => {
-      if (!params.word || params.word.trim() === "") {
+      if (!params || !params.word || params.word.trim() === "") {
         return { leftFooterBtnWord: "", rightFooterBtnWord: "" };
       }
       const safeWord = safeWordToRegularWord(params.word);
@@ -28,7 +28,7 @@ export default function WordPageFooter() {
     const safeWord = regularWordToSafeWord(word);
 
     // Check if safeWord is contained in the current URL
-    if ("word" in params && params.word === safeWord) {
+    if (params && "word" in params && params.word === safeWord) {
       console.log("Word already in URL");
       return;
     }

@@ -19,7 +19,7 @@ export default function HeaderSearchContainer() {
     setDropdownVisible(false);
 
     // Check if safeWord is contained in the current URL
-    if ("word" in params && params.word === safeWord) {
+    if (params && "word" in params && params.word === safeWord) {
       console.log("Word already in URL");
       return;
     }

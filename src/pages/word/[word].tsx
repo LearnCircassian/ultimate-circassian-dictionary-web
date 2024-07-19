@@ -6,8 +6,8 @@ import { useParams } from "next/navigation";
 import { safeWordToRegularWord } from "~/utils/wordFormatting";
 
 export default function WordPage() {
-  const { word: safeWord } = useParams<{ word: string }>();
-  const wordSpelling = safeWordToRegularWord(safeWord);
+  const params = useParams<{ word: string }>();
+  const wordSpelling = safeWordToRegularWord(params?.word || "");
 
   return (
     <>
