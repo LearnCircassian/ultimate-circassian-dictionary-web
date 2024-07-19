@@ -9,7 +9,7 @@ export default function WordPageContainer({ wordSpelling }: { wordSpelling: stri
     <div className="flex flex-col">
       <div
         className={cn(
-          "mx-auto mt-16 flex w-11/12 flex-row flex-[1]",
+          "mx-auto my-20 flex w-11/12 flex-row flex-[1]",
           "3xl:gap-16 2xl:gap-12 xl:gap-8 lg:gap-6 md:gap-4 sm:gap-4 gap-2",
         )}
       >

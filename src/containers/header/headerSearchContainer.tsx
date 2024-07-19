@@ -67,7 +67,7 @@ export default function HeaderSearchContainer() {
             border: "2px solid #155e75",
           }} // Added border and adjusted background color
         >
-          <FaSearch className="opacity-80" size={width < 300 ? 16 : 24} color="#155e75" />{" "}
+          <FaSearch className="opacity-80" size={width < 400 ? 16 : 24} color="#155e75" />{" "}
           {/* Increased icon size */}
           <input
             className="flex-grow bg-transparent px-1 font-medium text-black outline-none sm:px-2"

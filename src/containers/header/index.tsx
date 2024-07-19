@@ -56,7 +56,7 @@ export default function Header() {
           </div>
           <div className="md:hidden">
             <button onClick={toggleMobileMenu}>
-              <FaTimes size={width < 300 ? 26 : 36} />
+              <FaTimes size={width < 400 ? 26 : 36} />
             </button>
           </div>
         </div>
