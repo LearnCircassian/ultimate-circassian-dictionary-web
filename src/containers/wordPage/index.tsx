@@ -20,7 +20,9 @@ export default function WordPageContainer({ wordSpelling }: { wordSpelling: stri
           <DefinitionsContainer wordSpelling={wordSpelling} />
         </div>
       </div>
-      <WordPageFooter />
+      <div className="z-30">
+        <WordPageFooter />
+      </div>
     </div>
   );
 }

@@ -37,7 +37,7 @@ export default function WordPageFooter() {
   }
 
   return (
-    <footer className="fixed bottom-0 flex w-full items-center justify-between bg-white p-2 shadow-md sm:hidden">
+    <footer className="fixed bottom-0 z-30 flex w-full items-center justify-between bg-white p-2 shadow-md sm:hidden">
       <button
         className={cn("flex flex-col items-center justify-center flex-1", {
           "opacity-30": !footerWords.leftFooterBtnWord,

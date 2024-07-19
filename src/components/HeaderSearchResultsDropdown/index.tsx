@@ -24,7 +24,7 @@ interface HeaderSearchResultsDropdownProps {
   setDropdownVisible: (visible: boolean) => void;
 }
 
-const SIZE_STYLE = cn("xl:w-1/2 lg:w-2/3 md:w-3/4 sm:w-5/6 w-11/12");
+const SIZE_STYLE = cn("sm:w-full w-11/12");
 
 export default function HeaderSearchResultsDropdown({
   searchInputValue,
