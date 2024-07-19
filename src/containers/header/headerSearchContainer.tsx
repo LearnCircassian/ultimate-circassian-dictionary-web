@@ -76,7 +76,10 @@ export default function HeaderSearchContainer() {
             onFocus={() => setDropdownVisible(true)} // Set dropdownVisible state on focus
             placeholder="Let's find your word"
           />
-          <button className={cn("flex items-center hover:opacity-80", { hidden: !inputValue })}>
+          <button
+            className={cn("flex items-center hover:opacity-80", { hidden: !inputValue })}
+            onClick={() => setInputValue("")}
+          >
             <FaTimesCircle className="opacity-80" size={24} color="#757575" />{" "}
             {/* Increased icon size */}
           </button>

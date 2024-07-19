@@ -240,8 +240,8 @@ export default function HeaderSearchResultsDropdown({
               key={word.key}
               onClick={() => onWordSelection(word.key)}
             >
-              <div className="flex flex-row items-center justify-start gap-2">
-                <span className="mt-1 text-xxs sm:text-xs md:text-base">
+              <div className="flex flex-row items-center justify-start gap-1 sm:gap-2">
+                <span className="mt-1 text-[8px] sm:text-xs md:text-base">
                   [{word.fromLangs.join(", ")}]
                 </span>
                 <span className="text-lg xl:text-xl 2xl:text-2xl 3xl:text-3xl 4xl:text-4xl">
