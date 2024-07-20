@@ -110,4 +110,10 @@ export const USED_DICTS: UsedDict[] = [
   { count: 15139, title: "Адыгабзэм изэхэф гущы1алъ (2006)", fromLang: "Ady", toLang: "Ru" },
   { count: 27268, title: "Адыгэ-урыс псалъалъэ (2008)", fromLang: "Kbd", toLang: "Ru" },
   { count: 12350, title: "Ибрагим Алхаз Абазэ (2005)", fromLang: "Tu", toLang: "Kbd" },
+  {
+    count: 33490,
+    title: "Адыгабзэм изэхэф гущыӏалъ томищ мэхъу (2011)",
+    fromLang: "Ady",
+    toLang: "Ru",
+  },
 ];
