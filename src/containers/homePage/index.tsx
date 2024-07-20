@@ -20,7 +20,7 @@ export default function HomePageContainer() {
           >
             <h2 className="mb-2 text-lg font-bold">{dict.title}</h2>
             <p className="mb-2 text-sm">
-              <span className="font-semibold">From:</span> {dict.fromLang} -&gt;
+              <span className="font-semibold">From:</span> {dict.fromLang} -
               <span className="font-semibold"> To:</span> {dict.toLang}
             </p>
             <p className="text-sm">
