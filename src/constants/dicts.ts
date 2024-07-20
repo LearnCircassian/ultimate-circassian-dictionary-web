@@ -103,7 +103,7 @@ export const USED_DICTS: UsedDict[] = [
   { count: 26267, title: "Kabardian to Russian \u0026 English", fromLang: "Kbd", toLang: "En" },
   {
     count: 3814,
-    title: "Шэрджэс Алий - Яхуэмыфащэу лъэныкъуэ едгъэза псалъэхэр",
+    title: "Шэрджэс Алий - Яхуэмыфащэу лъэныкъуэ едгъэза псалъэхэр (2009)",
     fromLang: "Kbd",
     toLang: "Ru",
   },
