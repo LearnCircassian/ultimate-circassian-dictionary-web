@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { WordDefinitionsResults } from "~/interfaces";
+import { WordDefinitionsResults, SupportedLang } from "~/interfaces";
 import parse from "html-react-parser";
 import { HiChevronDown } from "react-icons/hi";
 import { cn } from "~/utils/classNames";
@@ -9,6 +9,8 @@ import { addToWordHistoryCache, findInWordHistoryCache } from "~/cache/wordHisto
 import { getSearchFilterPrefsCache } from "~/cache/searchFilterPrefs";
 
 export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: string }) {
+  const [selectedTab, setSelectedTab] = useState<SupportedLang | "All">("All");
+
   const {
     data: allDefResults = [] as WordDefinitionsResults[],
     isLoading: isWordDefinitionsLoading,
@@ -37,21 +39,35 @@ export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: s
     },
   });
 
+  const uniqueToLangs = useMemo(() => {
+    const allLangs = new Set<SupportedLang>();
+    allDefResults.forEach((wd) => {
+      wd.toLangs.forEach((lang) => allLangs.add(lang));
+    });
+    return Array.from(allLangs);
+  }, [allDefResults]);
+
   const filteredDefResults = useMemo(() => {
     const searchFilterPrefs = getSearchFilterPrefsCache();
     const toLangsWhitelist = searchFilterPrefs.toLang;
 
-    return allDefResults.filter((wd) => {
+    const filteredByPrefs = allDefResults.filter((wd) => {
       const toLangs = wd.toLangs;
       return toLangs.some((toLang) => toLangsWhitelist.includes(toLang));
     });
-  }, [allDefResults]);
+
+    if (selectedTab === "All") {
+      return filteredByPrefs;
+    } else {
+      return filteredByPrefs.filter((wd) => wd.toLangs.includes(selectedTab));
+    }
+  }, [allDefResults, selectedTab]);
 
   if (isWordDefinitionsLoading) {
     return (
       <div className="flex size-full items-center justify-center">
         <div className="flex items-center justify-center p-4">
-          <div className="border-blue-500 size-12 animate-spin rounded-full border-4 border-solid border-t-transparent"></div>
+          <div className="size-12 animate-spin rounded-full border-4 border-solid border-blue-500 border-t-transparent"></div>
         </div>
       </div>
     );
@@ -60,7 +76,7 @@ export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: s
   if (isWordDefinitionsErrored) {
     return (
       <div className="mt-4 flex size-full items-center  justify-center">
-        <p className="text-3xl text-red">
+        <p className="text-red text-3xl">
           Failed to load word &apos;{wordSpelling}&apos; definitions. Please try again later.
         </p>
       </div>
@@ -69,6 +85,7 @@ export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: s
 
   return (
     <div className="flex flex-col">
+      {/* Word spelling and total results */}
       <div className="flex flex-row items-center justify-start gap-2 px-2">
         <span
           className={cn(
@@ -92,12 +109,37 @@ export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: s
         </div>
       </div>
 
-      <WordDefinitions wordDefinitions={filteredDefResults} />
+      {/* Filter buttons */}
+      <div className="mt-4 flex flex-row items-center justify-start gap-1 px-2 text-lg sm:gap-2 md:text-xl lg:text-2xl xl:text-4xl">
+        <p className="mr-0 font-bold text-blue-500 sm:mr-4">Filter Results:</p>
+        <button
+          className={cn("sm:px-4 px-2 py-2 font-bold", {
+            "bg-blue-500 text-white": selectedTab === "All",
+          })}
+          onClick={() => setSelectedTab("All")}
+        >
+          All
+        </button>
+        {uniqueToLangs.map((lang) => (
+          <button
+            key={lang}
+            className={cn("sm:px-4 px-2 py-2 font-bold", {
+              "bg-blue-500 text-white": selectedTab === lang,
+            })}
+            onClick={() => setSelectedTab(lang)}
+          >
+            {lang}
+          </button>
+        ))}
+      </div>
+
+      {/* Definitions */}
+      <DefinitionsBox wordDefinitions={filteredDefResults} />
     </div>
   );
 }
 
-function WordDefinitions({ wordDefinitions }: { wordDefinitions: WordDefinitionsResults[] }) {
+function DefinitionsBox({ wordDefinitions }: { wordDefinitions: WordDefinitionsResults[] }) {
   const [definitionVisible, setDefinitionVisible] = useState<boolean[]>(() =>
     Array(wordDefinitions.length).fill(true),
   );
