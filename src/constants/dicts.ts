@@ -22,7 +22,7 @@ export const USED_DICTS: UsedDict[] = [
   { count: 8636, title: "Тхьаркъуахъо (1991)", fromLang: "Ady", toLang: "Ru" },
   {
     count: 6250,
-    title: "Adam Shagash's English to Adyghe Dictionary",
+    title: "Adam Shagash's English to Adyghe Dictionary (2020)",
     fromLang: "En",
     toLang: "Ady",
   },
@@ -37,7 +37,7 @@ export const USED_DICTS: UsedDict[] = [
   { count: 3476, title: "Блэгъожъ (1991)", fromLang: "Ru", toLang: "Ady" },
   {
     count: 6445,
-    title: "Adam Shagash's Adyghe to English Dictionary",
+    title: "Adam Shagash's Adyghe to English Dictionary (2020)",
     fromLang: "Ady",
     toLang: "En",
   },
@@ -47,7 +47,13 @@ export const USED_DICTS: UsedDict[] = [
     fromLang: "Kbd",
     toLang: "Ru",
   },
-  { count: 22664, title: "Хъуажь (2007)", fromLang: "Ady/Kbd", toLang: "Tu" },
+  { count: 22664, title: "Хъуажь Circassian to Turkish (2007)", fromLang: "Ady/Kbd", toLang: "Tu" },
+  {
+    count: 23176,
+    title: "Хъуажь Turkish to Circassian (2007)",
+    fromLang: "Tr",
+    toLang: "Ady/Kbd",
+  },
   { count: 12109, title: "Т1эшъу (1991)", fromLang: "Tu", toLang: "Ady" },
   {
     count: 7178,
@@ -112,7 +118,7 @@ export const USED_DICTS: UsedDict[] = [
   { count: 12350, title: "Ибрагим Алхаз Абазэ (2005)", fromLang: "Tu", toLang: "Kbd" },
   {
     count: 33490,
-    title: "Адыгабзэм изэхэф гущыӏалъ томищ мэхъу (2011)",
+    title: "Адыгабзэм изэхэф гущы1алъ томищ мэхъу (2011)",
     fromLang: "Ady",
     toLang: "Ru",
   },
