@@ -66,7 +66,7 @@ export default function WordPageFooter() {
         onClick={filterOptionClickHandler}
       >
         <HiFilter size={36} className="rounded-full bg-[#FFFFFF66] p-2 text-black" />
-        <span className="text-md text-black">Filter</span>
+        <span className="text-md text-black">Search Filter</span>
       </button>
       <button
         className={cn("flex flex-col items-center justify-center flex-1", {

@@ -38,9 +38,9 @@ export function transformWordDefinitionsResults(
 
   // Return the transformed word definitions results
   return {
-    spelling: a.spelling,
-    title: a.title,
-    html: a.html,
+    spelling: replaceStickLettersToPalochka(a.spelling),
+    title: replaceStickLettersToPalochka(a.title),
+    html: replaceStickLettersToPalochka(a.html),
     fromLangs: a.from_langs.map(getSupportedLangForString),
     toLangs: a.to_langs.map(getSupportedLangForString),
   };

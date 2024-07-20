@@ -6,10 +6,10 @@ import { cn } from "~/utils/classNames";
 import { useQuery } from "@tanstack/react-query";
 import { fetchExactWordDefinitions } from "~/requests";
 import { addToWordHistoryCache, findInWordHistoryCache } from "~/cache/wordHistory";
-import { getSearchFilterPrefsCache } from "~/cache/searchFilterPrefs";
 
 export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: string }) {
-  const [selectedTab, setSelectedTab] = useState<SupportedLang | "All">("All");
+  const [selectedFromTab, setSelectedFromTab] = useState<SupportedLang | "All">("All");
+  const [selectedToTab, setSelectedToTab] = useState<SupportedLang | "All">("All");
 
   const {
     data: allDefResults = [] as WordDefinitionsResults[],
@@ -39,6 +39,14 @@ export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: s
     },
   });
 
+  const uniqueFromLangs = useMemo(() => {
+    const allLangs = new Set<SupportedLang>();
+    allDefResults.forEach((wd) => {
+      wd.fromLangs.forEach((lang) => allLangs.add(lang));
+    });
+    return Array.from(allLangs);
+  }, [allDefResults]);
+
   const uniqueToLangs = useMemo(() => {
     const allLangs = new Set<SupportedLang>();
     allDefResults.forEach((wd) => {
@@ -47,21 +55,18 @@ export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: s
     return Array.from(allLangs);
   }, [allDefResults]);
 
-  const filteredDefResults = useMemo(() => {
-    const searchFilterPrefs = getSearchFilterPrefsCache();
-    const toLangsWhitelist = searchFilterPrefs.toLang;
-
+  const defResultsAfterFilter = useMemo(() => {
     const filteredByPrefs = allDefResults.filter((wd) => {
+      const fromLangs = wd.fromLangs;
       const toLangs = wd.toLangs;
-      return toLangs.some((toLang) => toLangsWhitelist.includes(toLang));
+      return (
+        (selectedFromTab === "All" || fromLangs.includes(selectedFromTab)) &&
+        (selectedToTab === "All" || toLangs.includes(selectedToTab))
+      );
     });
 
-    if (selectedTab === "All") {
-      return filteredByPrefs;
-    } else {
-      return filteredByPrefs.filter((wd) => wd.toLangs.includes(selectedTab));
-    }
-  }, [allDefResults, selectedTab]);
+    return filteredByPrefs;
+  }, [allDefResults, selectedFromTab, selectedToTab]);
 
   if (isWordDefinitionsLoading) {
     return (
@@ -75,7 +80,7 @@ export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: s
 
   if (isWordDefinitionsErrored) {
     return (
-      <div className="mt-4 flex size-full items-center  justify-center">
+      <div className="mt-4 flex size-full items-center justify-center">
         <p className="text-red text-3xl">
           Failed to load word &apos;{wordSpelling}&apos; definitions. Please try again later.
         </p>
@@ -101,40 +106,28 @@ export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: s
             "3xl:text-3xl 2xl:text-3xl xl:text-2xl lg:text-xl text-lg",
           )}
         >
-          <span>({allDefResults.length} total results</span>
-          <span className={cn({ hidden: allDefResults.length === filteredDefResults.length })}>
-            , {allDefResults.length - filteredDefResults.length} results were filtered out
-          </span>
-          <span>)</span>
+          {allDefResults.length === defResultsAfterFilter.length ? (
+            <span>({allDefResults.length} results)</span>
+          ) : (
+            <span>
+              ({defResultsAfterFilter.length} out of {allDefResults.length} results)
+            </span>
+          )}
         </div>
       </div>
 
       {/* Filter buttons */}
-      <div className="mt-4 flex flex-row items-center justify-start gap-1 px-2 text-lg sm:gap-2 md:text-xl lg:text-2xl xl:text-4xl">
-        <p className="mr-0 font-bold text-blue-500 sm:mr-4">Filter Results:</p>
-        <button
-          className={cn("sm:px-4 px-2 py-2 font-bold", {
-            "bg-blue-500 text-white": selectedTab === "All",
-          })}
-          onClick={() => setSelectedTab("All")}
-        >
-          All
-        </button>
-        {uniqueToLangs.map((lang) => (
-          <button
-            key={lang}
-            className={cn("sm:px-4 px-2 py-2 font-bold", {
-              "bg-blue-500 text-white": selectedTab === lang,
-            })}
-            onClick={() => setSelectedTab(lang)}
-          >
-            {lang}
-          </button>
-        ))}
-      </div>
+      <ResultFilters
+        selectedFromTab={selectedFromTab}
+        selectedToTab={selectedToTab}
+        setSelectedFromTab={setSelectedFromTab}
+        setSelectedToTab={setSelectedToTab}
+        uniqueFromLangs={uniqueFromLangs}
+        uniqueToLangs={uniqueToLangs}
+      />
 
       {/* Definitions */}
-      <DefinitionsBox wordDefinitions={filteredDefResults} />
+      <DefinitionsBox wordDefinitions={defResultsAfterFilter} />
     </div>
   );
 }
@@ -183,6 +176,80 @@ function DefinitionsBox({ wordDefinitions }: { wordDefinitions: WordDefinitionsR
           </div>
         </div>
       ))}
+    </div>
+  );
+}
+
+interface ResultFiltersProps {
+  selectedFromTab: SupportedLang | "All";
+  selectedToTab: SupportedLang | "All";
+  setSelectedFromTab: (lang: SupportedLang | "All") => void;
+  setSelectedToTab: (lang: SupportedLang | "All") => void;
+  uniqueFromLangs: SupportedLang[];
+  uniqueToLangs: SupportedLang[];
+}
+
+function ResultFilters({
+  selectedFromTab,
+  selectedToTab,
+  setSelectedToTab,
+  setSelectedFromTab,
+  uniqueFromLangs,
+  uniqueToLangs,
+}: ResultFiltersProps) {
+  return (
+    <div className="mt-4 flex flex-col gap-4 px-2 text-lg sm:flex-row md:gap-10 md:text-xl lg:gap-20 lg:text-2xl xl:text-4xl">
+      {/* From and To language filters */}
+      <div className="flex flex-col flex-wrap gap-2">
+        <p className="mr-0 font-bold text-blue-500 sm:mr-4">From Language:</p>
+        <div className="flex flex-wrap gap-2">
+          <button
+            className={cn("sm:px-4 px-2 py-2 font-bold", {
+              "bg-blue-500 text-white": selectedFromTab === "All",
+            })}
+            onClick={() => setSelectedFromTab("All")}
+          >
+            All
+          </button>
+          {uniqueFromLangs.sort().map((lang) => (
+            <button
+              key={lang}
+              className={cn("sm:px-4 px-2 py-2 font-bold", {
+                "bg-blue-500 text-white": selectedFromTab === lang,
+              })}
+              onClick={() => setSelectedFromTab(lang)}
+            >
+              {lang}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* To language filter */}
+      <div className="flex flex-col flex-wrap gap-2">
+        <p className="mr-0 font-bold text-blue-500 sm:mr-4">To Language:</p>
+        <div className="flex flex-wrap gap-2">
+          <button
+            className={cn("sm:px-4 px-2 py-2 font-bold", {
+              "bg-blue-500 text-white": selectedToTab === "All",
+            })}
+            onClick={() => setSelectedToTab("All")}
+          >
+            All
+          </button>
+          {uniqueToLangs.sort().map((lang) => (
+            <button
+              key={lang}
+              className={cn("sm:px-4 px-2 py-2 font-bold", {
+                "bg-blue-500 text-white": selectedToTab === lang,
+              })}
+              onClick={() => setSelectedToTab(lang)}
+            >
+              {lang}
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

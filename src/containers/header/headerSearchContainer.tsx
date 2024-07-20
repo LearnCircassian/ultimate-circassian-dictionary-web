@@ -86,13 +86,15 @@ export default function HeaderSearchContainer() {
       <div className="relative">
         <button
           className={cn(
-            "items-center gap-2 px-4 py-2 font-bold text-[#3182ce] hover:text-[#3182ce]/50",
-            "text-lg xl:text-xl 2xl:text-2xl 3xl:text-3xl",
+            "w-full items-center gap-1 px-4 py-2 font-bold text-[#3182ce] hover:text-[#3182ce]/50",
             "hidden md:flex",
           )}
           onClick={openFilterDialog}
         >
-          <FaFilter className="text-xl" /> Filter
+          <FaFilter className="text-3xl xl:text-4xl 2xl:text-4xl 3xl:text-5xl" />
+          <span className="w-full text-nowrap text-base xl:text-lg 2xl:text-xl 3xl:text-2xl">
+            Search Filter
+          </span>
         </button>
         {filterDialogVisible && (
           <div className="absolute right-0 z-50 mt-2 w-[407px]">
