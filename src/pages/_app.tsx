@@ -46,7 +46,6 @@ function InnerApp({ Component, pageProps }: any) {
 
       {/* <!-- Disable automatic phone number detection. --> */}
       <meta name="format-detection" content="telephone=no" />
-
       <link rel="icon" href="/fav/favicon.ico" sizes="any" />
     </Head>
   );
