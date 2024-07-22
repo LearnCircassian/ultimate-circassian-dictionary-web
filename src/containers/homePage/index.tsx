@@ -2,16 +2,41 @@ import React from "react";
 import { USED_DICTS } from "~/constants/dicts";
 import { RANDOM_COLORS } from "~/constants/colors";
 
-export default function HomePageContainer() {
+function Footer() {
   return (
-    <div className="container mx-auto my-8">
+    <footer className="mt-4 flex flex-col items-center justify-center gap-8 bg-[#a1d199] p-4">
+      <p className="whitespace-normal break-words text-center text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl 3xl:text-4xl 4xl:text-5xl">
+        You can contact us at:
+        <br />
+        <span className="font-bold">learncircassian@gmail.com</span>
+      </p>
+      <p className="whitespace-normal break-words text-center text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl 3xl:text-4xl 4xl:text-5xl">
+        You can get the dictionaries that we used at:
+        <br />
+        <span className="font-bold">
+          https://github.com/bihoqo/circassian-dictionaries-collection
+        </span>
+      </p>
+    </footer>
+  );
+}
+
+function DictionaryShowContainer() {
+  return (
+    <div
+      className="
+      container 
+      mx-auto my-8
+      mr-4 max-w-[500px]"
+    >
       <h1 className="mb-4 text-center text-3xl font-bold">
         Dictionaries Used: {USED_DICTS.length}
       </h1>
       <div className="mb-4 text-center">
         <p className="text-sm">Supporting Languages: Kbd, En, Ady, Ar, Tu & Ru</p>
       </div>
-      <div className="grid grid-cols-1 gap-4">
+      {/* Scrollable container for dictionaries */}
+      <div className="ml-auto mr-4  grid max-h-[400px] grid-cols-1 gap-4 overflow-auto">
         {USED_DICTS.map((dict, index) => (
           <div
             key={index}
@@ -29,20 +54,15 @@ export default function HomePageContainer() {
           </div>
         ))}
       </div>
-      <div className="mt-4 flex flex-col items-center justify-center gap-8 p-4">
-        <p className="whitespace-normal break-words text-center text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl 3xl:text-4xl 4xl:text-5xl">
-          You can content us at:
-          <br />
-          <span className="font-bold">learncircassian@gmail.com</span>
-        </p>
-        <p className="whitespace-normal break-words text-center text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl 3xl:text-4xl 4xl:text-5xl">
-          You can get the dictionaries that we used at:
-          <br />{" "}
-          <span className="font-bold">
-            https://github.com/bihoqo/circassian-dictionaries-collection
-          </span>
-        </p>
-      </div>
+    </div>
+  );
+}
+
+export default function HomePageContainer() {
+  return (
+    <div>
+      <DictionaryShowContainer />
+      <Footer />
     </div>
   );
 }
