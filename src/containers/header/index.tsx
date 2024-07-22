@@ -22,12 +22,12 @@ export default function Header() {
 
   return (
     <div>
-      <div className="flex w-full flex-row items-center justify-center bg-red-400 p-4 shadow">
+      {/* <div className="flex w-full flex-row items-center justify-center bg-red-400 p-4 shadow">
         <p className="text-lg text-white lg:text-4xl">
           The website is in its early stages and is still being developed, some features might not
           work as intended.
         </p>
-      </div>
+      </div> */}
       <div className="relative z-50 mx-auto flex w-full flex-row items-center justify-between gap-1 px-1 pt-12 sm:w-11/12 sm:gap-2 sm:px-0 md:gap-4">
         <div className="flex flex-row items-center gap-1 sm:gap-4">
           <div className="size-0 sm:size-[75px] md:size-[100px] lg:size-[120px] xl:size-[125px]">
