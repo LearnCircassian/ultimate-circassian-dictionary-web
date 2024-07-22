@@ -66,6 +66,10 @@ export default function HeaderSearchContainer() {
             onChange={inputChangeHandler}
             onFocus={() => setDropdownVisible(true)}
             placeholder="Let's find your word"
+            style={{
+              maxWidth: "85%",
+              fontSize: width < 400 ? "0.75rem" : "1rem",
+            }}
           />
           <button
             className={cn("flex items-center hover:opacity-80", { hidden: !inputValue })}
