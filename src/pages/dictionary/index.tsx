@@ -1,7 +1,7 @@
 import Head from "next/head";
 import React from "react";
 import type { GetServerSideProps } from "next";
-import DictionaryContainer from "../../containers/homePage";
+import DictionaryContainer from "../../containers/dictionaryPage";
 
 export default function DictionaryPage() {
   return (
