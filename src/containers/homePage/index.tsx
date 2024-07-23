@@ -2,21 +2,22 @@ import React from "react";
 import { USED_DICTS } from "~/constants/dicts";
 import { RANDOM_COLORS } from "~/constants/colors";
 
-function Footer() {
+export function Footer() {
   return (
-    <footer className="mt-4 flex flex-col items-center justify-center gap-8 bg-[#a1d199] p-4">
-      <p className="whitespace-normal break-words text-center text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl 3xl:text-4xl 4xl:text-5xl">
-        You can contact us at:
-        <br />
-        <span className="font-bold">learncircassian@gmail.com</span>
-      </p>
-      <p className="whitespace-normal break-words text-center text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl 3xl:text-4xl 4xl:text-5xl">
-        You can get the dictionaries that we used at:
-        <br />
-        <span className="font-bold">
-          https://github.com/bihoqo/circassian-dictionaries-collection
-        </span>
-      </p>
+    <footer className="mt-4 bg-[#a1d199] p-6 text-center">
+      <div className="mx-auto max-w-screen-lg">
+        <p className="text-sm md:text-base lg:text-lg">You can contact us at:</p>
+        <p className="mb-4 text-lg font-bold md:text-xl lg:text-2xl">learncircassian@gmail.com</p>
+        <p className="text-sm md:text-base lg:text-lg">
+          You can get the dictionaries that we used at:
+        </p>
+        <a
+          href="https://github.com/bihoqo/circassian-dictionaries-collection"
+          className="text-lg font-bold underline md:text-xl lg:text-2xl"
+        >
+          Circassian Dictionaries Collection
+        </a>
+      </div>
     </footer>
   );
 }
