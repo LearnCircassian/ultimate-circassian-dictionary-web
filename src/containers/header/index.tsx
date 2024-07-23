@@ -63,18 +63,33 @@ function MobileNavItem({
     </button>
   );
 }
+export function Footer() {
+  return (
+    <footer className="mt-4 bg-[#a1d199] p-6 text-center">
+      <div className="mx-auto max-w-screen-lg">
+        <p className="text-sm md:text-base lg:text-lg">You can contact us at:</p>
+        <p className="mb-4 text-lg font-bold md:text-xl lg:text-2xl">learncircassian@gmail.com</p>
+        <p className="text-sm md:text-base lg:text-lg">
+          You can get the dictionaries that we used at:
+        </p>
+        <a
+          href="https://github.com/bihoqo/circassian-dictionaries-collection"
+          className="text-lg font-bold underline md:text-xl lg:text-2xl"
+        >
+          Circassian Dictionaries Collection
+        </a>
+      </div>
+    </footer>
+  );
+}
 export default function Header() {
   const { width } = useWindowSize();
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const navigateTo = (link: string) => () => {
+  const navigateTo = (link: string) => {
     router.push(link);
     setIsMobileMenuOpen(false); // Close mobile menu when navigating
-  };
-
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   const navItems = [
@@ -91,27 +106,28 @@ export default function Header() {
         sm:px-0"
       >
         <div className="flex flex-row items-center gap-1 sm:gap-4">
-          <Logo onClick={navigateTo("/")} />
+          <Logo onClick={() => navigateTo("/")} />
           <div className="hidden md:flex">
             {navItems.map((item) => (
-              <NavItem key={item.title} item={item} onClick={navigateTo(item.link)} />
+              <NavItem key={item.title} item={item} onClick={() => navigateTo(item.link)} />
             ))}
           </div>
           <div className="md:hidden">
-            <button onClick={toggleMobileMenu}>
+            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
               <FaTimes size={width < 400 ? 26 : 36} />
             </button>
           </div>
         </div>
+
         {isMobileMenuOpen && (
           <div className="absolute left-0 top-16 z-60 w-full bg-white shadow-lg md:hidden">
             {navItems.map((item) => (
-              <MobileNavItem key={item.title} item={item} onClick={navigateTo(item.link)} />
+              <MobileNavItem key={item.title} item={item} onClick={() => navigateTo(item.link)} />
             ))}
 
             <MobileNavItem
               item={{ title: "Close", link: "", icon: <FaTimes /> }}
-              onClick={toggleMobileMenu}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             />
           </div>
         )}

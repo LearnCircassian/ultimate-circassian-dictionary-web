@@ -1,8 +1,7 @@
 import "react-toastify/dist/ReactToastify.css";
 import React, { ReactNode } from "react";
 import { cn } from "~/utils/classNames";
-import Header from "~/containers/header";
-import { Footer } from "~/containers/homePage";
+import Header, { Footer } from "~/containers/header";
 
 export interface LayoutProps {
   children: ReactNode;
