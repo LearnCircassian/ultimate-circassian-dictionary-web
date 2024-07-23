@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaFilter, FaSearch, FaTimesCircle } from "react-icons/fa";
 import { cn } from "~/utils/classNames";
 import SearchFilterDialog from "~/components/searchFilterModal";
-import HeaderSearchResultsDropdown from "~/components/HeaderSearchResultsDropdown";
+import HeaderSearchResultsDropdown from "~/containers/HeaderSearchResultsDropdown";
 import { useParams, useRouter } from "next/navigation";
 import { regularWordToSafeWord } from "~/utils/wordFormatting";
 import useWindowSize from "~/hooks/useWindowDimensions";

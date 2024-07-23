@@ -112,7 +112,7 @@ export default function HeaderSearchResultsDropdown({
         )}
       >
         <div className="flex items-center justify-center p-4">
-          <div className="border-blue-500 size-8 animate-spin rounded-full border-4 border-solid border-t-transparent"></div>
+          <div className="size-8 animate-spin rounded-full border-4 border-solid border-blue-500 border-t-transparent"></div>
         </div>
       </div>
     );
