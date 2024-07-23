@@ -1,6 +1,7 @@
 import React from "react";
 import { USED_DICTS } from "~/constants/dicts";
 import { RANDOM_COLORS } from "~/constants/colors";
+import HeaderSearchContainer from "~/containers/header/headerSearchContainer";
 
 export function Footer() {
   return (
@@ -59,11 +60,13 @@ function DictionaryShowContainer() {
   );
 }
 
-export default function HomePageContainer() {
+export default function DictionaryContainer() {
   return (
     <div>
+      <div className="flex flex-grow flex-col gap-2">
+        <HeaderSearchContainer />
+      </div>
       <DictionaryShowContainer />
-      <Footer />
     </div>
   );
 }
