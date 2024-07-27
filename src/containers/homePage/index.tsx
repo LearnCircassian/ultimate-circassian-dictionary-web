@@ -2,6 +2,7 @@ import React from "react";
 import { USED_DICTS } from "~/constants/dicts";
 import { RANDOM_COLORS } from "~/constants/colors";
 import Image from "next/image";
+import HeaderSearchContainer from "~/containers/header/headerSearchContainer";
 
 export default function clsclsHomePageContainer() {
   return (
@@ -14,7 +15,10 @@ export default function clsclsHomePageContainer() {
 
 export function Content() {
   return (
-    <div className="mx-auto my-8 flex w-3/5 flex-col items-center justify-center gap-2 rounded-md bg-white py-8 shadow-2xl">
+    <div className="mx-auto my-16 flex w-3/5 flex-col items-center justify-center gap-2 rounded-md bg-white py-8 shadow-2xl">
+      <div className="flex flex-grow flex-col gap-2">
+        <HeaderSearchContainer />
+      </div>
       <Image src="/fav/icon-1042x1042.png" width={300} height={300} alt="logo" />
       <p className="mb-4 text-center text-xl md:w-1/2">
         Welcome to our comprehensive collection of Circassian language dictionaries! Our website is

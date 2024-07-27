@@ -10,7 +10,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <>
       <div data-test-id="main-header z-50">
-        <div className="z-50 hidden w-full">
+        <div className="z-50 w-full">
           <Header />
         </div>
       </div>
