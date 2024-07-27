@@ -3,7 +3,7 @@ import { USED_DICTS } from "~/constants/dicts";
 import { RANDOM_COLORS } from "~/constants/colors";
 import Image from "next/image";
 
-export default function HomePageContainer() {
+export default function clsclsHomePageContainer() {
   return (
     <div>
       <Content />
@@ -14,7 +14,7 @@ export default function HomePageContainer() {
 
 export function Content() {
   return (
-    <div className="mx-auto my-8 flex w-3/5 flex-col items-center justify-center gap-2 rounded-md bg-white shadow-2xl">
+    <div className="mx-auto my-8 flex w-3/5 flex-col items-center justify-center gap-2 rounded-md bg-white py-8 shadow-2xl">
       <Image src="/fav/icon-1042x1042.png" width={300} height={300} alt="logo" />
       <p className="mb-4 text-center text-xl md:w-1/2">
         Welcome to our comprehensive collection of Circassian language dictionaries! Our website is
@@ -64,7 +64,7 @@ export function Content() {
 export function Footer() {
   return (
     <div className="w-full bg-[#eeeeff] shadow-xl">
-      <div className="mx-auto flex w-9/12 flex-col items-center justify-between gap-2 p-4 md:gap-8 lg:flex-row 2xl:gap-16">
+      <div className="mx-auto flex w-1/2 flex-col items-center justify-between gap-2 p-4 md:gap-8 lg:flex-row 2xl:gap-16">
         <p className="flex flex-col gap-0 whitespace-normal break-words text-center text-base leading-none md:text-lg lg:gap-2 lg:text-xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl 4xl:text-2xl">
           You can contact us at:
           <br />
