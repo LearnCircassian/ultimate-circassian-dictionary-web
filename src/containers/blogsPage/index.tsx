@@ -36,9 +36,9 @@ export default function BlogsPageContainer() {
           <div
             onClick={() => router.push(`/blogs/${blog.id}`)}
             key={blog.id}
-            className="w-[300px] hover:cursor-pointer lg:flex lg:max-w-full"
+            className="group w-[300px] hover:cursor-pointer lg:flex lg:max-w-full"
           >
-            <div className="flex flex-col justify-between rounded-lg border border-gray-400 bg-indigo-600/10 p-4 leading-normal shadow-md hover:bg-indigo-600/20 hover:shadow-lg">
+            <div className="flex flex-col justify-between rounded-sm border border-gray-400 bg-indigo-600/10 p-4 leading-normal shadow-md hover:bg-indigo-600/20 hover:shadow-lg">
               <div className="mb-8">
                 <div className="mb-2 text-xl font-bold text-gray-900">{blog.title}</div>
                 <p className="text-base text-gray-700">
@@ -46,7 +46,9 @@ export default function BlogsPageContainer() {
                 </p>
               </div>
               <div className="flex items-center">
-                <div className="text-3xl text-blue-600 hover:underline">Enter</div>
+                <div className="text-3xl text-blue-600 hover:underline group-hover:underline">
+                  Enter
+                </div>
               </div>
             </div>
           </div>
