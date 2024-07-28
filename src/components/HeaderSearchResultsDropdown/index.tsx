@@ -21,6 +21,7 @@ import { FaTimesCircle } from "react-icons/fa";
 interface HeaderSearchResultsDropdownProps {
   searchInputValue: string;
   onWordSelection: (word: string) => void;
+  dropdownVisible: boolean;
   setDropdownVisible: (visible: boolean) => void;
 }
 
@@ -29,6 +30,7 @@ const SIZE_STYLE = cn("sm:w-full w-11/12");
 export default function HeaderSearchResultsDropdown({
   searchInputValue,
   onWordSelection,
+  dropdownVisible,
   setDropdownVisible,
 }: HeaderSearchResultsDropdownProps) {
   const [debouncedSearchInputValue] = useDebounce(searchInputValue, 500);
@@ -38,9 +40,9 @@ export default function HeaderSearchResultsDropdown({
   const { data: autocompletesList = [], isLoading: isAutocompletesListLoading } = useQuery({
     staleTime: 60000,
     gcTime: 60000,
-    queryKey: ["autocompleteWords", debouncedSearchInputValue],
+    queryKey: ["autocompleteWords", debouncedSearchInputValue, dropdownVisible],
     queryFn: async (): Promise<Autocomplete[]> => {
-      if (!debouncedSearchInputValue) {
+      if (!debouncedSearchInputValue || !dropdownVisible) {
         return [];
       }
 
@@ -64,8 +66,11 @@ export default function HeaderSearchResultsDropdown({
   const { data: cachedAutocompletesList = [], refetch: refetchCachedAutocompletesList } = useQuery({
     staleTime: 60000,
     gcTime: 60000,
-    queryKey: ["cachedAutocompletesList", debouncedSearchInputValue],
+    queryKey: ["cachedAutocompletesList", debouncedSearchInputValue, dropdownVisible],
     queryFn: async (): Promise<string[]> => {
+      if (!dropdownVisible) {
+        return [];
+      }
       if (debouncedSearchInputValue.trim() === "") {
         return findAllAutocompletesInWordHistoryCache();
       }

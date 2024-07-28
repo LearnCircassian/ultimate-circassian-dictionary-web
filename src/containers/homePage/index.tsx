@@ -7,7 +7,7 @@ import BookSvg from "~/components/svg/bookSvg";
 
 export default function HomePageContainer() {
   return (
-    <div>
+    <div className="w-full">
       <Content />
       <Footer />
     </div>
@@ -16,13 +16,13 @@ export default function HomePageContainer() {
 
 export function Content() {
   return (
-    <div className="mx-auto my-16 flex w-11/12 flex-col items-center justify-center gap-2 rounded-sm bg-white py-8 shadow-xl">
+    <div className="mx-auto my-16 flex w-11/12 flex-col items-center justify-center gap-2 rounded-sm bg-white py-8 shadow-xl xl:w-full xl:max-w-screen-xl">
       <div className="mb-16 flex w-full flex-grow flex-col gap-4">
         <h1 className="w-full text-center text-5xl font-semibold">Circassian Dictionary</h1>
         <HeaderSearchContainer />
       </div>
       <Image src="/fav/icon-1042x1042.png" width={300} height={300} alt="logo" />
-      <p className="mb-4 text-center text-2xl md:w-1/2">
+      <p className="mb-4 w-11/12 text-center text-2xl md:w-1/2">
         Welcome to our comprehensive collection of Circassian language dictionaries! Our website is
         dedicated to preserving and promoting the rich linguistic heritage of the Circassian people
         by providing access to over 30 different dictionaries. These dictionaries encompass

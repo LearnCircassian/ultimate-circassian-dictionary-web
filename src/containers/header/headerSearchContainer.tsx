@@ -117,6 +117,7 @@ function SearchInput({
         <HeaderSearchResultsDropdown
           searchInputValue={inputValue}
           onWordSelection={clickWordHandler}
+          dropdownVisible={dropdownVisible}
           setDropdownVisible={setDropdownVisible}
         />
       )}
