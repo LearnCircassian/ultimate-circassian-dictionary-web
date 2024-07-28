@@ -5,7 +5,7 @@ import Image from "next/image";
 import HeaderSearchContainer from "~/containers/header/headerSearchContainer";
 import BookSvg from "~/components/svg/bookSvg";
 
-export default function clsclsHomePageContainer() {
+export default function HomePageContainer() {
   return (
     <div>
       <Content />
@@ -18,11 +18,11 @@ export function Content() {
   return (
     <div className="mx-auto my-16 flex w-11/12 flex-col items-center justify-center gap-2 rounded-sm bg-white py-8 shadow-xl">
       <div className="mb-16 flex w-full flex-grow flex-col gap-4">
-        <h1 className="w-full text-center text-3xl font-semibold">Circassian Dictionary</h1>
+        <h1 className="w-full text-center text-5xl font-semibold">Circassian Dictionary</h1>
         <HeaderSearchContainer />
       </div>
       <Image src="/fav/icon-1042x1042.png" width={300} height={300} alt="logo" />
-      <p className="mb-4 text-center text-xl md:w-1/2">
+      <p className="mb-4 text-center text-2xl md:w-1/2">
         Welcome to our comprehensive collection of Circassian language dictionaries! Our website is
         dedicated to preserving and promoting the rich linguistic heritage of the Circassian people
         by providing access to over 30 different dictionaries. These dictionaries encompass
@@ -71,19 +71,21 @@ export function Content() {
 export function Footer() {
   return (
     <div className="w-full bg-[#eeeeff] shadow-xl">
-      <div className="mx-auto flex w-1/2 flex-col items-center justify-between gap-2 p-4 md:gap-8 lg:flex-row 2xl:gap-16">
-        <p className="flex flex-col gap-0 whitespace-normal break-words text-center text-base leading-none md:text-lg lg:gap-2 lg:text-xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl 4xl:text-2xl">
-          You can contact us at:
-          <br />
-          <span className="font-bold  leading-none">learncircassian@gmail.com</span>
-        </p>
-        <p className="flex flex-col gap-0 whitespace-normal break-words text-center text-base leading-none md:text-lg lg:gap-2 lg:text-xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl 4xl:text-2xl">
-          You can get the dictionaries that we used at:
-          <br />{" "}
-          <span className="font-bold  leading-none">
-            https://github.com/bihoqo/circassian-dictionaries-collection
-          </span>
-        </p>
+      <div className="mx-auto w-11/12 py-4">
+        <div className="flex flex-col gap-0 text-center text-base leading-none md:text-lg lg:gap-2 lg:text-xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl 4xl:text-2xl">
+          <p>
+            <span>You can contact us at: </span>
+            <span className="font-bold leading-none">learncircassian@gmail.com</span>
+          </p>
+        </div>
+        <div className="flex flex-col gap-0 text-center text-base leading-none md:text-lg lg:gap-2 lg:text-xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl 4xl:text-2xl">
+          <p>
+            <span>You can get the dictionaries that we used at: </span>
+            <span className="font-bold leading-none">
+              https://github.com/bihoqo/circassian-dictionaries-collection
+            </span>
+          </p>
+        </div>
       </div>
     </div>
   );
