@@ -99,13 +99,8 @@ export default function Header() {
 
   return (
     <div>
-      <div
-        className="
-        relative flex flex-row gap-4 bg-[#afdda7]
-        p-2 sm:gap-2
-        sm:px-0"
-      >
-        <div className="flex flex-row items-center gap-1 sm:gap-4">
+      <div className="relative flex flex-row gap-4 bg-[#afdda7] p-2 shadow sm:gap-2 sm:px-0">
+        <div className="mx-auto flex w-11/12 flex-row items-center gap-1 sm:gap-4">
           <Logo onClick={() => navigateTo("/")} />
           <div className="hidden md:flex">
             {navItems.map((item) => (
