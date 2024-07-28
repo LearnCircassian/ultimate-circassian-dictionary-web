@@ -5,12 +5,7 @@ import DictionarySearchContainer from "~/containers/dictionaryPage/dictionarySea
 
 function DictionaryShowContainer() {
   return (
-    <div
-      className="
-      container 
-      mx-auto my-8
-      mr-4 max-w-[500px]"
-    >
+    <div className="container mx-auto my-8 mr-4 max-w-[500px]">
       <h1 className="mb-4 text-center text-3xl font-bold">
         Dictionaries Used: {USED_DICTS.length}
       </h1>
@@ -18,7 +13,7 @@ function DictionaryShowContainer() {
         <p className="text-sm">Supporting Languages: Kbd, En, Ady, Ar, Tu & Ru</p>
       </div>
       {/* Scrollable container for dictionaries */}
-      <div className="ml-auto mr-4  grid max-h-[400px] grid-cols-1 gap-4 overflow-auto">
+      <div className="ml-auto mr-4 grid max-h-[400px] grid-cols-1 gap-4 overflow-auto">
         {USED_DICTS.map((dict, index) => (
           <div
             key={index}

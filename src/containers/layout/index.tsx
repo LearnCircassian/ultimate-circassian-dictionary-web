@@ -16,9 +16,9 @@ export default function Layout({ children }: LayoutProps) {
       <main className="flex-grow">
         <div data-test-id="layout-container h-screen" className="flex">
           <div className="relative flex w-full flex-row justify-center">
-            <section className={cn("flex flex-col w-full")}>
+            <section className={cn("flex w-full flex-col")}>
               <div id="profile-bg" className="absolute inset-x-0 top-0 overflow-hidden" />
-              <div id="contribute-bg" className="absolute inset-x-0 top-0 " />
+              <div id="contribute-bg" className="absolute inset-x-0 top-0" />
               <div data-test-id="layout">{children}</div>
             </section>
           </div>

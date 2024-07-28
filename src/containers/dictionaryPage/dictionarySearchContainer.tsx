@@ -31,12 +31,12 @@ function CachedAutocompletedSearchElement({
   word,
   searchInputValAdjusted,
   onWordSelection,
-  cachedWordDeleteClickHandler,
+  wordDeleteClickHandler,
 }: {
   word: string;
   searchInputValAdjusted: string;
   onWordSelection: (word: string) => void;
-  cachedWordDeleteClickHandler: (word: string) => void;
+  wordDeleteClickHandler: (word: string) => void;
 }): React.JSX.Element {
   const index = word.toLowerCase().indexOf(searchInputValAdjusted.toLowerCase());
   const before = word.slice(0, index);
@@ -47,7 +47,7 @@ function CachedAutocompletedSearchElement({
       <button
         className={cn(
           "w-full rounded-md text-left font-medium text-[#bb90f6]",
-          "text-lg 4xl:text-4xl 3xl:text-3xl 2xl:text-2xl xl:text-xl",
+          "text-lg xl:text-xl 2xl:text-2xl 3xl:text-3xl 4xl:text-4xl",
         )}
         onClick={() => onWordSelection(word)}
       >
@@ -59,13 +59,13 @@ function CachedAutocompletedSearchElement({
       </button>
       <button
         className="hidden text-neutral-800 hover:text-neutral-600/50 hover:underline sm:flex"
-        onClick={() => cachedWordDeleteClickHandler(word)}
+        onClick={() => wordDeleteClickHandler(word)}
       >
         Delete
       </button>
       <button
         className="visible text-neutral-800 hover:text-neutral-600/50 hover:underline sm:hidden"
-        onClick={() => cachedWordDeleteClickHandler(word)}
+        onClick={() => wordDeleteClickHandler(word)}
       >
         <FaTimesCircle className="opacity-80" size={20} color="#757575" />{" "}
       </button>
@@ -90,7 +90,7 @@ function AutocompletedSearchElement({
   return (
     <button
       className={cn(
-        "hover:bg-gray-100 w-full rounded-md p-2 text-left font-medium hover:bg-[#e7e7e7]",
+        "w-full rounded-md p-2 text-left font-medium hover:bg-[#e7e7e7] hover:bg-gray-100",
       )}
       key={word.key}
       onClick={() => onWordSelection(word.key)}
@@ -153,7 +153,7 @@ function useCachedAutocompletesQuery(searchInput: string): UseQueryResult<string
   });
 }
 
-interface HeaderSearchResultsDropdownProps {
+interface AutocompleteDropdownProps {
   searchInputValue: string;
   onWordSelection: (word: string) => void;
   setDropdownVisible: (visible: boolean) => void;
@@ -161,24 +161,25 @@ interface HeaderSearchResultsDropdownProps {
 
 const SIZE_STYLE = cn("sm:w-full w-11/12");
 
-function SearchResultsDropdown({
+function AutocompleteDropdown({
   searchInputValue,
   onWordSelection,
   setDropdownVisible,
-}: HeaderSearchResultsDropdownProps) {
+}: AutocompleteDropdownProps) {
   const [debouncedSearchInputValue] = useDebounce(searchInputValue, 500);
+  const searchInputValAdjusted = replaceStickLettersToPalochka(debouncedSearchInputValue);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const { data: autocompletesList = [], isLoading: isAutocompletesListLoading } =
-    useAutocompleteQuery(debouncedSearchInputValue);
+  const { data: list = [], isLoading: isListLoading } =
+    useAutocompleteQuery(searchInputValAdjusted);
 
-  const { data: cachedAutocompletesList = [], refetch: refetchCachedAutocompletesList } =
-    useCachedAutocompletesQuery(debouncedSearchInputValue);
+  const { data: cachedList = [], refetch: refetchCachedList } =
+    useCachedAutocompletesQuery(searchInputValAdjusted);
 
   function cachedWordDeleteClickHandler(word: string) {
     removeFromWordHistoryCache(word);
-    refetchCachedAutocompletesList();
+    refetchCachedList();
   }
 
   useEffect(() => {
@@ -199,16 +200,16 @@ function SearchResultsDropdown({
     };
   }, [setDropdownVisible]);
 
-  if (debouncedSearchInputValue.trim() === "" && cachedAutocompletesList.length === 0) {
+  if (searchInputValAdjusted.trim() === "" && cachedList.length === 0) {
     return null;
   }
 
-  if (isAutocompletesListLoading) {
+  if (isListLoading) {
     return (
       <div
         ref={dropdownRef}
         className={cn(
-          "absolute left-1/2 top-[80px] max-h-80 flex -translate-x-1/2 transform flex-col items-center justify-center gap-2 overflow-y-auto rounded-b-[16px] bg-white shadow-lg",
+          "absolute left-1/2 top-[80px] flex max-h-80 -translate-x-1/2 transform flex-col items-center justify-center gap-2 overflow-y-auto rounded-b-[16px] bg-white shadow-lg",
           SIZE_STYLE,
         )}
       >
@@ -217,12 +218,12 @@ function SearchResultsDropdown({
     );
   }
 
-  if (autocompletesList.length === 0 && cachedAutocompletesList.length === 0) {
+  if (list.length === 0 && cachedList.length === 0) {
     return (
       <div
         ref={dropdownRef}
         className={cn(
-          "absolute py-4 left-1/2 top-[80px] max-h-80 flex -translate-x-1/2 transform flex-col items-center justify-center overflow-y-auto rounded-b-[16px] bg-white shadow-lg",
+          "absolute left-1/2 top-[80px] flex max-h-80 -translate-x-1/2 transform flex-col items-center justify-center overflow-y-auto rounded-b-[16px] bg-white py-4 shadow-lg",
           SIZE_STYLE,
         )}
       >
@@ -240,9 +241,9 @@ function SearchResultsDropdown({
     <div
       ref={dropdownRef}
       className={cn(
-        "scrollbar-gray absolute w-screen left-2/4 sm:left-1/2 top-[80px] flex -translate-x-1/2 transform flex-col items-center justify-start gap-2 rounded-b-[16px] bg-white shadow-lg",
-        "6xl:max-h-[1440px] 5xl:max-h-[1200px] 4xl:max-h-[1024px] 3xl:max-h-[900px] 2xl:max-h-[800px] xl:max-h-[700px] lg:max-h-[600px] md:max-h-[600px] max-h-[600px]",
-        "w-full overflow-x-hidden text-ellipsis whitespace-normal break-words overflow-y-auto",
+        "scrollbar-gray absolute left-2/4 top-[80px] flex w-screen -translate-x-1/2 transform flex-col items-center justify-start gap-2 rounded-b-[16px] bg-white shadow-lg sm:left-1/2",
+        "6xl:max-h-[1440px] 5xl:max-h-[1200px] max-h-[600px] md:max-h-[600px] lg:max-h-[600px] xl:max-h-[700px] 2xl:max-h-[800px] 3xl:max-h-[900px] 4xl:max-h-[1024px]",
+        "w-full overflow-y-auto overflow-x-hidden text-ellipsis whitespace-normal break-words",
         "p-0 sm:p-1 md:p-2 lg:p-4",
         SIZE_STYLE,
       )}
@@ -250,29 +251,27 @@ function SearchResultsDropdown({
       <div className="w-full border-b-2 border-solid border-[#0049d7] px-2 py-4 text-left text-lg font-bold">
         Definitions
       </div>
-      {cachedAutocompletesList
-        .sort((a, b) => sortingFunc(a, b, (item) => item, debouncedSearchInputValue))
+      {cachedList
+        .sort((a, b) => sortingFunc(a, b, (item) => item, searchInputValAdjusted))
         .map((word) => {
-          const searchInputValAdjusted = replaceStickLettersToPalochka(debouncedSearchInputValue);
           return (
             <CachedAutocompletedSearchElement
               key={word}
               word={word}
               searchInputValAdjusted={searchInputValAdjusted}
               onWordSelection={onWordSelection}
-              cachedWordDeleteClickHandler={cachedWordDeleteClickHandler}
+              wordDeleteClickHandler={cachedWordDeleteClickHandler}
             />
           );
         })}
-      {autocompletesList
+      {list
         .filter((a) => {
-          return !cachedAutocompletesList.includes(a.key);
+          return !cachedList.includes(a.key);
         })
         .sort((a: Autocomplete, b: Autocomplete) =>
-          sortingFunc(a, b, (item: Autocomplete) => item.key, debouncedSearchInputValue),
+          sortingFunc(a, b, (item: Autocomplete) => item.key, searchInputValAdjusted),
         )
         .map((word) => {
-          const searchInputValAdjusted = replaceStickLettersToPalochka(debouncedSearchInputValue);
           return (
             <AutocompletedSearchElement
               key={word.key}
@@ -285,10 +284,9 @@ function SearchResultsDropdown({
     </div>
   );
   function sortingFunc<T>(a: T, b: T, getString: (item: T) => string, searchInput: string): number {
-    const searchInputValAdjusted = replaceStickLettersToPalochka(searchInput);
-    // Prioritize words that start with debouncedSearchInputValue
-    const aStartsWith = getString(a).toLowerCase().startsWith(searchInputValAdjusted.toLowerCase());
-    const bStartsWith = getString(b).toLowerCase().startsWith(searchInputValAdjusted.toLowerCase());
+    // Prioritize words that start with searchInput
+    const aStartsWith: boolean = getString(a).toLowerCase().startsWith(searchInput.toLowerCase());
+    const bStartsWith: boolean = getString(b).toLowerCase().startsWith(searchInput.toLowerCase());
 
     if (aStartsWith && !bStartsWith) {
       return -1;
@@ -297,7 +295,7 @@ function SearchResultsDropdown({
       return 1;
     }
 
-    // If both or neither start with debouncedSearchInputValue, sort alphabetically
+    // If both or neither start with searchInput, sort alphabetically
     return getString(a).localeCompare(getString(b));
   }
 }
@@ -335,27 +333,19 @@ export default function DictionarySearchContainer() {
     setInputValue(e.target.value);
   }
 
-  const openFilterDialog = () => {
-    setFilterDialogVisible(true);
-  };
-
-  const closeFilterDialog = () => {
-    setFilterDialogVisible(false);
-  };
-
   return (
     <div
       className={cn(
-        "mx-auto flex flex-row items-center justify-center z-20",
-        "xl:w-1/2 lg:w-2/3 md:w-3/4 sm:w-5/6 w-full",
+        "z-20 mx-auto flex flex-row items-center justify-center",
+        "w-full sm:w-5/6 md:w-3/4 lg:w-2/3 xl:w-1/2",
       )}
     >
       <div className="relative flex w-full flex-col">
         <div
           className={cn(
-            "flex items-center justify-center w-full",
-            "sm:px-4 xs:px-2 px-1 py-3 text-black font-medium rounded-lg shadow",
-            "3xl:text-5xl 2xl:text-4xl xl:text-3xl lg:text-2xl md:text-xl sm:text-lg text-lg",
+            "flex w-full items-center justify-center",
+            "xs:px-2 rounded-lg px-1 py-3 font-medium text-black shadow sm:px-4",
+            "text-lg sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl 3xl:text-5xl",
           )}
           style={{
             backgroundColor: "#f2f1f4",
@@ -382,7 +372,7 @@ export default function DictionarySearchContainer() {
           </button>
         </div>
         {dropdownVisible && (
-          <SearchResultsDropdown
+          <AutocompleteDropdown
             searchInputValue={inputValue}
             onWordSelection={clickWordHandler}
             setDropdownVisible={setDropdownVisible}
@@ -396,7 +386,7 @@ export default function DictionarySearchContainer() {
             "w-full items-center gap-1 px-4 py-2 font-bold text-[#3182ce] hover:text-[#3182ce]/50",
             "hidden md:flex",
           )}
-          onClick={openFilterDialog}
+          onClick={() => setFilterDialogVisible(true)}
         >
           <FaFilter className="text-3xl xl:text-4xl 2xl:text-4xl 3xl:text-5xl" />
           <span className="w-full text-nowrap text-base xl:text-lg 2xl:text-xl 3xl:text-2xl">
@@ -405,7 +395,7 @@ export default function DictionarySearchContainer() {
         </button>
         {filterDialogVisible && (
           <div className="absolute right-0 z-50 mt-2 w-[407px]">
-            <SearchFilterDialog hide={closeFilterDialog} />
+            <SearchFilterDialog hide={() => setFilterDialogVisible(false)} />
           </div>
         )}
       </div>

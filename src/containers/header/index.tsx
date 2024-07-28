@@ -8,7 +8,7 @@ import useWindowSize from "~/hooks/useWindowDimensions";
 
 function Logo({ onClick }: { onClick: () => void }) {
   return (
-    <div className="size-0 sm:size-[40px] md:size-[50px] lg:size-[60px] xl:size-[65px]">
+    <div className="size-0 sm:size-[60px]">
       <Image
         src="/fav/icon-1042x1042.png"
         className={cn("cursor-pointer text-xl font-bold")}
@@ -33,8 +33,8 @@ function NavItem({
   return (
     <button
       className={cn(
-        "flex items-center gap-1 rounded-lg px-2 py-2 font-bold text-[#303f2e] hover:text-[#637f5e]/50",
-        "3xl:text-4xl 2xl:text-3xl xl:text-2xl lg:text-xl text-xl",
+        "flex items-center gap-2 rounded-lg px-2 py-2 font-bold text-[#303f2e] hover:text-[#637f5e]/50",
+        "text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl",
       )}
       onClick={onClick}
     >
@@ -99,12 +99,7 @@ export default function Header() {
 
   return (
     <div>
-      <div
-        className="
-        relative flex flex-row gap-4 bg-[#afdda7] 
-        p-2 sm:gap-2 
-        sm:px-0"
-      >
+      <div className="relative flex flex-row gap-4 bg-[#afdda7] p-2 sm:gap-2 sm:px-0">
         <div className="flex flex-row items-center gap-1 sm:gap-4">
           <Logo onClick={() => navigateTo("/")} />
           <div className="hidden md:flex">
