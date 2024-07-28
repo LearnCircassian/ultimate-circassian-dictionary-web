@@ -80,7 +80,7 @@ export default function TableWithPagination({
 }: TableWithPaginationProps) {
   if (!isColumnAllocationSizeClassNameValid(columnAllocationSizeClassName, headers.length)) {
     return (
-      <div className="mx-auto mt-4 flex w-11/12 flex-col items-center justify-center gap-4 rounded-md bg-red/50 p-6">
+      <div className="bg-red/50 mx-auto mt-4 flex w-11/12 flex-col items-center justify-center gap-4 rounded-md p-6">
         <h1 className="text-4xl font-black">Developer Note:</h1>
         <h2 className="text-3xl font-black">
           Please use a valid &quot;columnAllocationSizeClassName&quot; value, otherwise the table
@@ -93,7 +93,7 @@ export default function TableWithPagination({
 
   if (showPagination && (!sizeOfPage || !onSizeOfPageChange)) {
     return (
-      <div className="mx-auto mt-4 flex w-11/12 flex-col items-center justify-center gap-4 rounded-md bg-red/50 p-6">
+      <div className="bg-red/50 mx-auto mt-4 flex w-11/12 flex-col items-center justify-center gap-4 rounded-md p-6">
         <h1 className="text-4xl font-black">Developer Note:</h1>
         <h2 className="text-3xl font-black">Invalid props.</h2>
         <h2 className="text-3xl font-black">
@@ -201,7 +201,7 @@ function HeaderRow({
               {h.label}
             </p>
             <SortIconSvg
-              overrideClassName={cn(
+              className={cn(
                 "cursor-pointer",
                 { "hover:opacity-50": h.isSortable },
                 { hidden: !h.isSortable },
@@ -349,7 +349,7 @@ function TablePaginationBottom({
         <ArrowLeftSvg
           width="12"
           height="12"
-          overrideClassName={cn("cursor-pointer", { "hover:opacity-50": !isLeftArrowDisabled })}
+          className={cn("cursor-pointer", { "hover:opacity-50": !isLeftArrowDisabled })}
           onClick={clickOnLeftArrowHandler}
           isDisabled={isLeftArrowDisabled}
         />
@@ -359,7 +359,7 @@ function TablePaginationBottom({
         <ArrowRightSvg
           width="12"
           height="12"
-          overrideClassName={cn("cursor-pointer", { "hover:opacity-50": !isRightArrowDisabled })}
+          className={cn("cursor-pointer", { "hover:opacity-50": !isRightArrowDisabled })}
           onClick={clickOnRightArrowHandler}
           isDisabled={isRightArrowDisabled}
         />

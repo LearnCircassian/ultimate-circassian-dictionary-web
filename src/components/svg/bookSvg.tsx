@@ -2,10 +2,10 @@ import React from "react";
 import { GenericSvgProps } from "~/interfaces";
 import { cn } from "~/utils/classNames";
 
-export default function ArrowRightSvg({
+export default function BookSvg({
   width = "800px",
   height = "800px",
-  overrideClassName,
+  className,
   fill = "#000000",
   isDisabled = false,
   onClick = () => {},
@@ -19,6 +19,7 @@ export default function ArrowRightSvg({
       id="Capa_1"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 459.319 459.319"
+      className={cn(className, isDisabled && "opacity-50")}
     >
       <g>
         <path

@@ -3,6 +3,7 @@ import { USED_DICTS } from "~/constants/dicts";
 import { RANDOM_COLORS } from "~/constants/colors";
 import Image from "next/image";
 import HeaderSearchContainer from "~/containers/header/headerSearchContainer";
+import BookSvg from "~/components/svg/bookSvg";
 
 export default function clsclsHomePageContainer() {
   return (
@@ -38,29 +39,30 @@ export function Content() {
         our website to explore the beauty and complexity of Circassian, a language spoken by the
         Circassian people with a rich cultural history.
       </p>
-      <h1 className="mb-4 text-center text-3xl font-bold">
+      <h1 className="mb-4 mt-16 text-center text-3xl font-bold">
         List of dictionaries used: {USED_DICTS.length}
       </h1>
       <div className="mb-4 text-center">
         <p className="text-sm">Supporting Languages: Kbd, En, Ady, Ar, Tu & Ru</p>
       </div>
-      <div className="flex flex-wrap justify-center gap-2">
-        {USED_DICTS.map((dict, index) => (
-          <div
-            key={index}
-            className="w-full max-w-[300px] rounded-lg p-2 shadow-md md:w-1/2"
-            style={{ backgroundColor: RANDOM_COLORS[index] }}
-          >
-            <h2 className="mb-2 text-base font-bold leading-none">{dict.title}</h2>
-            <p className="mb-2 text-xs leading-none">
-              <span className="font-semibold">From:</span> {dict.fromLang} -
-              <span className="font-semibold"> To:</span> {dict.toLang}
-            </p>
-            <p className="text-xs leading-none">
-              <span className="font-semibold">Entries Count:</span> {dict.count}
-            </p>
-          </div>
-        ))}
+      <div className="mx-auto flex w-11/12 flex-col justify-center gap-4">
+        {USED_DICTS.map((dict, index) => {
+          return (
+            <div key={index} className="flex flex-row items-center justify-center gap-2">
+              <BookSvg width="75px" height="75px" fill={RANDOM_COLORS[index]} />
+              <div key={index} className="w-full rounded-lg">
+                <h2 className="mb-2 text-base font-bold leading-none">{dict.title}</h2>
+                <p className="mb-2 text-xs leading-none">
+                  <span className="font-semibold leading-none">From:</span> {dict.fromLang} -
+                  <span className="font-semibold leading-none"> To:</span> {dict.toLang}
+                </p>
+                <p className="text-xs leading-none">
+                  <span className="font-semibold">Entries Count:</span> {dict.count}
+                </p>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

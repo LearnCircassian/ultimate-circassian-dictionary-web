@@ -4,7 +4,7 @@ import { GenericSvgProps } from "~/interfaces";
 export default function SortIconSvg({
   width = "18",
   height = "18",
-  overrideClassName,
+  className,
   fill = "#000000",
   onClick,
 }: GenericSvgProps) {
@@ -13,7 +13,7 @@ export default function SortIconSvg({
       fill={fill}
       height={width}
       width={height}
-      className={overrideClassName}
+      className={className}
       version="1.1"
       id="Capa_1"
       xmlns="http://www.w3.org/2000/svg"
