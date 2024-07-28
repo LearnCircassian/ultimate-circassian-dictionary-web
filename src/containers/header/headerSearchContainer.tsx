@@ -41,23 +41,19 @@ export default function HeaderSearchContainer() {
   };
 
   return (
-    <div
-      className={cn(
-        "mx-auto flex flex-row items-center justify-center z-20",
-        "xl:w-1/2 lg:w-2/3 md:w-3/4 sm:w-5/6 w-full",
-      )}
-    >
+    <div className={cn("mx-auto flex flex-row items-center justify-center z-2 w-11/12")}>
+      {/* Search Input */}
       <div className="relative flex w-full flex-col">
         <div
           className={cn(
-            "flex items-center justify-center w-full",
-            "sm:px-4 xs:px-2 px-1 py-3 text-black font-medium rounded-lg shadow",
+            "flex items-center justify-center w-full bg-white",
+            "border border-solid",
+            "sm:px-4 xs:px-2 px-1 py-3 text-black font-medium rounded-md shadow-sm",
             "3xl:text-5xl 2xl:text-4xl xl:text-3xl lg:text-2xl md:text-xl sm:text-lg text-lg",
+            inputValue.length > 0
+              ? "border-[#b0e0b5] border-2"
+              : "border-[#cdcdcd] hover:border-[#b0e0b5]/60",
           )}
-          style={{
-            backgroundColor: "#f2f1f4",
-            border: "2px solid #155e75",
-          }}
         >
           <FaSearch className="opacity-80" size={width < 400 ? 16 : 24} color="#155e75" />
           <input
@@ -65,7 +61,7 @@ export default function HeaderSearchContainer() {
             value={inputValue}
             onChange={inputChangeHandler}
             onFocus={() => setDropdownVisible(true)}
-            placeholder="Let's find your word"
+            placeholder="Search, e.g. boy or к1алэ"
           />
           <button
             className={cn("flex items-center hover:opacity-80", { hidden: !inputValue })}
@@ -83,6 +79,7 @@ export default function HeaderSearchContainer() {
         )}
       </div>
 
+      {/* Search Filter */}
       <div className="relative">
         <button
           className={cn(

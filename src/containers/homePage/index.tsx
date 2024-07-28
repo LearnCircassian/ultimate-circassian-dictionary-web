@@ -15,8 +15,9 @@ export default function clsclsHomePageContainer() {
 
 export function Content() {
   return (
-    <div className="mx-auto my-16 flex w-3/5 flex-col items-center justify-center gap-2 rounded-md bg-white py-8 shadow-2xl">
-      <div className="flex flex-grow flex-col gap-2">
+    <div className="mx-auto my-16 flex w-11/12 flex-col items-center justify-center gap-2 rounded-sm bg-white py-8 shadow-xl">
+      <div className="mb-16 flex w-full flex-grow flex-col gap-4">
+        <h1 className="w-full text-center text-3xl font-semibold">Circassian Dictionary</h1>
         <HeaderSearchContainer />
       </div>
       <Image src="/fav/icon-1042x1042.png" width={300} height={300} alt="logo" />

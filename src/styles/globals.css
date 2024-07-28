@@ -6,7 +6,7 @@ html,
 body {
     padding: 0;
     margin: 0;
-    font-family: "Calibri", sans-serif;
+    font-family: "Open Sans", "Calibri", sans-serif;
     /* height: 100vh; */
     position: relative;
     overscroll-behavior: none;
