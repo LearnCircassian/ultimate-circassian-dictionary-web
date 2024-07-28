@@ -107,7 +107,10 @@ export default function KeyboardWrapper({
   const [layoutName, setLayoutName] = useState("default");
   const [currentLayout, setCurrentLayout] = useState("Circassian");
 
-  const onKeyPress = (clickedBtn: string) => {
+  const onKeyPress = (clickedBtn: string, e?: MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+    }
     switch (clickedBtn) {
       case "{shift}":
       case "{lock}":

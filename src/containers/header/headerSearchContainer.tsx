@@ -34,7 +34,6 @@ export default function HeaderSearchContainer() {
       return;
     }
     searchInputRef.current?.focus();
-    searchInputRef.current?.click();
   }
 
   return (

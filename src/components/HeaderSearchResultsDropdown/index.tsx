@@ -112,7 +112,7 @@ export default function HeaderSearchResultsDropdown({
         )}
       >
         <div className="flex items-center justify-center p-4">
-          <div className="border-blue-500 size-8 animate-spin rounded-full border-4 border-solid border-t-transparent"></div>
+          <div className="size-8 animate-spin rounded-full border-4 border-solid border-blue-500 border-t-transparent"></div>
         </div>
       </div>
     );
@@ -142,7 +142,7 @@ export default function HeaderSearchResultsDropdown({
       ref={dropdownRef}
       className={cn(
         "scrollbar-gray absolute w-screen left-2/4 sm:left-1/2 top-[80px] flex -translate-x-1/2 transform flex-col items-center justify-start gap-2 rounded-b-[16px] bg-white shadow-lg",
-        "6xl:max-h-[1440px] 5xl:max-h-[1200px] 4xl:max-h-[1024px] 3xl:max-h-[900px] 2xl:max-h-[800px] xl:max-h-[700px] lg:max-h-[600px] md:max-h-[600px] max-h-[600px]",
+        "6xl:max-h-[900px] 5xl:max-h-[875px] 4xl:max-h-[850px] 3xl:max-h-[825px] 2xl:max-h-[800px] xl:max-h-[700px] lg:max-h-[600px] md:max-h-[600px] max-h-[600px]",
         "w-full overflow-x-hidden text-ellipsis whitespace-normal break-words overflow-y-auto",
         "p-0 sm:p-1 md:p-2 lg:p-4",
         SIZE_STYLE,
