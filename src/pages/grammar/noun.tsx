@@ -1,10 +1,85 @@
 import React from "react";
-import H1 from "~/styled-components/h1";
+import GrammarBookPage from "~/styled-components/GrammarBookPage";
 import CText, { TranslateText, HighlightText } from "~/styled-components/CText";
 
+function SectionAbsolutive() {
+  return (
+    <section className="mb-8">
+      <h2 className="mb-2 text-2xl font-semibold">Absolutive</h2>
+      <p className="mb-4">
+        The absolutive case is marked by the suffix <CText ipa="-r">-р</CText>. As is usual for most
+        ergative languages, the absolutive is used as the subject of an intransitive verb and as the
+        direct object of a transitive verb.
+      </p>
+
+      <p className="mb-4">It denotes the subject of an intransitive verb.</p>
+      <ul className="mb-4 list-inside list-disc">
+        <li>
+          <CText ipa="χədʒabzər mabaːwa">
+            <HighlightText>хъыджэбзыр</HighlightText> мэбауэ
+          </CText>
+          :{" "}
+          <TranslateText>
+            <HighlightText>the girl</HighlightText> breaths
+          </TranslateText>
+        </li>
+        <li>
+          <CText ipa="fəzər mazəm jawpɬ">
+            <HighlightText>фызыр</HighlightText> мэзым йоплъ
+          </CText>
+          : :{" "}
+          <TranslateText>
+            <HighlightText>the woman</HighlightText> looks at the moon
+          </TranslateText>
+        </li>
+      </ul>
+
+      <p className="mb-4">It denotes the direct object of a transitive verb.</p>
+      <ul className="mb-4 list-inside list-disc">
+        <li>
+          <CText ipa="sa qasɬəχʷaː ɬʼər qazʁʷataːɕ">
+            сэ къэслъыхъуа <HighlightText>лIыр</HighlightText> къэзгъуэтащ
+          </CText>
+          :{" "}
+          <TranslateText>
+            I have found <HighlightText>the man</HighlightText> whom I was looking for
+          </TranslateText>
+        </li>
+      </ul>
+      <p className="mb-4">It denotes the nominal predicate in equative sentences.</p>
+      <ul className="mb-4 list-inside list-disc">
+        <li>
+          <CText ipa="sa təkʷanəm zʁakʷʼaːr səj qʷaʃərɕ">
+            сэ тыкуэным згъэкIуар <HighlightText>си къуэшырщ</HighlightText>
+          </CText>
+          :{" "}
+          <TranslateText>
+            whom I have sent to the store <HighlightText>is my brother</HighlightText>
+          </TranslateText>
+        </li>
+        <li>
+          <CText ipa="sa χədʒabz daːxar səj nəsarɕ">
+            сэ хъыджэбз дахэр <HighlightText>си нысэрщ</HighlightText>
+          </CText>
+          :
+          <TranslateText>
+            {" "}
+            this pretty girl <HighlightText>is my bride</HighlightText>
+          </TranslateText>
+        </li>
+        <li>
+          <CText ipa="səj qʷar ɕaːkʷʼarɕ">си къуэр щакIуэрщ</CText>:{" "}
+          <TranslateText>
+            my brother <HighlightText>is the hunter</HighlightText>
+          </TranslateText>
+        </li>
+      </ul>
+    </section>
+  );
+}
 export default function NounPage() {
   return (
-    <div className="mx-auto mt-2 w-11/12">
+    <GrammarBookPage>
       <h1 className="mb-4 text-3xl font-bold">Nouns</h1>
 
       <section className="mb-8">
@@ -163,78 +238,7 @@ export default function NounPage() {
         </ul>
       </section>
 
-      <section className="mb-8">
-        <h2 className="mb-2 text-2xl font-semibold">Absolutive</h2>
-        <p className="mb-4">
-          The absolutive case is marked by the suffix <CText ipa="-r">-р</CText>. As is usual for
-          most ergative languages, the absolutive is used as the subject of an intransitive verb and
-          as the direct object of a transitive verb.
-        </p>
-
-        <p className="mb-4">It denotes the subject of an intransitive verb.</p>
-        <ul className="mb-4 list-inside list-disc">
-          <li>
-            <CText ipa="χədʒabzər mabaːwa">
-              <HighlightText>хъыджэбзыр</HighlightText> мэбауэ
-            </CText>
-            :{" "}
-            <TranslateText>
-              <HighlightText>the girl</HighlightText> breaths
-            </TranslateText>
-          </li>
-          <li>
-            <CText ipa="fəzər mazəm jawpɬ">
-              <HighlightText>фызыр</HighlightText> мэзым йоплъ
-            </CText>
-            : :{" "}
-            <TranslateText>
-              <HighlightText>the woman</HighlightText> looks at the moon
-            </TranslateText>
-          </li>
-        </ul>
-
-        <p className="mb-4">It denotes the direct object of a transitive verb.</p>
-        <ul className="mb-4 list-inside list-disc">
-          <li>
-            <CText ipa="sa qasɬəχʷaː ɬʼər qazʁʷataːɕ">
-              сэ къэслъыхъуа <HighlightText>лIыр</HighlightText> къэзгъуэтащ
-            </CText>
-            :{" "}
-            <TranslateText>
-              I have found <HighlightText>the man</HighlightText> whom I was looking for
-            </TranslateText>
-          </li>
-        </ul>
-
-        <p className="mb-4">It denotes the nominal predicate in equative sentences.</p>
-        <ul className="mb-4 list-inside list-disc">
-          <li>
-            <CText ipa="sa təkʷanəm zʁakʷʼaːr səj qʷaʃərɕ">
-              сэ тыкуэным згъэкIуар <HighlightText>си къуэшырщ</HighlightText>
-            </CText>
-            :{" "}
-            <TranslateText>
-              whom I have sent to the store <HighlightText>is my brother</HighlightText>
-            </TranslateText>
-          </li>
-          <li>
-            <CText ipa="sa χədʒabz daːxar səj nəsarɕ">
-              сэ хъыджэбз дахэр <HighlightText>си нысэрщ</HighlightText>
-            </CText>
-            :
-            <TranslateText>
-              {" "}
-              this pretty girl <HighlightText>is my bride</HighlightText>
-            </TranslateText>
-          </li>
-          <li>
-            <CText ipa="səj qʷar ɕaːkʷʼarɕ">си къуэр щакIуэрщ</CText>:{" "}
-            <TranslateText>
-              my brother <HighlightText>is the hunter</HighlightText>
-            </TranslateText>
-          </li>
-        </ul>
-      </section>
+      <SectionAbsolutive />
 
       <section className="mb-8">
         <h2 className="mb-2 text-2xl font-semibold">Ergative</h2>
@@ -361,6 +365,6 @@ export default function NounPage() {
           </li>
         </ul>
       </section>
-    </div>
+    </GrammarBookPage>
   );
 }
