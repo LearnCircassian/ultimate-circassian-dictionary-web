@@ -35,7 +35,7 @@ export default function WordPageFooter() {
       return;
     }
 
-    router.push(`/word/${safeWord}`);
+    router.push(`/dictionary/${safeWord}`);
   }
 
   function filterOptionClickHandler() {

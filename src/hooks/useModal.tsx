@@ -57,7 +57,7 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
 }
 
 /**
- * the container responsible for showing modal content
+ * the containerDiv responsible for showing modal content
  * rendered on top of the React Tree, inside _app.tsx
  */
 export function ModalContainer() {

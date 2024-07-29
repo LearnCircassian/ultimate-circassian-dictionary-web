@@ -26,7 +26,7 @@ export default function HeaderSearchContainer() {
       return;
     }
 
-    router.push(`/word/${safeWord}`);
+    router.push(`/dictionary/${safeWord}`);
   }
 
   function keyboardSearchBtnHandler() {
