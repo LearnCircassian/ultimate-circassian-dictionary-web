@@ -1,10 +1,10 @@
 import React from "react";
-import GrammarBookPage from "~/styled-components/GrammarBookPage";
+import GrammarBookContainer from "~/styled-components/GrammarBookContainer";
 
 export default function NumberPage() {
   return (
-    <GrammarBookPage>
+    <GrammarBookContainer>
       <h1>Number</h1>
-    </GrammarBookPage>
+    </GrammarBookContainer>
   );
 }

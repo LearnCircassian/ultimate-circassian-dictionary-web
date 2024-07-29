@@ -1,8 +1,9 @@
 import React from "react";
+import ContainerDiv from "~/components/containerDiv";
 
 export default function Policy() {
   return (
-    <div className="m-8">
+    <ContainerDiv className="m-8 p-4">
       <h1 className="mb-4 text-2xl font-bold">Privacy Policy</h1>
       <p className="mb-4">Last updated: July 23, 2024</p>
       <p className="mb-4">
@@ -369,6 +370,6 @@ export default function Policy() {
       <ul className="mb-4 list-inside list-disc">
         <li>By email: learncircassian@gmail.com</li>
       </ul>
-    </div>
+    </ContainerDiv>
   );
 }

@@ -1,10 +1,10 @@
 import React from "react";
-import GrammarBookPage from "~/styled-components/GrammarBookPage";
+import GrammarBookContainer from "~/styled-components/GrammarBookContainer";
 
 export default function VerbPage() {
   return (
-    <GrammarBookPage>
+    <GrammarBookContainer>
       <h1>Verbs</h1>
-    </GrammarBookPage>
+    </GrammarBookContainer>
   );
 }

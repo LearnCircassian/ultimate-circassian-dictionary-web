@@ -1,5 +1,5 @@
 import React from "react";
-import GrammarBookPage from "~/styled-components/GrammarBookPage";
+import GrammarBookContainer from "~/styled-components/GrammarBookContainer";
 import CText, { TranslateText, HighlightText } from "~/styled-components/CText";
 
 function SectionAbsolutive() {
@@ -79,7 +79,7 @@ function SectionAbsolutive() {
 }
 export default function NounPage() {
   return (
-    <GrammarBookPage>
+    <GrammarBookContainer>
       <h1 className="mb-4 text-3xl font-bold">Nouns</h1>
 
       <section className="mb-8">
@@ -365,6 +365,6 @@ export default function NounPage() {
           </li>
         </ul>
       </section>
-    </GrammarBookPage>
+    </GrammarBookContainer>
   );
 }

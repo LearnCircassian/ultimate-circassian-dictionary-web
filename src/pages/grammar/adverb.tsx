@@ -1,10 +1,10 @@
 import React from "react";
-import GrammarBookPage from "~/styled-components/GrammarBookPage";
+import GrammarBookContainer from "~/styled-components/GrammarBookContainer";
 
 export default function AdverbPage() {
   return (
-    <GrammarBookPage>
+    <GrammarBookContainer>
       <h1>Adverb</h1>
-    </GrammarBookPage>
+    </GrammarBookContainer>
   );
 }
