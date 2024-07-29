@@ -1,7 +1,6 @@
 import Head from "next/head";
 import React from "react";
-import type { GetServerSideProps } from "next";
-import HomePageContainer from "../containers/homePage";
+import DictionaryShowContainer from "~/containers/dictionaryPage";
 
 export default function HomePage() {
   return (
@@ -9,8 +8,8 @@ export default function HomePage() {
       <Head>
         <title>Learn Circassian</title>
       </Head>
-      <main>
-        <HomePageContainer />
+      <main className="w-full">
+        <DictionaryShowContainer />
       </main>
     </>
   );

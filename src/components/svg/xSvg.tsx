@@ -4,7 +4,7 @@ import { GenericSvgProps } from "~/interfaces/";
 export default function XSvg({
   width = "12",
   height = "12",
-  overrideClassName,
+  className,
   fill = "none",
   onClick,
 }: GenericSvgProps) {
@@ -13,7 +13,7 @@ export default function XSvg({
       fill={fill}
       height={width}
       width={height}
-      className={overrideClassName}
+      className={className}
       viewBox="0 0 12 12"
       xmlns="http://www.w3.org/2000/svg"
       onClick={onClick}

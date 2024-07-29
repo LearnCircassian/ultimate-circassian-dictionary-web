@@ -4,7 +4,7 @@ import { GenericSvgProps } from "~/interfaces";
 export default function IFrameSvg({
   width = "14",
   height = "14",
-  overrideClassName,
+  className,
   fill = "none",
   onClick,
 }: GenericSvgProps) {
@@ -12,7 +12,7 @@ export default function IFrameSvg({
     <svg
       height={width}
       width={height}
-      className={overrideClassName}
+      className={className}
       onClick={onClick}
       viewBox="0 0 14 14"
       fill={fill}

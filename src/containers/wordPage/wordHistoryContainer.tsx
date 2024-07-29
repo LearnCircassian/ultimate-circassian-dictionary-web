@@ -32,7 +32,7 @@ export default function WordHistoryContainer() {
       return;
     }
 
-    router.push(`/word/${safeWord}`);
+    router.push(`/dictionary/${safeWord}`);
   }
 
   function onDeleteClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>, word: string) {
@@ -44,14 +44,14 @@ export default function WordHistoryContainer() {
   return (
     <div className={cn("flex w-full flex-col")}>
       <div className="flex w-full items-center justify-between rounded-t-2xl bg-[#adb3ed] px-4 py-2 font-bold shadow">
-        <span className={cn("2xl:text-4xl xl:text-3xl lg:text-2xl md:text-xl sm:text-lg text-md")}>
+        <span className={cn("text-md sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl")}>
           Search History
         </span>
       </div>
       <div
         className={cn(
-          "bg-[#f1f1ff] p-2 text-black shadow-sm rounded-b-2xl",
-          "2xl:text-3xl xl:text-2xl lg:text-xl md:text-lg sm:text-base text-sm",
+          "rounded-b-2xl bg-[#f1f1ff] p-2 text-black shadow-sm",
+          "text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl",
         )}
       >
         <p className={cn({ hidden: myWordHistory.length > 0 })}>Your search history is empty</p>
@@ -66,7 +66,7 @@ export default function WordHistoryContainer() {
               </span>
               <button
                 onClick={(event) => onDeleteClick(event, word)}
-                className="flex items-center opacity-0 group-hover:opacity-100 "
+                className="flex items-center opacity-0 group-hover:opacity-100"
               >
                 <FaTimesCircle className="opacity-80" size={20} color="#757575" />
               </button>

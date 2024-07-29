@@ -55,7 +55,7 @@ export default function SearchFilterDialog({ hide }: SearchFilterModalProps) {
       <div className="rounded-[10px] border border-gray-300 bg-[#f4fff1] p-6">
         <div className="-mx-6 -mt-6 flex items-center justify-between rounded-t-[10px] border-b border-solid border-gray-300 bg-[#b7edad] px-6 py-4">
           <p className="text-lg font-semibold text-gray-900">Search Filter Preferences</p>
-          <XSvg onClick={hide} overrideClassName="cursor-pointer hover:opacity-70" />
+          <XSvg onClick={hide} className="cursor-pointer hover:opacity-70" />
         </div>
         <div className="flex flex-col gap-6 pt-4">
           <p className="text-xl">
@@ -108,7 +108,7 @@ export default function SearchFilterDialog({ hide }: SearchFilterModalProps) {
             Discard
           </button>
           <button
-            className={cn("rounded bg-gray-300 px-4 py-2 text-md text-black hover:bg-gray-400", {
+            className={cn("text-md rounded bg-gray-300 px-4 py-2 text-black hover:bg-gray-400", {
               "cursor-not-allowed opacity-50": selectedFromLangCheckboxes.length === 0,
             })}
             disabled={selectedFromLangCheckboxes.length === 0}

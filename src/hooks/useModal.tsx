@@ -57,7 +57,7 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
 }
 
 /**
- * the container responsible for showing modal content
+ * the containerDiv responsible for showing modal content
  * rendered on top of the React Tree, inside _app.tsx
  */
 export function ModalContainer() {
@@ -72,7 +72,7 @@ export function ModalContainer() {
 
 /**
  * the API for showing the modal, only thing needed is the showModal function that accepts
- * content as the first parameter, that'HeaderSearchResultsDropdown all it takes to render a modal
+ * content as the first parameter, that's all it takes to render a modal
  */
 export default function useModal() {
   const { show, hide, isOpen } = React.useContext(ModalContext);
