@@ -6,7 +6,7 @@ import WordPageFooter from "~/containers/wordPage/wordPageFooter"; // Import the
 
 export default function WordPageContainer({ wordSpelling }: { wordSpelling: string }) {
   return (
-    <div className="flex flex-col">
+    <div className="mx-auto my-16 flex w-11/12 flex-col items-center justify-center gap-2 rounded-sm bg-white py-8 shadow-xl xl:w-full xl:max-w-screen-xl">
       <div
         className={cn(
           "mx-auto my-20 flex w-11/12 flex-row flex-[1]",
