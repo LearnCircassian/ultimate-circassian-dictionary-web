@@ -19,7 +19,7 @@ export default function WordPage() {
       <Head>
         <title>Learn Circassian</title>
       </Head>
-      <main>
+      <main className="size-full">
         <ContainerDiv>
           <div className="flex w-full flex-grow flex-col gap-4">
             <h1 className="w-full text-center text-5xl font-semibold">Circassian Dictionary</h1>
