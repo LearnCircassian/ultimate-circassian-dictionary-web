@@ -10,7 +10,7 @@ export default function DictionaryShowContainer() {
   return (
     <div className="w-full">
       <Content />
-      <Footer />
+      <HomepageFooter />
     </div>
   );
 }
@@ -69,7 +69,7 @@ export function Content() {
   );
 }
 
-export function Footer() {
+export function HomepageFooter() {
   return (
     <div className="w-full bg-[#eeeeff] shadow-xl">
       <div className="mx-auto w-11/12 py-4">

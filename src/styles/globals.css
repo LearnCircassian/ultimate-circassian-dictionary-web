@@ -17,6 +17,7 @@ body {
     background-image: url('./../../public/bg.jpg');
 
     /* Full height */
+    min-height: 100% !important;
     height: 100%;
 
     /* Center and scale the image nicely */

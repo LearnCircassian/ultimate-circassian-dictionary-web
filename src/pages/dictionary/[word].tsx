@@ -38,10 +38,10 @@ export default function WordPage() {
               <DefinitionsContainer wordSpelling={wordSpelling} />
             </div>
           </div>
-          <div className="z-30 w-full">
-            <WordPageFooter />
-          </div>
         </ContainerDiv>
+        <div className="z-30 w-full">
+          <WordPageFooter />
+        </div>
       </main>
     </>
   );
