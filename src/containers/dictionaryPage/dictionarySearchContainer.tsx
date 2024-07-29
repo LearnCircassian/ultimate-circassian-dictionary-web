@@ -326,7 +326,7 @@ export default function DictionarySearchContainer() {
       return;
     }
 
-    router.push(`/word/${safeWord}`);
+    router.push(`/dictionary/${safeWord}`);
   }
 
   function inputChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {

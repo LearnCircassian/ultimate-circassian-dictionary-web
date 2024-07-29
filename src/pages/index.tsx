@@ -8,7 +8,7 @@ export default function HomePage() {
       <Head>
         <title>Learn Circassian</title>
       </Head>
-      <main>
+      <main className="w-full">
         <DictionaryShowContainer />
       </main>
     </>

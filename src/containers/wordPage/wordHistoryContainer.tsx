@@ -32,7 +32,7 @@ export default function WordHistoryContainer() {
       return;
     }
 
-    router.push(`/word/${safeWord}`);
+    router.push(`/dictionary/${safeWord}`);
   }
 
   function onDeleteClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>, word: string) {
