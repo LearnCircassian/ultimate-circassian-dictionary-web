@@ -4,7 +4,7 @@ import { GenericSvgProps } from "~/interfaces";
 export default function MagnifyingGlassSvg({
   width = "18",
   height = "18",
-  overrideClassName,
+  className,
   fill = "#000000",
 }: GenericSvgProps) {
   return (
@@ -12,7 +12,7 @@ export default function MagnifyingGlassSvg({
       fill={fill}
       height={width}
       width={height}
-      className={overrideClassName}
+      className={className}
       version="1.1"
       id="Capa_1"
       xmlns="http://www.w3.org/2000/svg"

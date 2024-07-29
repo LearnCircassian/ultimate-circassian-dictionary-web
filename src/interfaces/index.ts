@@ -8,7 +8,7 @@ export type NumberOrString = number | string;
 export interface GenericSvgProps {
   width?: string;
   height?: string;
-  overrideClassName?: string;
+  className?: string;
   fill?: string;
   onClick?: () => void;
   isDisabled?: boolean;

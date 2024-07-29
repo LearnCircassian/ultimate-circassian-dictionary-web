@@ -5,7 +5,7 @@ import { cn } from "~/utils/classNames";
 export default function ArrowRightSvg({
   width = "5",
   height = "8",
-  overrideClassName,
+  className,
   fill = "none",
   isDisabled = false,
   onClick = () => {},
@@ -15,7 +15,7 @@ export default function ArrowRightSvg({
       fill={fill}
       height={width}
       width={height}
-      className={cn({ "opacity-50": isDisabled }, overrideClassName)}
+      className={cn({ "opacity-50": isDisabled }, className)}
       viewBox="0 0 5 8"
       xmlns="http://www.w3.org/2000/svg"
       onClick={isDisabled ? () => {} : onClick}

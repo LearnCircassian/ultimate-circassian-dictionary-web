@@ -4,7 +4,7 @@ import { GenericSvgProps } from "~/interfaces";
 export default function ArrowDownSvg({
   width = "6",
   height = "4",
-  overrideClassName,
+  className,
   fill = "none",
 }: GenericSvgProps) {
   return (
@@ -12,7 +12,7 @@ export default function ArrowDownSvg({
       fill={fill}
       height={width}
       width={height}
-      className={overrideClassName}
+      className={className}
       viewBox="0 0 6 4"
       xmlns="http://www.w3.org/2000/svg"
     >
