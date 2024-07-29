@@ -46,7 +46,7 @@ export default function OldHeader() {
             <button
               className={cn(
                 "flex items-center gap-1 rounded-lg px-2 py-2 font-bold text-[#a1d199] hover:text-[#a1d199]/50",
-                "3xl:text-5xl 2xl:text-4xl xl:text-2xl lg:text-xl text-xl",
+                "text-xl lg:text-xl xl:text-2xl 2xl:text-4xl 3xl:text-5xl",
               )}
               onClick={navigateToHome}
             >
@@ -66,14 +66,14 @@ export default function OldHeader() {
         {isMobileMenuOpen && (
           <div className="absolute left-0 top-16 z-60 w-full bg-white shadow-lg md:hidden">
             <button
-              className="text-lightGreen hover:text-lightGreen/70 flex w-full items-center justify-center gap-2 py-4 text-lg font-bold "
+              className="text-lightGreen hover:text-lightGreen/70 flex w-full items-center justify-center gap-2 py-4 text-lg font-bold"
               onClick={navigateToHome}
             >
               <FaHome />
               Home
             </button>
             <button
-              className="text-lightGreen hover:text-lightGreen/70 flex w-full items-center justify-center gap-2 py-4 text-lg font-bold "
+              className="text-lightGreen hover:text-lightGreen/70 flex w-full items-center justify-center gap-2 py-4 text-lg font-bold"
               onClick={toggleMobileMenu}
             >
               <FaTimes />

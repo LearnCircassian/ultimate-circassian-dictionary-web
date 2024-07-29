@@ -5,7 +5,7 @@ import Image from "next/image";
 import HeaderSearchContainer from "~/containers/header/headerSearchContainer";
 import BookSvg from "~/components/svg/bookSvg";
 
-export default function HomePageContainer() {
+export default function DictionaryShowContainer() {
   return (
     <div className="w-full">
       <Content />

@@ -34,7 +34,7 @@ function NavItem({
     <button
       className={cn(
         "flex items-center gap-1 rounded-lg px-2 py-2 font-bold text-[#303f2e] hover:text-[#637f5e]/50",
-        "3xl:text-4xl 2xl:text-3xl xl:text-2xl lg:text-xl text-xl",
+        "text-xl lg:text-xl xl:text-2xl 2xl:text-3xl 3xl:text-4xl",
       )}
       onClick={onClick}
     >

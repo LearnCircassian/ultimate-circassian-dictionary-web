@@ -175,7 +175,7 @@ function HeaderRow({
       className={cn(
         "grid font-semibold",
         columnAllocationSizeClassName,
-        "border-b border-[#161619]/30 border-solid",
+        "border-b border-solid border-[#161619]/30",
         overrideClassName,
       )}
     >
@@ -252,10 +252,10 @@ function TableRows({
           <div
             key={idx}
             className={cn(
-              "grid font-semibold items-center",
+              "grid items-center font-semibold",
               columnAllocationSizeClassName,
               isOnDarkMode
-                ? "bg-[#262629] rounded-[6px] mb-2"
+                ? "mb-2 rounded-[6px] bg-[#262629]"
                 : idx % 2 === 0
                   ? "bg-transparent"
                   : "bg-[#161619]/5",
@@ -267,7 +267,7 @@ function TableRows({
               <div
                 key={idx}
                 className={cn(
-                  "text-md font-medium p-4",
+                  "text-md p-4 font-medium",
                   "w-full overflow-hidden text-ellipsis whitespace-normal break-words",
                   {
                     "text-left": idx === 0,

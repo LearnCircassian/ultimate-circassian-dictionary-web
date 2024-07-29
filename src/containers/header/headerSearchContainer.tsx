@@ -88,12 +88,12 @@ function SearchInput({
     <div className="relative flex w-full flex-col">
       <div
         className={cn(
-          "flex items-center justify-center w-full bg-white",
+          "flex w-full items-center justify-center bg-white",
           "border border-solid",
-          "sm:px-4 xs:px-2 px-1 py-3 text-black font-medium rounded-md shadow-sm",
-          "3xl:text-5xl 2xl:text-4xl xl:text-3xl lg:text-2xl md:text-xl sm:text-lg text-lg",
+          "xs:px-2 rounded-md px-1 py-3 font-medium text-black shadow-sm sm:px-4",
+          "text-lg sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl 3xl:text-5xl",
           inputValue.length > 0
-            ? "border-[#b0e0b5] border-2"
+            ? "border-2 border-[#b0e0b5]"
             : "border-[#cdcdcd] hover:border-[#b0e0b5]/60",
         )}
       >

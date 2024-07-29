@@ -45,7 +45,7 @@ export default function WordPageFooter() {
   return (
     <footer className="fixed bottom-0 z-30 flex w-full items-center justify-between bg-white p-2 shadow-md sm:hidden">
       <button
-        className={cn("flex flex-col items-center justify-center flex-1", {
+        className={cn("flex flex-1 flex-col items-center justify-center", {
           "opacity-30": !footerWords.leftFooterBtnWord,
         })}
         disabled={!footerWords.leftFooterBtnWord}
@@ -69,7 +69,7 @@ export default function WordPageFooter() {
         <span className="text-md text-black">Search Filter</span>
       </button>
       <button
-        className={cn("flex flex-col items-center justify-center flex-1", {
+        className={cn("flex flex-1 flex-col items-center justify-center", {
           "opacity-30": !footerWords.rightFooterBtnWord,
         })}
         disabled={!footerWords.rightFooterBtnWord}

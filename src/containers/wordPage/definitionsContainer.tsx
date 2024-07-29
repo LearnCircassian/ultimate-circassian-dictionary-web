@@ -93,15 +93,15 @@ export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: s
         <span
           className={cn(
             "text-left font-black text-cyan-800",
-            "3xl:text-7xl 2xl:text-6xl xl:text-5xl lg:text-4xl text-4xl",
+            "text-4xl lg:text-4xl xl:text-5xl 2xl:text-6xl 3xl:text-7xl",
           )}
         >
           {wordSpelling}
         </span>
         <div
           className={cn(
-            "mt-0 sm:mt-3 text-left font-black text-cyan-800",
-            "3xl:text-3xl 2xl:text-3xl xl:text-2xl lg:text-xl text-lg",
+            "mt-0 text-left font-black text-cyan-800 sm:mt-3",
+            "text-lg lg:text-xl xl:text-2xl 2xl:text-3xl 3xl:text-3xl",
           )}
         >
           {allDefResults.length === defResultsAfterFilter.length ? (
@@ -149,7 +149,7 @@ function DefinitionsBox({ wordDefinitions }: { wordDefinitions: WordDefinitionsR
         <div
           key={idx}
           className={cn("flex flex-col", {
-            "rounded-2xl border-l-4 border-solid border-green": definitionVisible[idx],
+            "border-green rounded-2xl border-l-4 border-solid": definitionVisible[idx],
           })}
         >
           <button
@@ -157,7 +157,7 @@ function DefinitionsBox({ wordDefinitions }: { wordDefinitions: WordDefinitionsR
             onClick={() => toggleDefinitionVisibility(idx)}
           >
             <span
-              className={cn("2xl:text-4xl xl:text-3xl lg:text-2xl md:text-xl sm:text-lg text-md")}
+              className={cn("text-md sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl")}
             >
               {wd.title} ({wd.fromLangs.join("/")} {"->"} {wd.toLangs.join("/")})
             </span>
@@ -166,7 +166,7 @@ function DefinitionsBox({ wordDefinitions }: { wordDefinitions: WordDefinitionsR
           <div
             className={cn(
               "bg-[#f4fff1] p-2 text-black shadow-sm",
-              "2xl:text-3xl xl:text-2xl lg:text-xl md:text-lg sm:text-base text-sm",
+              "text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl",
               { hidden: !definitionVisible[idx] },
             )}
           >
@@ -202,7 +202,7 @@ function ResultFilters({
         <p className="mr-0 font-bold text-blue-500 sm:mr-4">From Language:</p>
         <div className="flex flex-wrap gap-2">
           <button
-            className={cn("sm:px-4 px-2 py-2 font-bold", {
+            className={cn("px-2 py-2 font-bold sm:px-4", {
               "bg-blue-500 text-white": selectedFromTab === "All",
             })}
             onClick={() => setSelectedFromTab("All")}
@@ -212,7 +212,7 @@ function ResultFilters({
           {uniqueFromLangs.sort().map((lang) => (
             <button
               key={lang}
-              className={cn("sm:px-4 px-2 py-2 font-bold", {
+              className={cn("px-2 py-2 font-bold sm:px-4", {
                 "bg-blue-500 text-white": selectedFromTab === lang,
               })}
               onClick={() => setSelectedFromTab(lang)}
@@ -228,7 +228,7 @@ function ResultFilters({
         <p className="mr-0 font-bold text-blue-500 sm:mr-4">To Language:</p>
         <div className="flex flex-wrap gap-2">
           <button
-            className={cn("sm:px-4 px-2 py-2 font-bold", {
+            className={cn("px-2 py-2 font-bold sm:px-4", {
               "bg-blue-500 text-white": selectedToTab === "All",
             })}
             onClick={() => setSelectedToTab("All")}
@@ -238,7 +238,7 @@ function ResultFilters({
           {uniqueToLangs.sort().map((lang) => (
             <button
               key={lang}
-              className={cn("sm:px-4 px-2 py-2 font-bold", {
+              className={cn("px-2 py-2 font-bold sm:px-4", {
                 "bg-blue-500 text-white": selectedToTab === lang,
               })}
               onClick={() => setSelectedToTab(lang)}
