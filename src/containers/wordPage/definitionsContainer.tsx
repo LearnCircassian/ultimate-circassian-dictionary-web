@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { WordDefinitionsResults, SupportedLang } from "~/interfaces";
+import { SupportedLang, WordDefinitionsResults } from "~/interfaces";
 import parse from "html-react-parser";
 import { HiChevronDown } from "react-icons/hi";
 import { cn } from "~/utils/classNames";
@@ -56,7 +56,7 @@ export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: s
   }, [allDefResults]);
 
   const defResultsAfterFilter = useMemo(() => {
-    const filteredByPrefs = allDefResults.filter((wd) => {
+    return allDefResults.filter((wd) => {
       const fromLangs = wd.fromLangs;
       const toLangs = wd.toLangs;
       return (
@@ -64,8 +64,6 @@ export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: s
         (selectedToTab === "All" || toLangs.includes(selectedToTab))
       );
     });
-
-    return filteredByPrefs;
   }, [allDefResults, selectedFromTab, selectedToTab]);
 
   if (isWordDefinitionsLoading) {
@@ -89,9 +87,9 @@ export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: s
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="flex w-full flex-col">
       {/* Word spelling and total results */}
-      <div className="flex flex-row items-center justify-start gap-2 px-2">
+      <div className="flex w-full flex-row items-center justify-start gap-2 px-2">
         <span
           className={cn(
             "text-left font-black text-cyan-800",
@@ -102,7 +100,7 @@ export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: s
         </span>
         <div
           className={cn(
-            "mt-0 text-left font-black text-cyan-800 sm:mt-3",
+            "w-f mt-0 text-left font-black text-cyan-800 sm:mt-3",
             "text-lg lg:text-xl xl:text-2xl 2xl:text-3xl 3xl:text-3xl",
           )}
         >
@@ -146,11 +144,11 @@ function DefinitionsBox({ wordDefinitions }: { wordDefinitions: WordDefinitionsR
   };
 
   return (
-    <div className="my-8 flex flex-col gap-6">
+    <div className="my-8 flex w-full flex-col gap-6">
       {wordDefinitions.map((wd, idx) => (
         <div
           key={idx}
-          className={cn("flex flex-col", {
+          className={cn("flex w-full flex-col", {
             "border-green rounded-2xl border-l-4 border-solid": definitionVisible[idx],
           })}
         >
@@ -167,7 +165,7 @@ function DefinitionsBox({ wordDefinitions }: { wordDefinitions: WordDefinitionsR
           </button>
           <div
             className={cn(
-              "bg-[#f4fff1] p-2 text-black shadow-sm",
+              "w-full bg-[#f4fff1] p-2 text-black shadow-sm",
               "text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl",
               { hidden: !definitionVisible[idx] },
             )}
@@ -198,7 +196,7 @@ function ResultFilters({
   uniqueToLangs,
 }: ResultFiltersProps) {
   return (
-    <div className="mt-4 flex flex-col gap-4 px-2 text-lg sm:flex-row md:gap-10 md:text-xl lg:gap-20 lg:text-2xl xl:text-4xl">
+    <div className="mt-4 flex w-full flex-col gap-4 px-2 text-lg sm:flex-row md:gap-10 md:text-xl lg:gap-20 lg:text-2xl xl:text-4xl">
       {/* From and To language filters */}
       <div className="flex flex-col flex-wrap gap-2">
         <p className="mr-0 font-bold text-blue-500 sm:mr-4">From Language:</p>

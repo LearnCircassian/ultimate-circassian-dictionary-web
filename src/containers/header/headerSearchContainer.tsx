@@ -26,7 +26,7 @@ export default function HeaderSearchContainer() {
       return;
     }
 
-    router.push(`/word/${safeWord}`);
+    router.push(`/dictionary/${safeWord}`);
   }
 
   function keyboardSearchBtnHandler() {
@@ -57,7 +57,7 @@ export default function HeaderSearchContainer() {
         />
       </div>
       {/* Search Keyboard */}
-      <div className="mx-auto mt-4 flex w-1/2 flex-row items-center justify-center">
+      <div className="mx-auto mt-4 hidden w-11/12 flex-row items-center justify-center sm:flex xl:w-1/2">
         <KeyboardWrapper
           inputValue={inputValue}
           setInputValue={setInputValue}

@@ -4,19 +4,20 @@ import { RANDOM_COLORS } from "~/constants/colors";
 import Image from "next/image";
 import HeaderSearchContainer from "~/containers/header/headerSearchContainer";
 import BookSvg from "~/components/svg/bookSvg";
+import ContainerDiv from "../../components/containerDiv";
 
 export default function DictionaryShowContainer() {
   return (
     <div className="w-full">
       <Content />
-      <Footer />
+      <HomepageFooter />
     </div>
   );
 }
 
 export function Content() {
   return (
-    <div className="mx-auto my-16 flex w-11/12 flex-col items-center justify-center gap-2 rounded-sm bg-white py-8 shadow-xl xl:w-full xl:max-w-screen-xl">
+    <ContainerDiv>
       <div className="mb-16 flex w-full flex-grow flex-col gap-4">
         <h1 className="w-full text-center text-5xl font-semibold">Circassian Dictionary</h1>
         <HeaderSearchContainer />
@@ -64,11 +65,11 @@ export function Content() {
           );
         })}
       </div>
-    </div>
+    </ContainerDiv>
   );
 }
 
-export function Footer() {
+export function HomepageFooter() {
   return (
     <div className="w-full bg-[#eeeeff] shadow-xl">
       <div className="mx-auto w-11/12 py-4">

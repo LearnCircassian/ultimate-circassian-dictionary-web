@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaHome, FaTimes } from "react-icons/fa";
+import { FaHome, FaTimes, FaHamburger } from "react-icons/fa";
 import { MdMenuBook } from "react-icons/md";
 import { useRouter } from "next/navigation";
 import { cn } from "~/utils/classNames";
@@ -112,7 +112,7 @@ export default function Header() {
           </div>
           <div className="md:hidden">
             <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-              <FaTimes size={width < 400 ? 26 : 36} />
+              <FaHamburger size={width < 400 ? 26 : 36} />
             </button>
           </div>
         </div>

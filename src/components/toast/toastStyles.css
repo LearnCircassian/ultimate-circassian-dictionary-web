@@ -1,4 +1,4 @@
-/** Used to define container behavior: width, position: fixed etc... **/
+/** Used to define containerDiv behavior: width, position: fixed etc... **/
 @media screen and (max-width: 600px) {
   .Toastify__toast-container {
     width: 100vw;

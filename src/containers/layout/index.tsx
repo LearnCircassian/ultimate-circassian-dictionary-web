@@ -14,7 +14,7 @@ export default function Layout({ children }: LayoutProps) {
           <Header />
         </div>
       </div>
-      <div className="bg-image flex h-screen">
+      <div className="bg-image">
         <div className="relative flex w-full flex-row justify-center">{children}</div>
       </div>
     </>
