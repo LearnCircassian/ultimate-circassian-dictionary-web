@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { WordDefinitionsResults, SupportedLang } from "~/interfaces";
+import { SupportedLang, WordDefinitionsResults } from "~/interfaces";
 import parse from "html-react-parser";
 import { HiChevronDown } from "react-icons/hi";
 import { cn } from "~/utils/classNames";
@@ -56,7 +56,7 @@ export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: s
   }, [allDefResults]);
 
   const defResultsAfterFilter = useMemo(() => {
-    const filteredByPrefs = allDefResults.filter((wd) => {
+    return allDefResults.filter((wd) => {
       const fromLangs = wd.fromLangs;
       const toLangs = wd.toLangs;
       return (
@@ -64,8 +64,6 @@ export default function DefinitionsContainer({ wordSpelling }: { wordSpelling: s
         (selectedToTab === "All" || toLangs.includes(selectedToTab))
       );
     });
-
-    return filteredByPrefs;
   }, [allDefResults, selectedFromTab, selectedToTab]);
 
   if (isWordDefinitionsLoading) {
