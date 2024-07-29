@@ -59,7 +59,6 @@ export default function GrammarPage() {
             </div>
           </div>
         </GrammarBookPage>
-        );
       </main>
     </>
   );
