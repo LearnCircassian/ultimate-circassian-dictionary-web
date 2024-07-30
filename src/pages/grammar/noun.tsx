@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, ReactNode } from "react";
 import GrammarBookContainer from "~/styled-components/GrammarBookContainer";
 import CText, { TranslateText, HighlightText } from "~/styled-components/CText";
 
@@ -12,15 +12,96 @@ import CText, { TranslateText, HighlightText } from "~/styled-components/CText";
 //     <></>
 //   </SimpleTranslationExample>
 // </ExampleListContainer>;
-function ExampleListContainer({ children }: { children: React.ReactNode[] | React.ReactNode }) {
+type Props = {
+  children: ReactNode[] | ReactNode;
+};
+
+enum DisplayState {
+  Default,
+  Expanded,
+  Collapsed,
+}
+
+function ExampleListContainer({ children }: Props) {
+  const [displayState, setDisplayState] = useState<DisplayState>(DisplayState.Default);
+  const maxDefaultLength = 3;
+
+  const renderChildren = () => {
+    if (displayState === DisplayState.Collapsed) {
+      return null;
+    }
+
+    if (Array.isArray(children)) {
+      if (displayState === DisplayState.Default && children.length > maxDefaultLength) {
+        const visibleChildren = children.slice(0, maxDefaultLength);
+        const numRemaining = children.length - maxDefaultLength;
+        return (
+          <>
+            {visibleChildren.map((child, index) => (
+              <li key={index}>{child}</li>
+            ))}
+            <span
+              key="more"
+              className="mt-4 text-center"
+              onClick={() => setDisplayState(DisplayState.Expanded)}
+            >
+              <div className="rotate-90 font-bold text-green-500">...</div>
+              <div className="font-bold text-green-500">{numRemaining} more examples</div>
+            </span>
+          </>
+        );
+      } else if (displayState === DisplayState.Expanded && children.length > maxDefaultLength) {
+        return (
+          <>
+            {children.map((child, index) => (
+              <li key={index}>{child}</li>
+            ))}
+            <span
+              key="less"
+              className="mt-4 text-center"
+              onClick={() => setDisplayState(DisplayState.Default)}
+            >
+              <div className="rotate-90 font-bold text-green-500">...</div>
+              <div className="font-bold text-green-500">less examples</div>
+            </span>
+          </>
+        );
+      }
+      return children.map((child, index) => <li key={index}>{child}</li>);
+    }
+    return <li>{children}</li>;
+  };
+
   return (
-    <ul className="mb-4 list-inside list-disc rounded border border-green-500 bg-green-100 p-4 shadow">
-      {Array.isArray(children) ? (
-        children.map((child, index) => <li key={index}>{child}</li>)
-      ) : (
-        <li>{children}</li>
-      )}
-    </ul>
+    <div className="rounded border border-green-500 bg-green-100 shadow">
+      <div className="flex items-center justify-end border-b border-green-500 bg-green-100 p-2 text-xs">
+        <span
+          className={`cursor-pointer ${displayState === DisplayState.Default ? "font-bold" : ""}`}
+          onClick={() => setDisplayState(DisplayState.Default)}
+        >
+          Default
+        </span>
+        |
+        <span
+          className={`cursor-pointer ${displayState === DisplayState.Expanded ? "font-bold" : ""}`}
+          onClick={() => setDisplayState(DisplayState.Expanded)}
+        >
+          Expanded
+        </span>
+        |
+        <span
+          className={`cursor-pointer ${displayState === DisplayState.Collapsed ? "font-bold" : ""}`}
+          onClick={() => setDisplayState(DisplayState.Collapsed)}
+        >
+          Collapsed
+        </span>
+      </div>
+      <ul
+        className={`list-inside list-disc p-4 ${displayState === DisplayState.Collapsed ? "hidden" : ""}`}
+      >
+        {renderChildren()}
+      </ul>
+    </div>
   );
 }
 
@@ -302,7 +383,25 @@ function SectionErgative() {
           </>
           <>
             {" "}
-            the boy gave <HighlightText>the Tkhamada</HighlightText> an applied
+            the boy gave <HighlightText>the Tkhamada</HighlightText> an apple
+          </>
+        </SimpleTranslationExample>
+        <SimpleTranslationExample ipa="pɕʼaːɕar ɕʼaːɮam jawaːɕ">
+          <>
+            пщIащэр <HighlightText>щIалэм</HighlightText> еуащ
+          </>
+          <>
+            {" "}
+            the girl hit <HighlightText>the boy</HighlightText>
+          </>
+        </SimpleTranslationExample>
+        <SimpleTranslationExample ipa="ɕʼaːɮam məʔarəsa jəʔaːɕ">
+          <>
+            <HighlightText>щIалэм</HighlightText> мыIэрысэ иIащ
+          </>
+          <>
+            {" "}
+            the boy has <HighlightText>the apple</HighlightText>
           </>
         </SimpleTranslationExample>
       </ExampleListContainer>
