@@ -9,8 +9,10 @@ import DefinitionsContainer from "~/containers/wordPage/definitionsContainer";
 import WordPageFooter from "~/containers/wordPage/wordPageFooter";
 import ContainerDiv from "~/components/containerDiv";
 import SearchContainer from "~/containers/header/searchContainer";
+import useWindowSize from "~/hooks/useWindowDimensions";
 
 export default function WordPage() {
+  const { width } = useWindowSize();
   const params = useParams<{ word: string }>();
   const wordSpelling = safeWordToRegularWord(params?.word || "");
 
@@ -22,7 +24,11 @@ export default function WordPage() {
       <main className="size-full">
         <ContainerDiv>
           <div className="flex w-full flex-grow flex-col gap-4">
-            <h1 className="w-full text-center text-5xl font-semibold">Circassian Dictionary</h1>
+            <h1
+              className={cn("w-full text-center text-5xl font-semibold", { hidden: width < 400 })}
+            >
+              Circassian Dictionary
+            </h1>
             <SearchContainer showOnMobile={false} />
           </div>
           <div
