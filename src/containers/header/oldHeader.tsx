@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaHome, FaBars, FaTimes } from "react-icons/fa";
-import HeaderSearchContainer from "~/containers/header/headerSearchContainer";
+import SearchContainer from "~/containers/header/searchContainer";
 import { useRouter } from "next/navigation";
 import { cn } from "~/utils/classNames";
 import Image from "next/image";
@@ -61,7 +61,7 @@ export default function OldHeader() {
           </div>
         </div>
         <div className="flex flex-grow flex-col gap-2">
-          <HeaderSearchContainer />
+          <SearchContainer showOnMobile={false} />
         </div>
         {isMobileMenuOpen && (
           <div className="absolute left-0 top-16 z-60 w-full bg-white shadow-lg md:hidden">
