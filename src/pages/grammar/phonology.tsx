@@ -1,9 +1,10 @@
 import React from "react";
+import { GrammarBookContainer } from "~/styled-components";
 
 export default function PhonologyPage() {
   return (
-    <div>
+    <GrammarBookContainer>
       <h1>Phonology</h1>
-    </div>
+    </GrammarBookContainer>
   );
 }

@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { cn } from "~/utils/classNames";
 import Image from "next/image";
 import useWindowSize from "~/hooks/useWindowDimensions";
+import SearchContainer from "~/containers/header/searchContainer";
+import { usePathname } from "next/navigation";
 
 function Logo({ onClick }: { onClick: () => void }) {
   return (
@@ -63,27 +65,10 @@ function MobileNavItem({
     </button>
   );
 }
-export function Footer() {
-  return (
-    <footer className="mt-4 bg-[#a1d199] p-6 text-center">
-      <div className="mx-auto max-w-screen-lg">
-        <p className="text-sm md:text-base lg:text-lg">You can contact us at:</p>
-        <p className="mb-4 text-lg font-bold md:text-xl lg:text-2xl">learncircassian@gmail.com</p>
-        <p className="text-sm md:text-base lg:text-lg">
-          You can get the dictionaries that we used at:
-        </p>
-        <a
-          href="https://github.com/bihoqo/circassian-dictionaries-collection"
-          className="text-lg font-bold underline md:text-xl lg:text-2xl"
-        >
-          Circassian Dictionaries Collection
-        </a>
-      </div>
-    </footer>
-  );
-}
+
 export default function Header() {
   const { width } = useWindowSize();
+  const pathname = usePathname();
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -95,37 +80,48 @@ export default function Header() {
   const navItems = [
     { title: "Home", link: "/", icon: <FaHome /> },
     { title: "Dictionary", link: "/dictionary", icon: <MdMenuBook /> },
+    { title: "Grammar", link: "/grammar", icon: <MdMenuBook /> },
+    // { title: "Blog", link: "/blog", icon: <MdMenuBook /> },
+    { title: "Policy", link: "/policy", icon: <MdMenuBook /> },
   ];
 
-  return (
-    <div>
-      <div className="relative flex flex-row gap-4 bg-[#afdda7] p-2 shadow sm:gap-2 sm:px-0">
-        <div className="mx-auto flex w-11/12 flex-row items-center gap-1 sm:gap-4">
-          <Logo onClick={() => navigateTo("/")} />
-          <div className="hidden md:flex">
-            {navItems.map((item) => (
-              <NavItem key={item.title} item={item} onClick={() => navigateTo(item.link)} />
-            ))}
-          </div>
-          <div className="md:hidden">
+  if (width < 640) {
+    return (
+      <div className={cn("z-50 w-full", { fixed: pathname?.includes("dictionary") })}>
+        <div className="relative z-50 flex flex-row gap-4 bg-[#afdda7] p-2 shadow">
+          <div className="mx-auto flex w-full flex-row items-center gap-1">
             <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-              <FaHamburger size={width < 400 ? 26 : 36} />
+              <FaHamburger size={36} />
             </button>
+            <SearchContainer showOnMobile={true} />
           </div>
+
+          {isMobileMenuOpen && (
+            <div className="absolute left-0 top-16 z-60 w-full bg-white shadow-lg">
+              {navItems.map((item) => (
+                <MobileNavItem key={item.title} item={item} onClick={() => navigateTo(item.link)} />
+              ))}
+
+              <MobileNavItem
+                item={{ title: "Close", link: "", icon: <FaTimes /> }}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              />
+            </div>
+          )}
         </div>
+      </div>
+    );
+  }
 
-        {isMobileMenuOpen && (
-          <div className="absolute left-0 top-16 z-60 w-full bg-white shadow-lg md:hidden">
-            {navItems.map((item) => (
-              <MobileNavItem key={item.title} item={item} onClick={() => navigateTo(item.link)} />
-            ))}
-
-            <MobileNavItem
-              item={{ title: "Close", link: "", icon: <FaTimes /> }}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            />
-          </div>
-        )}
+  return (
+    <div className="relative flex flex-row gap-4 bg-[#afdda7] p-2 shadow sm:gap-2 sm:px-0">
+      <div className="mx-auto flex w-11/12 flex-row items-center gap-1 sm:gap-4">
+        <Logo onClick={() => navigateTo("/")} />
+        <div className="flex">
+          {navItems.map((item) => (
+            <NavItem key={item.title} item={item} onClick={() => navigateTo(item.link)} />
+          ))}
+        </div>
       </div>
     </div>
   );

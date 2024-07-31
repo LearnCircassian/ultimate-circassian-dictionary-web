@@ -1,6 +1,7 @@
 import Head from "next/head";
 import React from "react";
 import { useRouter } from "next/navigation";
+import ContainerDiv from "~/components/containerDiv";
 
 export default function GrammarPage() {
   const router = useRouter();
@@ -10,7 +11,7 @@ export default function GrammarPage() {
         <title>Learn Circassian</title>
       </Head>
       <main>
-        <div className="mx-auto mt-2 flex w-11/12 flex-col gap-4">
+        <ContainerDiv className="p-4">
           <div className="flex flex-col gap-4">
             <p
               className="cursor-pointer text-3xl font-bold text-blue-600 hover:underline"
@@ -55,8 +56,7 @@ export default function GrammarPage() {
               Adjectives
             </p>
           </div>
-        </div>
-        );
+        </ContainerDiv>
       </main>
     </>
   );

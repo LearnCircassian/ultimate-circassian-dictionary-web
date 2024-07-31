@@ -8,7 +8,8 @@ import { regularWordToSafeWord } from "~/utils/wordFormatting";
 import useWindowSize from "~/hooks/useWindowDimensions";
 import KeyboardWrapper from "~/components/keyboardWrapper";
 
-export default function HeaderSearchContainer() {
+export default function SearchContainer({ showOnMobile }: { showOnMobile: boolean }) {
+  const { width } = useWindowSize();
   const searchInputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = React.useState<string>("");
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
@@ -36,6 +37,35 @@ export default function HeaderSearchContainer() {
     searchInputRef.current?.focus();
   }
 
+  if (!showOnMobile && width < 640) {
+    return null;
+  }
+
+  if (showOnMobile && width < 640) {
+    return (
+      <div className="z-2 mx-auto flex w-11/12 flex-col">
+        <div className={cn("flex flex-row items-center justify-center")}>
+          {/* Search Input */}
+          <SearchInput
+            searchInputRef={searchInputRef}
+            inputValue={inputValue}
+            setInputValue={setInputValue}
+            setDropdownVisible={setDropdownVisible}
+            clickWordHandler={clickWordHandler}
+            dropdownVisible={dropdownVisible}
+          />
+
+          {/* Search Filter */}
+          <SearchFilter
+            filterDialogVisible={filterDialogVisible}
+            openFilterDialog={() => setFilterDialogVisible(true)}
+            closeFilterDialog={() => setFilterDialogVisible(false)}
+          />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="z-2 mx-auto flex w-11/12 flex-col">
       <div className={cn("flex flex-row items-center justify-center")}>
@@ -57,7 +87,7 @@ export default function HeaderSearchContainer() {
         />
       </div>
       {/* Search Keyboard */}
-      <div className="mx-auto mt-4 hidden w-11/12 flex-row items-center justify-center sm:flex xl:w-1/2">
+      <div className="mx-auto mt-4 flex w-11/12 flex-row items-center justify-center xl:w-1/2">
         <KeyboardWrapper
           inputValue={inputValue}
           setInputValue={setInputValue}
