@@ -153,12 +153,17 @@ export default function HeaderSearchResultsDropdown({
         SIZE_STYLE,
       )}
     >
-      <div className="w-full border-b-2 border-solid border-[#0049d7] px-2 py-4 text-left text-lg font-bold">
-        Definitions
+      <div className="flex w-full items-center justify-between border-b-2 border-solid border-[#0049d7] px-2 py-4 text-left text-lg font-bold">
+        <span>Definitions</span>
+        <button className="font-bold text-blue-600" onClick={() => setDropdownVisible(false)}>
+          Cancel
+        </button>
       </div>
       {cachedAutocompletesList
         .sort((a, b) => {
-          const searchInputValAdjusted = replaceStickLettersToPalochka(debouncedSearchInputValue);
+          const searchInputValAdjusted = replaceStickLettersToPalochka(
+            debouncedSearchInputValue.trim(),
+          );
           // Prioritize words that start with debouncedSearchInputValue
           const aStartsWith = a.toLowerCase().startsWith(searchInputValAdjusted.toLowerCase());
           const bStartsWith = b.toLowerCase().startsWith(searchInputValAdjusted.toLowerCase());
@@ -174,7 +179,9 @@ export default function HeaderSearchResultsDropdown({
           return a.localeCompare(b);
         })
         .map((word) => {
-          const searchInputValAdjusted = replaceStickLettersToPalochka(debouncedSearchInputValue);
+          const searchInputValAdjusted = replaceStickLettersToPalochka(
+            debouncedSearchInputValue.trim(),
+          );
           const index = word.toLowerCase().indexOf(searchInputValAdjusted.toLowerCase());
           const before = word.slice(0, index);
           const bold = word.slice(index, index + searchInputValAdjusted.length);

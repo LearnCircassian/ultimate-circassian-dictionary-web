@@ -6,6 +6,7 @@ import { cn } from "~/utils/classNames";
 import Image from "next/image";
 import useWindowSize from "~/hooks/useWindowDimensions";
 import SearchContainer from "~/containers/header/searchContainer";
+import { usePathname } from "next/navigation";
 
 function Logo({ onClick }: { onClick: () => void }) {
   return (
@@ -67,6 +68,7 @@ function MobileNavItem({
 
 export default function Header() {
   const { width } = useWindowSize();
+  const pathname = usePathname();
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -85,7 +87,7 @@ export default function Header() {
 
   if (width < 640) {
     return (
-      <div className="fixed z-50 w-full">
+      <div className={cn("z-50 w-full", { fixed: pathname?.includes("dictionary") })}>
         <div className="relative z-50 flex flex-row gap-4 bg-[#afdda7] p-2 shadow">
           <div className="mx-auto flex w-full flex-row items-center gap-1">
             <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
