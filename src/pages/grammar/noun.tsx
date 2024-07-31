@@ -2,9 +2,6 @@ import React, { useState, ReactNode } from "react";
 import GrammarBookContainer from "~/styled-components/GrammarBookContainer";
 import CText, { TranslateText, HighlightText } from "~/styled-components/CText";
 
-//TODO(artur): This component should have 3 togglable states: default, expanded and collapsed.
-//             The idea is that one should be able to provide as much examples as possible
-//             without cluttering the page. This way the user can decide how much information is visible.
 //SNIPPET:
 // <ExampleListContainer>
 //   <SimpleTranslationExample>
@@ -141,45 +138,47 @@ function SectionCase() {
         resulting in , resulting in <CText ipa="-raːwa">-рауэ</CText>.
       </p>
 
-      <table className="mb-4 w-full border-collapse border border-gray-400">
-        <thead>
-          <tr className="bg-gray-200">
-            <th className="border px-4 py-2">Case</th>
-            <th className="border px-4 py-2">Absolutive</th>
-            <th className="border px-4 py-2">Ergative</th>
-            <th className="border px-4 py-2">Instrumental</th>
-            <th className="border px-4 py-2">Adverbial</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td className="border px-4 py-2">Indefinite</td>
-            <td className="border px-4 py-2">-∅</td>
-            <td className="border px-4 py-2">-∅</td>
-            <td>
-              <CText ipa="-tʃʼa">-кIэ</CText>
-            </td>
-            <td>
-              <CText ipa="-wa">-уэ</CText>
-            </td>
-          </tr>
-          <tr>
-            <td className="border px-4 py-2">Definite</td>
-            <td>
-              <CText ipa="-r">-р</CText>
-            </td>
-            <td>
-              <CText ipa="-m">-м</CText>
-            </td>
-            <td>
-              <CText ipa="-mtʃʼa">-мкIэ</CText>
-            </td>
-            <td>
-              <CText ipa="-raːwa">-рауэ</CText>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div className="overflow-x-auto">
+        <table className="mb-4 w-full min-w-[600px] border-collapse border border-gray-400">
+          <thead>
+            <tr className="bg-gray-200">
+              <th className="border px-4 py-2">Case</th>
+              <th className="border px-4 py-2">Absolutive</th>
+              <th className="border px-4 py-2">Ergative</th>
+              <th className="border px-4 py-2">Instrumental</th>
+              <th className="border px-4 py-2">Adverbial</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className="border px-4 py-2">Indefinite</td>
+              <td className="border px-4 py-2">-∅</td>
+              <td className="border px-4 py-2">-∅</td>
+              <td>
+                <CText ipa="-tʃʼa">-кIэ</CText>
+              </td>
+              <td>
+                <CText ipa="-wa">-уэ</CText>
+              </td>
+            </tr>
+            <tr>
+              <td className="border px-4 py-2">Definite</td>
+              <td>
+                <CText ipa="-r">-р</CText>
+              </td>
+              <td>
+                <CText ipa="-m">-м</CText>
+              </td>
+              <td>
+                <CText ipa="-mtʃʼa">-мкIэ</CText>
+              </td>
+              <td>
+                <CText ipa="-raːwa">-рауэ</CText>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <p className="mb-4">Below are a few examples:</p>
       <ul className="mb-4 list-inside list-disc">
@@ -201,44 +200,45 @@ function SectionCase() {
         This is in line with the fact that marking the plural is optional and thus also inherently
         definite.
       </p>
-
-      <table className="mb-4 w-full border-collapse border border-gray-400">
-        <thead>
-          <tr className="bg-gray-200">
-            <th className="border px-4 py-2">Case</th>
-            <th className="border px-4 py-2">Absolutive</th>
-            <th className="border px-4 py-2">Ergative</th>
-            <th className="border px-4 py-2">Instrumental</th>
-            <th className="border px-4 py-2">Adverbial</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td className="border px-4 py-2">Indefinite</td>
-            <td className="border px-4 py-2">not used</td>
-            <td className="border px-4 py-2">not used</td>
-            <td className="border px-4 py-2">not used</td>
-            <td>
-              <CText ipa="-xawə">-хэу</CText>
-            </td>
-          </tr>
-          <tr>
-            <td className="border px-4 py-2">Definite</td>
-            <td>
-              <CText ipa="-xar">-хэр</CText>
-            </td>
-            <td>
-              <CText ipa="-xam">-хэм</CText>
-            </td>
-            <td>
-              <CText ipa="-xamtʃʼa">-хэмкIэ</CText>
-            </td>
-            <td>
-              <CText ipa="-xaraːwa">-хэрауэ</CText>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div className="overflow-x-auto">
+        <table className="mb-4 w-full border-collapse border border-gray-400">
+          <thead>
+            <tr className="bg-gray-200">
+              <th className="border px-4 py-2">Case</th>
+              <th className="border px-4 py-2">Absolutive</th>
+              <th className="border px-4 py-2">Ergative</th>
+              <th className="border px-4 py-2">Instrumental</th>
+              <th className="border px-4 py-2">Adverbial</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className="border px-4 py-2">Indefinite</td>
+              <td className="border px-4 py-2">not used</td>
+              <td className="border px-4 py-2">not used</td>
+              <td className="border px-4 py-2">not used</td>
+              <td>
+                <CText ipa="-xawə">-хэу</CText>
+              </td>
+            </tr>
+            <tr>
+              <td className="border px-4 py-2">Definite</td>
+              <td>
+                <CText ipa="-xar">-хэр</CText>
+              </td>
+              <td>
+                <CText ipa="-xam">-хэм</CText>
+              </td>
+              <td>
+                <CText ipa="-xamtʃʼa">-хэмкIэ</CText>
+              </td>
+              <td>
+                <CText ipa="-xaraːwa">-хэрауэ</CText>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <p className="mb-4">
         However, the plural indefinite form is used in a vocative sense, which is used to address
