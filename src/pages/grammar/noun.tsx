@@ -1,120 +1,12 @@
 import React, { useState, ReactNode } from "react";
-import GrammarBookContainer from "~/styled-components/GrammarBookContainer";
-import CText, { TranslateText, HighlightText } from "~/styled-components/CText";
-
-//SNIPPET:
-// <ExampleListContainer>
-//   <SimpleTranslationExample>
-//     <></>
-//     <></>
-//   </SimpleTranslationExample>
-// </ExampleListContainer>;
-type Props = {
-  children: ReactNode[] | ReactNode;
-};
-
-enum DisplayState {
-  Default,
-  Expanded,
-  Collapsed,
-}
-
-function ExampleListContainer({ children }: Props) {
-  const [displayState, setDisplayState] = useState<DisplayState>(DisplayState.Default);
-  const maxDefaultLength = 3;
-
-  const renderChildren = () => {
-    if (displayState === DisplayState.Collapsed) {
-      return null;
-    }
-
-    if (Array.isArray(children)) {
-      if (displayState === DisplayState.Default && children.length > maxDefaultLength) {
-        const visibleChildren = children.slice(0, maxDefaultLength);
-        const numRemaining = children.length - maxDefaultLength;
-        return (
-          <>
-            {visibleChildren.map((child, index) => (
-              <li key={index}>{child}</li>
-            ))}
-            <span
-              key="more"
-              className="mt-4 text-center"
-              onClick={() => setDisplayState(DisplayState.Expanded)}
-            >
-              <div className="rotate-90 font-bold text-green-500">...</div>
-              <div className="font-bold text-green-500">{numRemaining} more examples</div>
-            </span>
-          </>
-        );
-      } else if (displayState === DisplayState.Expanded && children.length > maxDefaultLength) {
-        return (
-          <>
-            {children.map((child, index) => (
-              <li key={index}>{child}</li>
-            ))}
-            <span
-              key="less"
-              className="mt-4 text-center"
-              onClick={() => setDisplayState(DisplayState.Default)}
-            >
-              <div className="rotate-90 font-bold text-green-500">...</div>
-              <div className="font-bold text-green-500">less examples</div>
-            </span>
-          </>
-        );
-      }
-      return children.map((child, index) => <li key={index}>{child}</li>);
-    }
-    return <li>{children}</li>;
-  };
-
-  return (
-    <div className="rounded border border-green-500 bg-green-100 shadow">
-      <div className="flex items-center justify-end border-b border-green-500 bg-green-100 p-2 text-xs">
-        <span
-          className={`cursor-pointer ${displayState === DisplayState.Default ? "font-bold" : ""}`}
-          onClick={() => setDisplayState(DisplayState.Default)}
-        >
-          Default
-        </span>
-        |
-        <span
-          className={`cursor-pointer ${displayState === DisplayState.Expanded ? "font-bold" : ""}`}
-          onClick={() => setDisplayState(DisplayState.Expanded)}
-        >
-          Expanded
-        </span>
-        |
-        <span
-          className={`cursor-pointer ${displayState === DisplayState.Collapsed ? "font-bold" : ""}`}
-          onClick={() => setDisplayState(DisplayState.Collapsed)}
-        >
-          Collapsed
-        </span>
-      </div>
-      <ul
-        className={`list-inside list-disc p-4 ${displayState === DisplayState.Collapsed ? "hidden" : ""}`}
-      >
-        {renderChildren()}
-      </ul>
-    </div>
-  );
-}
-
-function SimpleTranslationExample({
-  children,
-  ipa,
-}: {
-  children: [React.ReactNode, React.ReactNode];
-  ipa?: string;
-}) {
-  return (
-    <>
-      <CText ipa={ipa}>{children[0]}</CText> - <TranslateText>{children[1]}</TranslateText>
-    </>
-  );
-}
+import {
+  TranslateText,
+  HighlightText,
+  GrammarBookContainer,
+  CText,
+  SimpleTranslationExample,
+  ExampleListContainer,
+} from "~/styled-components/";
 
 function SectionCase() {
   return (
