@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { SupportedLang, WordDefinitionsResults } from "~/interfaces";
 import parse from "html-react-parser";
 import { HiChevronDown } from "react-icons/hi";
