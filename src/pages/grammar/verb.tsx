@@ -2,7 +2,19 @@ import React from "react";
 import { CText, GrammarBookContainer, TranslateText } from "~/styled-components";
 
 function Col({ children, color }: { children: React.ReactNode; color: "red" | "blue" | "green" }) {
-  return <span className={`text-${color}-500`}>{children}</span>;
+  let style = "";
+  switch (color) {
+    case "red":
+      style = "text-red-500";
+      break;
+    case "blue":
+      style = "text-blue-500";
+      break;
+    case "green":
+      style = "text-green-500";
+      break;
+  }
+  return <span className={style}>{children}</span>;
 }
 function ColR({ children }: { children: React.ReactNode }) {
   return <Col color="red">{children}</Col>;
@@ -112,18 +124,18 @@ function SectionErgativity() {
         . To add an object to <CText ipa="pɬan">плъэн</CText>, one has to to use a preverb
         (Circassiasn equivalent of preposition), like{" "}
         <CText>
-          <ColG>е-</ColG>
+          <ColG>те-</ColG>
         </CText>
         , which results into the verb{" "}
-        <CText ipa="japɬən">
-          <ColG>е</ColG>плъын
-        </CText>{" "}
-        (note the change from <CText>э</CText> to <CText>ы</CText>). This allows to say{" "}
+        <CText ipa="tajpɬan">
+          <ColG>те</ColG>плъэн
+        </CText>
+        . This allows to say{" "}
         <CText>
-          <ColR>уэ</ColR> <ColG>сэ</ColG> <ColR>у</ColR>къы<ColG>зэ</ColG>плъынщ
+          <ColR>уэ</ColR> <ColG>сэ</ColG> <ColR>у</ColR>къы<ColG>сте</ColG>плъэнщ
         </CText>{" "}
         <TranslateText>
-          <ColR>You</ColR>&apos;ll look <ColG>at me</ColG>
+          <ColR>You</ColR>&apos;ll look <ColG>down on me</ColG>
         </TranslateText>
         .
       </p>
@@ -131,7 +143,7 @@ function SectionErgativity() {
         One way to think about that is to think of ergative verbs as passivized verbs, only that in
         ergative languages the perceived meaning is not really passivized. For example, if we take
         the phrase{" "}
-        <CText>
+        <CText ipa="wa sa səpɬaːʁʷənɕ">
           <ColB>уэ</ColB> <ColR>сэ</ColR> <ColR>сы</ColR>
           <ColB>п</ColB>лъагъунщ
         </CText>{" "}
@@ -142,8 +154,15 @@ function SectionErgativity() {
         <TranslateText>
           <ColR>I</ColR>&apos;ll be seen <ColB>by you</ColB>
         </TranslateText>
-        . In that analogy <ColR>I</ColR> is the absolutive case, while <ColB>by you</ColB> in the
-        ergative case.
+        . In that analogy{" "}
+        <TranslateText>
+          <ColR>I</ColR>
+        </TranslateText>{" "}
+        is the absolutive case, while{" "}
+        <TranslateText>
+          <ColB>by you</ColB>
+        </TranslateText>{" "}
+        in the ergative case.
       </p>
     </section>
   );

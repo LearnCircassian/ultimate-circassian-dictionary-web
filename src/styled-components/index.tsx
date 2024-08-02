@@ -10,7 +10,20 @@ function HoverBox({ children }: { children: ReactNode }) {
 }
 
 export function TranslateText({ children }: { children: ReactNode }) {
-  return <span className="text-black-500">{children}</span>;
+  // return (
+  //   <span
+  //     style={{
+  //       textDecoration: "underline dotted",
+  //       textDecorationThickness: "0.1rem", // Increase the thickness of the dots
+  //       textDecorationStyle: "dotted",
+  //       textUnderlineOffset: "3px", // Adjusts the spacing between text and underline
+  //     }}
+  //     className="text-black-500"
+  //   >
+  //     {children}
+  //   </span>
+  // );
+  return <span className="text-black-500 italic underline decoration-dotted">{children}</span>;
 }
 
 // TODO(artur): Find better name, preferably short, as it should be used a lot whenever some highlighting is needed.
@@ -122,7 +135,7 @@ export function ExampleListContainer({ children }: { children: ReactNode[] | Rea
 
   return (
     <div className="rounded border border-green-500 bg-green-100 shadow">
-      <div className="flex items-center justify-end border-b border-green-500 bg-green-100 p-2 text-xs">
+      <div className="flex items-center justify-end border-b border-green-500 bg-green-100 p-0 text-xs">
         <span
           className={`cursor-pointer ${displayState === DisplayState.Default ? "font-bold" : ""}`}
           onClick={() => setDisplayState(DisplayState.Default)}
