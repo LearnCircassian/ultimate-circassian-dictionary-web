@@ -10,20 +10,20 @@ function HoverBox({ children }: { children: ReactNode }) {
 }
 
 export function TranslateText({ children }: { children: ReactNode }) {
-  // return (
-  //   <span
-  //     style={{
-  //       textDecoration: "underline dotted",
-  //       textDecorationThickness: "0.1rem", // Increase the thickness of the dots
-  //       textDecorationStyle: "dotted",
-  //       textUnderlineOffset: "3px", // Adjusts the spacing between text and underline
-  //     }}
-  //     className="text-black-500"
-  //   >
-  //     {children}
-  //   </span>
-  // );
-  return <span className="text-black-500 italic underline decoration-dotted">{children}</span>;
+  return (
+    <span
+      style={{
+        textDecoration: "underline dotted",
+        textDecorationThickness: "0.1rem", // Increase the thickness of the dots
+        textDecorationStyle: "dotted",
+        textUnderlineOffset: "5px", // Adjusts the spacing between text and underline
+      }}
+      className="text-black-500"
+    >
+      {children}
+    </span>
+  );
+  // return <span className="text-black-500 italic underline decoration-dotted leading-5">{children}</span>;
 }
 
 // TODO(artur): Find better name, preferably short, as it should be used a lot whenever some highlighting is needed.
@@ -103,11 +103,11 @@ export function ExampleListContainer({ children }: { children: ReactNode[] | Rea
             ))}
             <span
               key="more"
-              className="mt-4 text-center"
+              className="mt-4 cursor-pointer items-center text-center font-bold text-green-500 hover:text-green-700"
               onClick={() => setDisplayState(DisplayState.Expanded)}
             >
-              <div className="rotate-90 font-bold text-green-500">...</div>
-              <div className="font-bold text-green-500">{numRemaining} more examples</div>
+              <div className="rotate-90">...</div>
+              <div className="">{numRemaining} more examples</div>
             </span>
           </>
         );
@@ -119,11 +119,11 @@ export function ExampleListContainer({ children }: { children: ReactNode[] | Rea
             ))}
             <span
               key="less"
-              className="mt-4 text-center"
+              className="mt-4 cursor-pointer items-center text-center font-bold text-green-500 hover:text-green-700"
               onClick={() => setDisplayState(DisplayState.Default)}
             >
-              <div className="rotate-90 font-bold text-green-500">...</div>
-              <div className="font-bold text-green-500">less examples</div>
+              <div className="rotate-90">...</div>
+              <div className="">less examples</div>
             </span>
           </>
         );
