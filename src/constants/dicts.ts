@@ -128,4 +128,10 @@ export const USED_DICTS: UsedDict[] = [
     fromLang: "Tr",
     toLang: "Ady",
   },
+  {
+    count: 20639,
+    title: "Еджап1эм папщ1э урыс-адыгэ псалъалъэ (2013)",
+    fromLang: "Ru",
+    toLang: "Kbd",
+  },
 ];

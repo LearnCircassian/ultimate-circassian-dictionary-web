@@ -10,6 +10,7 @@ import { Result } from "neverthrow";
 import { Autocomplete } from "~/interfaces";
 import { cn } from "~/utils/classNames";
 import SearchFilterDialog from "~/components/searchFilterModal";
+import KeyboardWrapper from "~/components/keyboardWrapper";
 import { regularWordToSafeWord } from "~/utils/wordFormatting";
 import useWindowSize from "~/hooks/useWindowDimensions";
 import { replaceStickLettersToPalochka } from "~/utils/wordFormatting";
@@ -109,13 +110,16 @@ function AutocompletedSearchElement({
   );
 }
 
-function useAutocompleteQuery(searchInput: string): UseQueryResult<Autocomplete[], Error> {
+function useAutocompleteQuery(
+  searchInput: string,
+  dropdownVisible: boolean,
+): UseQueryResult<Autocomplete[], Error> {
   return useQuery({
     staleTime: 60000,
     gcTime: 60000,
-    queryKey: ["autocompleteWords", searchInput],
+    queryKey: ["autocompleteWords", searchInput, dropdownVisible],
     queryFn: async (): Promise<Autocomplete[]> => {
-      if (!searchInput) {
+      if (!searchInput || !dropdownVisible) {
         return [];
       }
 
@@ -137,12 +141,18 @@ function useAutocompleteQuery(searchInput: string): UseQueryResult<Autocomplete[
   });
 }
 
-function useCachedAutocompletesQuery(searchInput: string): UseQueryResult<string[], Error> {
+function useCachedAutocompletesQuery(
+  searchInput: string,
+  dropdownVisible: boolean,
+): UseQueryResult<string[], Error> {
   return useQuery({
     staleTime: 60000,
     gcTime: 60000,
     queryKey: ["cachedAutocompletesList", searchInput],
     queryFn: async (): Promise<string[]> => {
+      if (!dropdownVisible) {
+        return [];
+      }
       if (searchInput.trim() === "") {
         return findAllAutocompletesInWordHistoryCache();
       }
@@ -156,6 +166,7 @@ function useCachedAutocompletesQuery(searchInput: string): UseQueryResult<string
 interface AutocompleteDropdownProps {
   searchInputValue: string;
   onWordSelection: (word: string) => void;
+  dropdownVisible: boolean;
   setDropdownVisible: (visible: boolean) => void;
 }
 
@@ -164,6 +175,7 @@ const SIZE_STYLE = cn("sm:w-full w-11/12");
 function AutocompleteDropdown({
   searchInputValue,
   onWordSelection,
+  dropdownVisible,
   setDropdownVisible,
 }: AutocompleteDropdownProps) {
   const [debouncedSearchInputValue] = useDebounce(searchInputValue, 500);
@@ -171,11 +183,15 @@ function AutocompleteDropdown({
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const { data: list = [], isLoading: isListLoading } =
-    useAutocompleteQuery(searchInputValAdjusted);
+  const { data: list = [], isLoading: isListLoading } = useAutocompleteQuery(
+    searchInputValAdjusted,
+    dropdownVisible,
+  );
 
-  const { data: cachedList = [], refetch: refetchCachedList } =
-    useCachedAutocompletesQuery(searchInputValAdjusted);
+  const { data: cachedList = [], refetch: refetchCachedList } = useCachedAutocompletesQuery(
+    searchInputValAdjusted,
+    dropdownVisible,
+  );
 
   function cachedWordDeleteClickHandler(word: string) {
     removeFromWordHistoryCache(word);
@@ -308,8 +324,9 @@ function LoadingSpinner() {
   );
 }
 
-export default function DictionarySearchContainer() {
+export default function DictionarySearchContainer({ showOnMobile }: { showOnMobile: boolean }) {
   const { width } = useWindowSize();
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = React.useState<string>("");
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
   const [filterDialogVisible, setFilterDialogVisible] = useState<boolean>(false);
@@ -329,76 +346,155 @@ export default function DictionarySearchContainer() {
     router.push(`/dictionary/${safeWord}`);
   }
 
-  function inputChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
-    setInputValue(e.target.value);
+  function keyboardSearchBtnHandler() {
+    if (inputValue.length === 0) {
+      return;
+    }
+    searchInputRef.current?.focus();
+  }
+  if (!showOnMobile && width < 640) {
+    return null;
+  }
+  if (showOnMobile && width < 640) {
+    return (
+      <div className="z-2 mx-auto flex w-11/12 flex-col">
+        <div className={cn("flex flex-row items-center justify-center")}>
+          {/* Search Input */}
+          <SearchInput
+            searchInputRef={searchInputRef}
+            inputValue={inputValue}
+            setInputValue={setInputValue}
+            setDropdownVisible={setDropdownVisible}
+            clickWordHandler={clickWordHandler}
+            dropdownVisible={dropdownVisible}
+          />
+
+          {/* Search Filter */}
+          <SearchFilter
+            filterDialogVisible={filterDialogVisible}
+            openFilterDialog={() => setFilterDialogVisible(true)}
+            closeFilterDialog={() => setFilterDialogVisible(false)}
+          />
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div
-      className={cn(
-        "z-20 mx-auto flex flex-row items-center justify-center",
-        "w-full sm:w-5/6 md:w-3/4 lg:w-2/3 xl:w-1/2",
-      )}
-    >
-      <div className="relative flex w-full flex-col">
-        <div
-          className={cn(
-            "flex w-full items-center justify-center",
-            "xs:px-2 rounded-lg px-1 py-3 font-medium text-black shadow sm:px-4",
-            "text-lg sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl 3xl:text-5xl",
-          )}
-          style={{
-            backgroundColor: "#f2f1f4",
-            border: "2px solid #155e75",
-          }}
-        >
-          <FaSearch className="opacity-80" size={width < 400 ? 16 : 24} color="#155e75" />
-          <input
-            className="flex-grow bg-transparent px-1 font-medium text-black outline-none sm:px-2"
-            value={inputValue}
-            onChange={inputChangeHandler}
-            onFocus={() => setDropdownVisible(true)}
-            placeholder="Let's find your word"
-            style={{
-              maxWidth: "85%",
-              fontSize: width < 400 ? "0.75rem" : "1rem",
-            }}
-          />
-          <button
-            className={cn("flex items-center hover:opacity-80", { hidden: !inputValue })}
-            onClick={() => setInputValue("")}
-          >
-            <FaTimesCircle className="opacity-80" size={24} color="#757575" />
-          </button>
-        </div>
-        {dropdownVisible && (
-          <AutocompleteDropdown
-            searchInputValue={inputValue}
-            onWordSelection={clickWordHandler}
-            setDropdownVisible={setDropdownVisible}
-          />
-        )}
+    <div className="z-2 mx-auto flex w-11/12 flex-col">
+      <div className={cn("flex flex-row items-center justify-center")}>
+        <SearchInput
+          searchInputRef={searchInputRef}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          setDropdownVisible={setDropdownVisible}
+          clickWordHandler={clickWordHandler}
+          dropdownVisible={dropdownVisible}
+        />
+        {/* Search Filter */}
+        <SearchFilter
+          filterDialogVisible={filterDialogVisible}
+          openFilterDialog={() => setFilterDialogVisible(true)}
+          closeFilterDialog={() => setFilterDialogVisible(false)}
+        />
       </div>
+      {/* Search Keyboard */}
+      <div className="mx-auto mt-4 flex w-11/12 flex-row items-center justify-center xl:w-1/2">
+        <KeyboardWrapper
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          onSearchClick={keyboardSearchBtnHandler}
+        />
+      </div>
+    </div>
+  );
+}
 
-      <div className="relative">
-        <button
-          className={cn(
-            "w-full items-center gap-1 px-4 py-2 font-bold text-[#3182ce] hover:text-[#3182ce]/50",
-            "hidden md:flex",
-          )}
-          onClick={() => setFilterDialogVisible(true)}
-        >
-          <FaFilter className="text-3xl xl:text-4xl 2xl:text-4xl 3xl:text-5xl" />
-          <span className="w-full text-nowrap text-base xl:text-lg 2xl:text-xl 3xl:text-2xl">
-            Search Filter
-          </span>
-        </button>
-        {filterDialogVisible && (
-          <div className="absolute right-0 z-50 mt-2 w-[407px]">
-            <SearchFilterDialog hide={() => setFilterDialogVisible(false)} />
-          </div>
+function SearchInput({
+  searchInputRef,
+  inputValue,
+  setInputValue,
+  setDropdownVisible,
+  dropdownVisible,
+  clickWordHandler,
+}: {
+  inputValue: string;
+  setInputValue: (v: string) => void;
+  setDropdownVisible: (value: boolean) => void;
+  dropdownVisible: boolean;
+  clickWordHandler: (word: string) => void;
+  searchInputRef: React.RefObject<HTMLInputElement>;
+}) {
+  const { width } = useWindowSize();
+  return (
+    <div className="relative flex w-full flex-col">
+      <div
+        className={cn(
+          "flex w-full items-center justify-center bg-white",
+          "border border-solid",
+          "xs:px-2 rounded-md px-1 py-3 font-medium text-black shadow-sm sm:px-4",
+          "text-lg sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl 3xl:text-5xl",
+          inputValue.length > 0
+            ? "border-2 border-[#b0e0b5]"
+            : "border-[#cdcdcd] hover:border-[#b0e0b5]/60",
         )}
+      >
+        <FaSearch className="opacity-80" size={width < 400 ? 16 : 24} color="#155e75" />
+        <input
+          ref={searchInputRef}
+          className="flex-grow bg-transparent px-1 font-medium text-black outline-none sm:px-2"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onFocus={() => setDropdownVisible(true)}
+          placeholder="Search, e.g. boy or к1алэ"
+        />
+        <button
+          className={cn("flex items-center hover:opacity-80", { hidden: !inputValue })}
+          onClick={() => setInputValue("")}
+        >
+          <FaTimesCircle className="opacity-80" size={24} color="#757575" />
+        </button>
       </div>
+      {dropdownVisible && (
+        <AutocompleteDropdown
+          searchInputValue={inputValue}
+          onWordSelection={clickWordHandler}
+          dropdownVisible={dropdownVisible}
+          setDropdownVisible={setDropdownVisible}
+        />
+      )}
+    </div>
+  );
+}
+
+function SearchFilter({
+  filterDialogVisible,
+  openFilterDialog,
+  closeFilterDialog,
+}: {
+  filterDialogVisible: boolean;
+  openFilterDialog: () => void;
+  closeFilterDialog: () => void;
+}) {
+  return (
+    <div className="relative">
+      <button
+        className={cn(
+          "w-full items-center gap-1 px-4 py-2 font-bold text-[#3182ce] hover:text-[#3182ce]/50",
+          "hidden md:flex",
+        )}
+        onClick={openFilterDialog}
+      >
+        <FaFilter className="text-3xl xl:text-4xl 2xl:text-4xl 3xl:text-5xl" />
+        <span className="w-full text-nowrap text-base xl:text-lg 2xl:text-xl 3xl:text-2xl">
+          Search Filter
+        </span>
+      </button>
+      {filterDialogVisible && (
+        <div className="absolute right-0 z-50 mt-2 w-[407px]">
+          <SearchFilterDialog hide={closeFilterDialog} />
+        </div>
+      )}
     </div>
   );
 }
