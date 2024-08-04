@@ -23,7 +23,6 @@ export function TranslateText({ children }: { children: ReactNode }) {
       {children}
     </span>
   );
-  // return <span className="text-black-500 italic underline decoration-dotted leading-5">{children}</span>;
 }
 
 // TODO(artur): Find better name, preferably short, as it should be used a lot whenever some highlighting is needed.

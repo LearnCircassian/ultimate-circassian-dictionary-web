@@ -107,7 +107,7 @@ function SectionErgativity() {
         </TranslateText>
         . Except that the cases are different, they are exactly the same to their English counter
         parts in regards to the direct object. One can say{" "}
-        <CText ipa="wa sa səpɬaːʁʷənɕ">
+        <CText>
           <ColB>уэ</ColB> <ColR>сэ</ColR> <ColR>сы</ColR>
           <ColB>п</ColB>лъагъунщ
         </CText>{" "}
@@ -115,7 +115,7 @@ function SectionErgativity() {
           <ColB>You</ColB>&apos;ll see <ColR>me</ColR>
         </TranslateText>
         , as with the English equivalent one can only say{" "}
-        <CText ipa="wa wəpɬanɕ">
+        <CText>
           <ColR>уэ</ColR> <ColR>у</ColR>плэнщ
         </CText>{" "}
         <TranslateText>
@@ -123,7 +123,7 @@ function SectionErgativity() {
         </TranslateText>
         . To add an object to <CText ipa="pɬan">плъэн</CText>, one has to to use a preverb
         (Circassiasn equivalent of preposition), like{" "}
-        <CText ipa="taj-">
+        <CText>
           <ColG>те-</ColG>
         </CText>
         , which results into the verb{" "}
@@ -131,7 +131,7 @@ function SectionErgativity() {
           <ColG>те</ColG>плъэн
         </CText>
         . This allows to say{" "}
-        <CText ipa="wa sa qəstajpɬanɕ">
+        <CText>
           <ColR>уэ</ColR> <ColG>сэ</ColG> <ColR>у</ColR>къы<ColG>сте</ColG>плъэнщ
         </CText>{" "}
         <TranslateText>
