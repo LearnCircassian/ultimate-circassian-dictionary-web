@@ -1,6 +1,7 @@
 import "react-toastify/dist/ReactToastify.css";
 import React, { ReactNode } from "react";
 import Header from "~/containers/header";
+import { HomepageFooter } from "../dictionaryPage";
 
 export interface LayoutProps {
   children: ReactNode;
@@ -17,6 +18,7 @@ export default function Layout({ children }: LayoutProps) {
       <div className="bg-image">
         <div className="relative flex w-full flex-row justify-center">{children}</div>
       </div>
+      <HomepageFooter />
     </>
   );
 }
