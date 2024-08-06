@@ -71,11 +71,6 @@ export function GrammarBookContainer({ children }: { children: React.ReactNode }
   return <div className="md m-2 mx-auto w-[97%] bg-white p-4 md:max-w-screen-md">{children}</div>;
 }
 
-enum DisplayState {
-  Default,
-  Expanded,
-  Collapsed,
-}
 //SNIPPET:
 // <ExampleListContainer>
 //   <SimpleTranslationExample>
@@ -84,6 +79,18 @@ enum DisplayState {
 //   </SimpleTranslationExample>
 // </ExampleListContainer>;
 export function ExampleListContainer({ children }: { children: ReactNode[] | ReactNode }) {
+  enum DisplayState {
+    Default,
+    Expanded,
+    Collapsed,
+  }
+
+  const toggleButtons = [
+    { state: DisplayState.Default, text: "Default" },
+    { state: DisplayState.Expanded, text: "Expanded" },
+    { state: DisplayState.Collapsed, text: "Collapsed" },
+  ];
+
   const [displayState, setDisplayState] = useState<DisplayState>(DisplayState.Default);
   const maxDefaultLength = 3;
 
@@ -92,70 +99,55 @@ export function ExampleListContainer({ children }: { children: ReactNode[] | Rea
       return null;
     }
 
-    if (Array.isArray(children)) {
-      if (displayState === DisplayState.Default && children.length > maxDefaultLength) {
-        const visibleChildren = children.slice(0, maxDefaultLength);
-        const numRemaining = children.length - maxDefaultLength;
-        return (
-          <>
-            {visibleChildren.map((child, index) => (
-              <li key={index}>{child}</li>
-            ))}
-            <span
-              key="more"
-              className="mt-4 cursor-pointer items-center text-center font-bold text-green-500 hover:text-green-700"
-              onClick={() => setDisplayState(DisplayState.Expanded)}
-            >
-              <div className="rotate-90">...</div>
-              <div className="">{numRemaining} more examples</div>
-            </span>
-          </>
-        );
-      } else if (displayState === DisplayState.Expanded && children.length > maxDefaultLength) {
-        return (
-          <>
-            {children.map((child, index) => (
-              <li key={index}>{child}</li>
-            ))}
-            <span
-              key="less"
-              className="mt-4 cursor-pointer items-center text-center font-bold text-green-500 hover:text-green-700"
-              onClick={() => setDisplayState(DisplayState.Default)}
-            >
-              <div className="rotate-90">...</div>
-              <div className="">less examples</div>
-            </span>
-          </>
-        );
-      }
+    if (!Array.isArray(children)) {
+      return <li>{children}</li>;
+    }
+
+    if (children.length > maxDefaultLength) {
+      const visibleChildren =
+        displayState === DisplayState.Default ? children.slice(0, maxDefaultLength) : children;
+      const stateOnClick =
+        displayState === DisplayState.Default ? DisplayState.Expanded : DisplayState.Default;
+
+      return (
+        <>
+          {visibleChildren.map((child, index) => (
+            <li key={index}>{child}</li>
+          ))}
+
+          <span
+            key="more"
+            className="mt-4 cursor-pointer items-center text-center font-bold text-green-500 hover:text-green-700"
+            onClick={() => setDisplayState(stateOnClick)}
+          >
+            <div className="rotate-90">...</div>
+            <div>
+              {displayState === DisplayState.Default ? (
+                <>{children.length - maxDefaultLength} more examples</>
+              ) : (
+                <>less examples</>
+              )}
+            </div>
+          </span>
+        </>
+      );
+    } else {
       return children.map((child, index) => <li key={index}>{child}</li>);
     }
-    return <li>{children}</li>;
   };
 
   return (
     <div className="rounded border border-green-500 bg-green-100 shadow">
       <div className="flex items-center justify-end border-b border-green-500 bg-green-100 p-0 text-xs">
-        <span
-          className={`cursor-pointer ${displayState === DisplayState.Default ? "font-bold" : ""}`}
-          onClick={() => setDisplayState(DisplayState.Default)}
-        >
-          Default
-        </span>
-        |
-        <span
-          className={`cursor-pointer ${displayState === DisplayState.Expanded ? "font-bold" : ""}`}
-          onClick={() => setDisplayState(DisplayState.Expanded)}
-        >
-          Expanded
-        </span>
-        |
-        <span
-          className={`cursor-pointer ${displayState === DisplayState.Collapsed ? "font-bold" : ""}`}
-          onClick={() => setDisplayState(DisplayState.Collapsed)}
-        >
-          Collapsed
-        </span>
+        {toggleButtons.map(({ state, text }) => (
+          <span
+            key={state}
+            className={`cursor-pointer ${displayState === state ? "font-bold" : ""}`}
+            onClick={() => setDisplayState(state)}
+          >
+            {text}
+          </span>
+        ))}
       </div>
       <ul
         className={`list-inside list-disc p-4 ${displayState === DisplayState.Collapsed ? "hidden" : ""}`}
