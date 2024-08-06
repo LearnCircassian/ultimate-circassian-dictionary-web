@@ -10,7 +10,6 @@ export default function DictionaryShowContainer() {
   return (
     <div className="w-full">
       <Content />
-      <HomepageFooter />
     </div>
   );
 }
