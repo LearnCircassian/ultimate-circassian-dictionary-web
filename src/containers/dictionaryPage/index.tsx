@@ -10,7 +10,6 @@ export default function DictionaryShowContainer() {
   return (
     <div className="w-full">
       <Content />
-      <HomepageFooter />
     </div>
   );
 }
@@ -66,28 +65,5 @@ export function Content() {
         })}
       </div>
     </ContainerDiv>
-  );
-}
-
-export function HomepageFooter() {
-  return (
-    <div className="w-full bg-[#eeeeff] shadow-xl">
-      <div className="mx-auto w-11/12 py-4">
-        <div className="flex flex-col gap-0 text-center text-base leading-none md:text-lg lg:gap-2 lg:text-xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl 4xl:text-2xl">
-          <p>
-            <span>You can contact us at: </span>
-            <span className="font-bold leading-none">learncircassian@gmail.com</span>
-          </p>
-        </div>
-        <div className="flex flex-col gap-0 text-center text-base leading-none md:text-lg lg:gap-2 lg:text-xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl 4xl:text-2xl">
-          <p>
-            <span>You can get the dictionaries that we used at: </span>
-            <span className="font-bold leading-none">
-              https://github.com/bihoqo/circassian-dictionaries-collection
-            </span>
-          </p>
-        </div>
-      </div>
-    </div>
   );
 }
