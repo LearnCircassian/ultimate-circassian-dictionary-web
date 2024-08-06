@@ -14,6 +14,7 @@ module.exports = {
         "prettier/prettier": ["error", {
             "endOfLine": "auto"
         }],
+        "no-misleading-character-class": "off",
         "prefer-const": "error",
         "tailwindcss/no-custom-classname": "off",
         "tailwindcss/migration-from-tailwind-2": "off",
