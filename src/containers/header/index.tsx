@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaHome, FaTimes, FaHamburger } from "react-icons/fa";
-import { MdMenuBook } from "react-icons/md";
+import { MdMenuBook, MdContactSupport } from "react-icons/md";
 import { useRouter } from "next/navigation";
 import { cn } from "~/utils/classNames";
 import Image from "next/image";
@@ -82,7 +82,7 @@ export default function Header() {
     { title: "Dictionary", link: "/dictionary", icon: <MdMenuBook /> },
     { title: "Grammar", link: "/grammar", icon: <MdMenuBook /> },
     // { title: "Blog", link: "/blog", icon: <MdMenuBook /> },
-    { title: "Policy", link: "/policy", icon: <MdMenuBook /> },
+    { title: "Contact Us", link: "/contact-us", icon: <MdContactSupport /> },
   ];
 
   if (width < 640) {

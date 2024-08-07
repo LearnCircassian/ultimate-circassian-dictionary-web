@@ -10,7 +10,6 @@ export default function DictionaryShowContainer() {
   return (
     <div className="w-full">
       <Content />
-      <HomepageFooter />
     </div>
   );
 }
@@ -23,22 +22,21 @@ export function Content() {
         <SearchContainer showOnMobile={false} />
       </div>
       <Image src="/fav/icon-1042x1042.png" width={300} height={300} alt="logo" />
-      <p className="mb-4 w-11/12 text-center text-2xl md:w-1/2">
-        Welcome to our comprehensive collection of Circassian language dictionaries! Our website is
-        dedicated to preserving and promoting the rich linguistic heritage of the Circassian people
-        by providing access to over 30 different dictionaries. These dictionaries encompass
-        translations between Circassian and several major languages: Russian, English, Arabic, and
-        Turkish.
+      <p className="mt-8 w-11/12 text-center text-2xl md:w-1/2">
+        Welcome to our dedicated platform for preserving the Circassian language! Our mission is to
+        keep this rich linguistic heritage alive by offering access to over 30 comprehensive
+        dictionaries. These dictionaries facilitate translations between Circassian and major
+        languages including Russian, English, Arabic, and Turkish.
         <br />
         <br />
-        Our collection includes dictionaries for both Western and Eastern Circassian, translating to
-        and from Turkish, English, Russian, and Arabic.
+        Our collection spans both Western and Eastern Circassian, enabling translations to and from
+        Turkish, English, Russian, and Arabic. We aim to assist Circassians from all over the world
+        in understanding advanced Circassian texts such as newspapers, Nart Saga stories, articles,
+        and more.
         <br />
         <br />
-        Whether you are a language enthusiast, a student, or a scholar, our extensive collection
-        offers valuable resources for learning and researching the Circassian language. Dive into
-        our website to explore the beauty and complexity of Circassian, a language spoken by the
-        Circassian people with a rich cultural history.
+        Explore our website to immerse yourself in the beauty and complexity of the Circassian
+        language, and join us in our endeavor to ensure its survival for future generations.
       </p>
       <h1 className="mb-4 mt-16 text-center text-3xl font-bold">
         List of dictionaries used: {USED_DICTS.length}
@@ -66,28 +64,5 @@ export function Content() {
         })}
       </div>
     </ContainerDiv>
-  );
-}
-
-export function HomepageFooter() {
-  return (
-    <div className="w-full bg-[#eeeeff] shadow-xl">
-      <div className="mx-auto w-11/12 py-4">
-        <div className="flex flex-col gap-0 text-center text-base leading-none md:text-lg lg:gap-2 lg:text-xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl 4xl:text-2xl">
-          <p>
-            <span>You can contact us at: </span>
-            <span className="font-bold leading-none">learncircassian@gmail.com</span>
-          </p>
-        </div>
-        <div className="flex flex-col gap-0 text-center text-base leading-none md:text-lg lg:gap-2 lg:text-xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl 4xl:text-2xl">
-          <p>
-            <span>You can get the dictionaries that we used at: </span>
-            <span className="font-bold leading-none">
-              https://github.com/bihoqo/circassian-dictionaries-collection
-            </span>
-          </p>
-        </div>
-      </div>
-    </div>
   );
 }
