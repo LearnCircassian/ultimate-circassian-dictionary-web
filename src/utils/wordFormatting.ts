@@ -23,6 +23,22 @@ export function replaceStickLettersToPalochka(text: string) {
     .replaceAll("iя", "ӏя")
     .replaceAll("iу", "ӏу")
     .replaceAll("iо", "ӏо")
+
+    .replaceAll("iэ", "ӏэ")
+    .replaceAll("iы", "ӏы")
+    .replaceAll("iа", "ӏа")
+    .replaceAll("iе", "ӏе")
+    .replaceAll("iя", "ӏя")
+    .replaceAll("iу", "ӏу")
+    .replaceAll("iо", "ӏо")
+    .replaceAll("ıэ", "ӏэ")
+    .replaceAll("ıы", "ӏы")
+    .replaceAll("ıа", "ӏа")
+    .replaceAll("ıе", "ӏе")
+    .replaceAll("ıя", "ӏя")
+    .replaceAll("ıу", "ӏу")
+    .replaceAll("ıо", "ӏо")
+
     .replaceAll("\u04c0э", "ӏэ")
     .replaceAll("\u04c0ы", "ӏы")
     .replaceAll("\u04c0а", "ӏа")
@@ -30,6 +46,7 @@ export function replaceStickLettersToPalochka(text: string) {
     .replaceAll("\u04c0я", "ӏя")
     .replaceAll("\u04c0у", "ӏу")
     .replaceAll("\u04c0о", "ӏо")
+
     .replaceAll("\u0049э", "ӏэ")
     .replaceAll("\u0049ы", "ӏы")
     .replaceAll("\u0049а", "ӏа")
@@ -37,6 +54,7 @@ export function replaceStickLettersToPalochka(text: string) {
     .replaceAll("\u0049я", "ӏя")
     .replaceAll("\u0049у", "ӏу")
     .replaceAll("\u0049о", "ӏо")
+
     .replaceAll("\u04cfэ", "ӏэ")
     .replaceAll("\u04cfы", "ӏы")
     .replaceAll("\u04cfа", "ӏа")
@@ -44,6 +62,7 @@ export function replaceStickLettersToPalochka(text: string) {
     .replaceAll("\u04cfя", "ӏя")
     .replaceAll("\u04cfу", "ӏу")
     .replaceAll("\u04cfо", "ӏо")
+
     .replaceAll("\u0069э", "ӏэ")
     .replaceAll("\u0069ы", "ӏы")
     .replaceAll("\u0069а", "ӏа")
@@ -51,6 +70,7 @@ export function replaceStickLettersToPalochka(text: string) {
     .replaceAll("\u0069я", "ӏя")
     .replaceAll("\u0069у", "ӏу")
     .replaceAll("\u0069о", "ӏо")
+
     .replaceAll("\u006cэ", "ӏэ")
     .replaceAll("\u006cы", "ӏы")
     .replaceAll("\u006cа", "ӏа")
@@ -58,6 +78,7 @@ export function replaceStickLettersToPalochka(text: string) {
     .replaceAll("\u006cя", "ӏя")
     .replaceAll("\u006cу", "ӏу")
     .replaceAll("\u006cо", "ӏо")
+
     .replaceAll("\u0456э", "ӏэ")
     .replaceAll("\u0456ы", "ӏы")
     .replaceAll("\u0456а", "ӏа")
@@ -65,6 +86,10 @@ export function replaceStickLettersToPalochka(text: string) {
     .replaceAll("\u0456я", "ӏя")
     .replaceAll("\u0456у", "ӏу")
     .replaceAll("\u0456о", "ӏо");
+}
+
+export function replaceTurkishLetterIToEnglishLetterI(text: string) {
+  return text.replaceAll("ı", "i").replaceAll("i", "i");
 }
 
 export function replaceStickLettersToOne(text: string) {
@@ -78,7 +103,29 @@ export function replaceStickLettersToOne(text: string) {
   let isLetterStartsWithCyrillicOrPalochka = false;
   text = text.toLowerCase();
   isLetterStartsWithCyrillicOrPalochka ||= cyrillicRegex.test(text.charAt(0));
-  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("ӏ");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("ӏэ");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("ӏы");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("ӏа");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("ӏе");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("ӏу");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("ӏя");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("ӏо");
+
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("iэ");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("iы");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("iа");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("iе");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("iу");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("iя");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("iо");
+
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("ıэ");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("ıы");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("ıа");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("ıе");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("ıу");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("ıя");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("ıо");
 
   isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("iэ");
   isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("iы");
@@ -142,6 +189,8 @@ export function replaceStickLettersToOne(text: string) {
 
   return text
     .replaceAll("ӏ", "1")
+    .replaceAll("i", "1")
+    .replaceAll("ı", "1")
     .replaceAll("i", "1")
     .replaceAll("\u04c0", "1")
     .replaceAll("\u0049", "1")
