@@ -281,3 +281,71 @@ export function SimpleTranslationExample({
     </>
   );
 }
+
+type TableCell = string | Exclude<ReactNode, null>;
+
+export class MorphologyTable {
+  constructor(rowHeaders: string[], columnHeaders: string[]) {
+    this.rowHeaders = rowHeaders;
+    this.columnHeaders = columnHeaders;
+    this.table = new Array(rowHeaders.length).map(() => new Array(columnHeaders.length).fill(null));
+  }
+
+  setNameInUpperLeftCorner(name: string) {
+    this.upperLeftCornerName = name;
+  }
+
+  setCell(rowName: string, columnName: string, value: TableCell | null) {
+    const rowIndex = this.rowHeaders.indexOf(rowName);
+    const columnIndex = this.columnHeaders.indexOf(columnName);
+    if (rowIndex === -1 || columnIndex === -1) {
+      throw new Error("Row or column not found");
+    }
+    this.table[rowIndex][columnIndex] = value;
+  }
+  getCell(rowName: string, columnName: string): TableCell | null {
+    const rowIndex = this.rowHeaders.indexOf(rowName);
+    const columnIndex = this.columnHeaders.indexOf(columnName);
+    if (rowIndex === -1 || columnIndex === -1) {
+      throw new Error("Row or column not found");
+    }
+    return this.table[rowIndex][columnIndex];
+  }
+
+  genReactNode(): ReactNode {
+    return (
+      <div className="overflow-x-auto">
+        <table className="mb-4 w-full min-w-[600px] border-collapse border border-gray-400">
+          <thead>
+            <tr className="bg-gray-200">
+              <th className="border px-4 py-2">{this.upperLeftCornerName}</th>
+              {this.columnHeaders.map((header, index) => (
+                <th key={index} className="border px-4 py-2">
+                  {header}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {this.rowHeaders.map((rowHeader, rowIndex) => (
+              <tr key={rowIndex}>
+                <td className="border px-4 py-2">{rowHeader}</td>
+                {this.table[rowIndex].map((cell, cellIndex) => (
+                  // TODO(artur): Add that null cells are greyed out
+                  <td key={cellIndex} className="border px-4 py-2">
+                    {cell}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  }
+
+  private rowHeaders: string[];
+  private columnHeaders: string[];
+  private table: (TableCell | null)[][];
+  private upperLeftCornerName: string = "";
+}

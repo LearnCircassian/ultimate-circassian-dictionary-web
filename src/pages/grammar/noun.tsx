@@ -6,17 +6,46 @@ import {
   CText,
   SimpleTranslationExample,
   ExampleListContainer,
+  MorphologyTable,
 } from "~/styled-components/";
 
 function SectionCase() {
+  const table = new MorphologyTable(
+    ["Indefinite", "Definite"],
+    ["Absolutive", "Ergative", "Instrumental", "Adverbial"],
+  );
+  table.setNameInUpperLeftCorner("Case");
+  table.setCell("Indefinite", "Absolutive", "-∅");
+  table.setCell("Indefinite", "Ergative", "-∅");
+  table.setCell("Indefinite", "Instrumental", <CText d="e">-кIэ</CText>);
+  table.setCell("Indefinite", "Adverbial", <CText d="e">-уэ</CText>);
+  table.setCell("Definite", "Absolutive", <CText d="e">-р</CText>);
+  table.setCell("Definite", "Ergative", <CText d="e">-м</CText>);
+  table.setCell("Definite", "Instrumental", <CText d="e">-мкIэ</CText>);
+  table.setCell("Definite", "Adverbial", <CText d="e">-рауэ</CText>);
+
+  const table2 = new MorphologyTable(
+    ["Indefinite", "Definite"],
+    ["Absolutive", "Ergative", "Instrumental", "Adverbial"],
+  );
+  table2.setNameInUpperLeftCorner("Case");
+  table2.setCell("Indefinite", "Absolutive", "not used");
+  table2.setCell("Indefinite", "Ergative", "not used");
+  table2.setCell("Indefinite", "Instrumental", "not used");
+  table2.setCell("Indefinite", "Adverbial", <CText d="e">-хэу</CText>);
+  table2.setCell("Definite", "Absolutive", <CText d="e">-хэр</CText>);
+  table2.setCell("Definite", "Ergative", <CText d="e">-хэм</CText>);
+  table2.setCell("Definite", "Instrumental", <CText d="e">-хэмкIэ</CText>);
+  table2.setCell("Definite", "Adverbial", <CText d="e">-хэрауэ</CText>);
+
+  // prettier-ignore
   return (
     <section className="mb-8">
       <h2 className="mb-2 text-2xl font-semibold">Case</h2>
       <p className="mb-4">
         Kabardian has 4 cases: absolutive (traditionally also called nominative){" "}
         <CText d="e">-р</CText>, ergative <CText d="e">-м</CText>, instrumental{" "}
-        <CText d="e">-кIэ</CText>, and adverbial <CText d="e">-уэ</CText>. The case markers are not
-        part of the stem and are only suffixed when the noun is used in a sentence.
+        <CText d="e">-кIэ</CText>, and adverbial <CText d="e">-уэ</CText>. The case markers are not part of the stem and are only suffixed when the noun is used in a sentence.
       </p>
       <p className="mb-4">
         Those 4 cases are divided into primary and secondary cases. The primary cases are only used
@@ -24,59 +53,17 @@ function SectionCase() {
         <span className="italic">the man</span> vs <span className="italic">a man</span>). The
         secondary cases are morphologically built upon the primary cases. This can be seen in
         definite nouns, where the instrumental case suffix <CText d="e">-кIэ</CText> is added to the
-        ergative suffix <CText d="e">-м</CText>, resulting in
-        <CText d="e">-мкIэ</CText>, and the adverbial case suffix
-        <CText d="e">-уэ</CText> is added to the nominative suffix <CText d="e">-р</CText>,
-        resulting in , resulting in <CText d="e">-рауэ</CText>.
+        ergative suffix <CText d="e">-м</CText>, resulting in <CText d="e">-мкIэ</CText>, and the
+        adverbial case suffix <CText d="e">-уэ</CText> is added to the nominative suffix{" "}
+        <CText d="e">-р</CText>, resulting in <CText d="e">-рауэ</CText>.
       </p>
-
-      <div className="overflow-x-auto">
-        <table className="mb-4 w-full min-w-[600px] border-collapse border border-gray-400">
-          <thead>
-            <tr className="bg-gray-200">
-              <th className="border px-4 py-2">Case</th>
-              <th className="border px-4 py-2">Absolutive</th>
-              <th className="border px-4 py-2">Ergative</th>
-              <th className="border px-4 py-2">Instrumental</th>
-              <th className="border px-4 py-2">Adverbial</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className="border px-4 py-2">Indefinite</td>
-              <td className="border px-4 py-2">-∅</td>
-              <td className="border px-4 py-2">-∅</td>
-              <td>
-                <CText d="e">-кIэ</CText>
-              </td>
-              <td>
-                <CText d="e">-уэ</CText>
-              </td>
-            </tr>
-            <tr>
-              <td className="border px-4 py-2">Definite</td>
-              <td>
-                <CText d="e">-р</CText>
-              </td>
-              <td>
-                <CText d="e">-м</CText>
-              </td>
-              <td>
-                <CText d="e">-мкIэ</CText>
-              </td>
-              <td>
-                <CText d="e">-рауэ</CText>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      {table.genReactNode()}
 
       <p className="mb-4">Below are a few examples:</p>
       <ul className="mb-4 list-inside list-disc">
         <li>
-          <CText d="e">пхъащIэм пхъэбгъухэр куэбжэу ищIащ</CText> :{" "}
-          <TranslateText>the carpenter made a gate out of planks</TranslateText> (lit.{" "}
+          <CText d="e">пхъащIэм пхъэбгъухэр куэбжэу ищIащ</CText> :
+          <TranslateText>the carpenter made a gate out of planks</TranslateText> (lit.
           <TranslateText>
             <span className="italic">the carpenter made planks like a gate</span>
           </TranslateText>
@@ -90,45 +77,7 @@ function SectionCase() {
         This is in line with the fact that marking the plural is optional and thus also inherently
         definite.
       </p>
-      <div className="overflow-x-auto">
-        <table className="mb-4 w-full border-collapse border border-gray-400">
-          <thead>
-            <tr className="bg-gray-200">
-              <th className="border px-4 py-2">Case</th>
-              <th className="border px-4 py-2">Absolutive</th>
-              <th className="border px-4 py-2">Ergative</th>
-              <th className="border px-4 py-2">Instrumental</th>
-              <th className="border px-4 py-2">Adverbial</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className="border px-4 py-2">Indefinite</td>
-              <td className="border px-4 py-2">not used</td>
-              <td className="border px-4 py-2">not used</td>
-              <td className="border px-4 py-2">not used</td>
-              <td>
-                <CText d="e">-хэу</CText>
-              </td>
-            </tr>
-            <tr>
-              <td className="border px-4 py-2">Definite</td>
-              <td>
-                <CText d="e">-хэр</CText>
-              </td>
-              <td>
-                <CText d="e">-хэм</CText>
-              </td>
-              <td>
-                <CText d="e">-хэмкIэ</CText>
-              </td>
-              <td>
-                <CText d="e">-хэрауэ</CText>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      {table2.genReactNode()}
 
       <p className="mb-4">
         However, the plural indefinite form is used in a vocative sense, which is used to address
