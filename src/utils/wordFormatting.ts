@@ -55,6 +55,14 @@ export function replaceStickLettersToPalochka(text: string) {
     .replaceAll("\u0049у", "ӏу")
     .replaceAll("\u0049о", "ӏо")
 
+    .replaceAll("\u0131э", "ӏэ")
+    .replaceAll("\u0131ы", "ӏы")
+    .replaceAll("\u0131а", "ӏа")
+    .replaceAll("\u0131е", "ӏе")
+    .replaceAll("\u0131я", "ӏя")
+    .replaceAll("\u0131у", "ӏу")
+    .replaceAll("\u0131о", "ӏо")
+
     .replaceAll("\u04cfэ", "ӏэ")
     .replaceAll("\u04cfы", "ӏы")
     .replaceAll("\u04cfа", "ӏа")
@@ -85,20 +93,24 @@ export function replaceStickLettersToPalochka(text: string) {
     .replaceAll("\u0456е", "ӏе")
     .replaceAll("\u0456я", "ӏя")
     .replaceAll("\u0456у", "ӏу")
-    .replaceAll("\u0456о", "ӏо");
+    .replaceAll("\u0456о", "ӏо")
+
+    .replaceAll("\u0130э", "ӏэ")
+    .replaceAll("\u0130ы", "ӏы")
+    .replaceAll("\u0130а", "ӏа")
+    .replaceAll("\u0130е", "ӏе")
+    .replaceAll("\u0130я", "ӏя")
+    .replaceAll("\u0130у", "ӏу")
+    .replaceAll("\u0130о", "ӏо");
 }
 
 export function replaceTurkishLetterIToEnglishLetterI(text: string) {
-  return text.replaceAll("ı", "i").replaceAll("i", "i");
+  return text.replaceAll("İ", "I").replaceAll("İ", "I").replaceAll("i", "i");
 }
 
 export function replaceStickLettersToOne(text: string) {
   // Regular expression to match Cyrillic characters (Unicode range for Cyrillic)
   const cyrillicRegex = /^[\u0400-\u04FF]/;
-
-  if (text.startsWith("к1")) {
-    console.log("text", text);
-  }
 
   let isLetterStartsWithCyrillicOrPalochka = false;
   text = text.toLowerCase();
@@ -127,13 +139,13 @@ export function replaceStickLettersToOne(text: string) {
   isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("ıя");
   isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("ıо");
 
-  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("iэ");
-  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("iы");
-  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("iа");
-  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("iе");
-  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("iу");
-  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("iя");
-  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("iо");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("Iэ");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("Iы");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("Iа");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("Iе");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("Iу");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("Iя");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("Iо");
 
   isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("\u04c0э");
   isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("\u04c0ы");
@@ -150,6 +162,14 @@ export function replaceStickLettersToOne(text: string) {
   isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("\u0049у");
   isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("\u0049я");
   isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("\u0049о");
+
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("\u0131э");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("\u0131ы");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("\u0131а");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("\u0131е");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("\u0131у");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("\u0131я");
+  isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("\u0131о");
 
   isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("\u04cfэ");
   isLetterStartsWithCyrillicOrPalochka ||= text.startsWith("\u04cfы");
@@ -194,6 +214,7 @@ export function replaceStickLettersToOne(text: string) {
     .replaceAll("i", "1")
     .replaceAll("\u04c0", "1")
     .replaceAll("\u0049", "1")
+    .replaceAll("\u0131", "1")
     .replaceAll("\u04cf", "1")
     .replaceAll("\u006c", "1")
     .replaceAll("\u0069", "1")

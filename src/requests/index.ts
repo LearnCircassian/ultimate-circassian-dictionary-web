@@ -53,6 +53,7 @@ export async function fetchWordAutocompletes(
   word: string,
 ): Promise<Result<Autocomplete[], string>> {
   let wordAdjusted = regularWordToSafeWord(word).trim().toLowerCase();
+  wordAdjusted = replaceTurkishLetterIToEnglishLetterI(wordAdjusted);
   wordAdjusted = replaceStickLettersToOne(wordAdjusted);
 
   const searchFilterPrefs = getSearchFilterPrefsCache();
@@ -81,6 +82,7 @@ export async function fetchWordAutocompletesThatContains(
   word: string,
 ): Promise<Result<Autocomplete[], string>> {
   let wordAdjusted = regularWordToSafeWord(word).trim().toLowerCase();
+  wordAdjusted = replaceTurkishLetterIToEnglishLetterI(wordAdjusted);
   wordAdjusted = replaceStickLettersToOne(wordAdjusted);
 
   const searchFilterPrefs = getSearchFilterPrefsCache();
