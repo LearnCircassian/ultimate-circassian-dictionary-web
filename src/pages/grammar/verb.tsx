@@ -25,8 +25,9 @@ function ColB({ children }: { children: React.ReactNode }) {
 function ColG({ children }: { children: React.ReactNode }) {
   return <Col color="green">{children}</Col>;
 }
-// prettier-ignore
+
 function SectionErgativity() {
+  // prettier-ignore
   return (
     <section>
       <h2 className="mb-2 text-2xl font-semibold">Ergativity</h2>

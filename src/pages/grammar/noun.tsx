@@ -272,7 +272,6 @@ function SectionErgative() {
             щIалэм мыIэрысэ <HighlightText>тхьэмадэм</HighlightText> иритащ
           </>
           <>
-            {" "}
             the boy gave <HighlightText>the Tkhamada</HighlightText> an apple
           </>
         </SimpleTranslationExample>
@@ -281,7 +280,6 @@ function SectionErgative() {
             пщIащэр <HighlightText>щIалэм</HighlightText> еуащ
           </>
           <>
-            {" "}
             the girl hit <HighlightText>the boy</HighlightText>
           </>
         </SimpleTranslationExample>
@@ -290,7 +288,6 @@ function SectionErgative() {
             <HighlightText>щIалэм</HighlightText> мыIэрысэ иIащ
           </>
           <>
-            {" "}
             the boy has <HighlightText>the apple</HighlightText>
           </>
         </SimpleTranslationExample>
