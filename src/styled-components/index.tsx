@@ -197,11 +197,11 @@ export function ExampleListContainer({ children }: { children: ReactNode[] | Rea
   let colorBackground;
   let colorText;
   if (dialect === "east") {
-    colorBackground = "border-green-500 bg-green-100";
-    colorText = "text-green-500 hover:text-green-700";
-  } else {
     colorBackground = "border-blue-500 bg-blue-100";
     colorText = "text-blue-500 hover:text-blue-700";
+  } else {
+    colorBackground = "border-green-500 bg-green-100";
+    colorText = "text-green-500 hover:text-green-700";
   }
 
   const renderChildren = () => {
@@ -284,7 +284,7 @@ export function SimpleTranslationExample({
 
 type TableCell = string | Exclude<ReactNode, null>;
 
-export class MorphologyTable {
+export class Table {
   constructor(rowHeaders: string[], columnHeaders: string[]) {
     this.rowHeaders = rowHeaders;
     this.columnHeaders = columnHeaders;
@@ -314,41 +314,78 @@ export class MorphologyTable {
     return this.table[rowIndex][columnIndex];
   }
 
-  genReactNode(): ReactNode {
-    const cellClasses = "border px-4 py-2";
-    return (
-      <div className="overflow-x-auto">
-        <table className="mb-4 w-full min-w-[600px] border-collapse border border-gray-400">
-          <thead>
-            <tr className="bg-gray-200">
-              <th className={`${cellClasses}`}>{this.upperLeftCornerName}</th>
-              {this.columnHeaders.map((header, index) => (
-                <th key={index} className={`${cellClasses}`}>
-                  {header}
-                </th>
+  rowHeaders: string[];
+  columnHeaders: string[];
+  table: (TableCell | null)[][];
+  upperLeftCornerName: string = "";
+}
+
+//TODO(artur): Add that if one hovers over cell [x][y] then the row x and column y should be highlighted including the headers.
+//             Consider whether only headers should be highlighted or the whole row/column.
+//TODO(artur): Add a toggle button to show/hide the whole table.
+//TODO(artur): Consider whether the column headers should be sticky. This would allow for better navigation in bigger tables with many rows.
+//TODO(artur): Extract this function into a React Component.
+export function MorphologyTable({ data }: { data: Table }): ReactNode {
+  const [hoveredRow, setHoveredRow] = useState<number | null>(null);
+  const [hoveredCol, setHoveredCol] = useState<number | null>(null);
+
+  const cellClasses = "border px-4 py-2";
+  const nullCellClasses = "bg-gray-300 text-gray-500";
+
+  // the text of headerClasses should be bold
+  const headerClasses = "bg-orange-100 font-bold";
+  const headerClassesHover = "bg-orange-200 font-bold";
+
+  const hoverClasses = "bg-gray-200";
+
+  return (
+    <div className="overflow-x-auto">
+      <table className="mb-4 w-full min-w-[600px] border-collapse overflow-hidden rounded-lg border border-gray-400 shadow-lg">
+        <thead>
+          <tr>
+            <th className={`${cellClasses} ${headerClasses}`}>{data.upperLeftCornerName}</th>
+            {data.columnHeaders.map((header, index) => (
+              <th
+                key={index}
+                className={`${cellClasses} ${hoveredCol == index ? headerClassesHover : headerClasses}`}
+              >
+                {header}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {data.rowHeaders.map((rowHeader, rowIndex) => (
+            <tr key={rowIndex}>
+              <td
+                className={`${cellClasses} ${hoveredRow == rowIndex ? headerClassesHover : headerClasses}`}
+              >
+                {rowHeader}
+              </td>
+
+              {data.table[rowIndex].map((cell, cellIndex) => (
+                // TODO(artur): Add that null cells are greyed out
+                <td
+                  key={cellIndex}
+                  className={`${cellClasses} ${cell === null ? nullCellClasses : ""} ${
+                    hoveredRow === rowIndex || hoveredCol === cellIndex ? hoverClasses : ""
+                  }`}
+                  onMouseEnter={() => {
+                    setHoveredRow(rowIndex);
+                    setHoveredCol(cellIndex);
+                  }}
+                  onMouseLeave={() => {
+                    setHoveredRow(null);
+                    setHoveredCol(null);
+                  }}
+                >
+                  {cell}
+                </td>
               ))}
             </tr>
-          </thead>
-          <tbody>
-            {this.rowHeaders.map((rowHeader, rowIndex) => (
-              <tr key={rowIndex}>
-                <td className={`${cellClasses}`}>{rowHeader}</td>
-                {this.table[rowIndex].map((cell, cellIndex) => (
-                  // TODO(artur): Add that null cells are greyed out
-                  <td key={cellIndex} className={`${cellClasses}`}>
-                    {cell}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
-  }
-
-  private rowHeaders: string[];
-  private columnHeaders: string[];
-  private table: (TableCell | null)[][];
-  private upperLeftCornerName: string = "";
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 }

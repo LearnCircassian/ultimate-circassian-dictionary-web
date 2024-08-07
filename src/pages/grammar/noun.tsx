@@ -6,11 +6,12 @@ import {
   CText,
   SimpleTranslationExample,
   ExampleListContainer,
+  Table,
   MorphologyTable,
 } from "~/styled-components/";
 
 function SectionCase() {
-  const table = new MorphologyTable(
+  const table = new Table(
     ["Indefinite", "Definite"],
     ["Absolutive", "Ergative", "Instrumental", "Adverbial"],
   );
@@ -24,14 +25,11 @@ function SectionCase() {
   table.setCell("Definite", "Instrumental", <CText d="e">-мкIэ</CText>);
   table.setCell("Definite", "Adverbial", <CText d="e">-рауэ</CText>);
 
-  const table2 = new MorphologyTable(
+  const table2 = new Table(
     ["Indefinite", "Definite"],
     ["Absolutive", "Ergative", "Instrumental", "Adverbial"],
   );
   table2.setNameInUpperLeftCorner("Case");
-  table2.setCell("Indefinite", "Absolutive", "not used");
-  table2.setCell("Indefinite", "Ergative", "not used");
-  table2.setCell("Indefinite", "Instrumental", "not used");
   table2.setCell("Indefinite", "Adverbial", <CText d="e">-хэу</CText>);
   table2.setCell("Definite", "Absolutive", <CText d="e">-хэр</CText>);
   table2.setCell("Definite", "Ergative", <CText d="e">-хэм</CText>);
@@ -45,19 +43,13 @@ function SectionCase() {
       <p className="mb-4">
         Kabardian has 4 cases: absolutive (traditionally also called nominative){" "}
         <CText d="e">-р</CText>, ergative <CText d="e">-м</CText>, instrumental{" "}
-        <CText d="e">-кIэ</CText>, and adverbial <CText d="e">-уэ</CText>. The case markers are not part of the stem and are only suffixed when the noun is used in a sentence.
+        <CText d="e">-кIэ</CText>, and adverbial <CText d="e">-уэ</CText>. The case markers are not
+        part of the stem and are only suffixed when the noun is used in a sentence.
       </p>
       <p className="mb-4">
-        Those 4 cases are divided into primary and secondary cases. The primary cases are only used
-        if the noun is definite, while they are absent if the noun is indefinite (basically{" "}
-        <span className="italic">the man</span> vs <span className="italic">a man</span>). The
-        secondary cases are morphologically built upon the primary cases. This can be seen in
-        definite nouns, where the instrumental case suffix <CText d="e">-кIэ</CText> is added to the
-        ergative suffix <CText d="e">-м</CText>, resulting in <CText d="e">-мкIэ</CText>, and the
-        adverbial case suffix <CText d="e">-уэ</CText> is added to the nominative suffix{" "}
-        <CText d="e">-р</CText>, resulting in <CText d="e">-рауэ</CText>.
+        Those 4 cases are divided into primary and secondary cases. The primary cases are only used if the noun is definite, while they are absent if the noun is indefinite (basically{" "} <span className="italic">the man</span> vs <span className="italic">a man</span>). The secondary cases are morphologically built upon the primary cases. This can be seen in definite nouns, where the instrumental case suffix <CText d="e">-кIэ</CText> is added to the ergative suffix <CText d="e">-м</CText>, resulting in <CText d="e">-мкIэ</CText>, and the adverbial case suffix <CText d="e">-уэ</CText> is added to the nominative suffix{" "} <CText d="e">-р</CText>, resulting in <CText d="e">-рауэ</CText>.
       </p>
-      {table.genReactNode()}
+      <MorphologyTable data={table} />
 
       <p className="mb-4">Below are a few examples:</p>
       <ul className="mb-4 list-inside list-disc">
@@ -72,16 +64,11 @@ function SectionCase() {
       </ul>
 
       <p className="mb-4">
-        There is also a special interaction with the plural forms of a noun, as in their indefinite
-        form they only have the adverbial form, while in their definite form they have all 4 cases.
-        This is in line with the fact that marking the plural is optional and thus also inherently
-        definite.
+        There is also a special interaction with the plural forms of a noun, as in their indefinite form they only have the adverbial form, while in their definite form they have all 4 cases. This is in line with the fact that marking the plural is optional and thus also inherently definite.
       </p>
-      {table2.genReactNode()}
-
+      <MorphologyTable data={table2} />
       <p className="mb-4">
-        However, the plural indefinite form is used in a vocative sense, which is used to address
-        someone. This is also the only case where the plural indefinite form is used, e.g.
+        However, the plural indefinite form is used in a vocative sense, which is used to address someone. This is also the only case where the plural indefinite form is used, e.g.
       </p>
 
       <ExampleListContainer>
@@ -96,9 +83,7 @@ function SectionCase() {
       </ExampleListContainer>
 
       <p className="mb-4">
-        Similar to the plural, other word forms also may require case marking to be grammatical.
-        However note, that it is more accurate to say that not the noun, but the noun phrase is
-        marked for the case.
+        Similar to the plural, other word forms also may require case marking to be grammatical. However note, that it is more accurate to say that not the noun, but the noun phrase is marked for the case.
       </p>
 
       <ExampleListContainer>
@@ -116,13 +101,12 @@ function SectionCase() {
 }
 
 function SectionAbsolutive() {
+  // prettier-ignore
   return (
     <section className="mb-8">
       <h2 className="mb-2 text-2xl font-semibold">Absolutive</h2>
       <p className="mb-4">
-        The absolutive case is marked by the suffix <CText d="e">-р</CText>. As is usual for most
-        ergative languages, the absolutive is used as the subject of an intransitive verb and as the
-        direct object of a transitive verb.
+        The absolutive case is marked by the suffix <CText d="e">-р</CText>. As is usual for most ergative languages, the absolutive is used as the subject of an intransitive verb and as the direct object of a transitive verb.
       </p>
 
       <p className="mb-4">It denotes the subject of an intransitive verb.</p>
@@ -188,6 +172,7 @@ function SectionAbsolutive() {
   );
 }
 function SectionErgative() {
+  // prettier-ignore
   return (
     <section className="mb-8">
       <h2 className="mb-2 text-2xl font-semibold">Ergative</h2>
@@ -203,8 +188,7 @@ function SectionErgative() {
         </SimpleTranslationExample>
       </ExampleListContainer>
       <p className="mb-4">
-        It also denotes the indirect object of intransitive and transitive verbs (mainly because the
-        indirect object is governed by the preverb).
+        It also denotes the indirect object of intransitive and transitive verbs (mainly because the indirect object is governed by the preverb).
       </p>
 
       <ExampleListContainer>
@@ -290,6 +274,7 @@ function SectionErgative() {
 }
 
 function SectionInstrumental() {
+  // prettier-ignore
   return (
     <section className="mb-8">
       <h2 className="mb-2 text-2xl font-semibold">Instrumental</h2>

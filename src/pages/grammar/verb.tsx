@@ -32,11 +32,7 @@ function SectionErgativity() {
     <section>
       <h2 className="mb-2 text-2xl font-semibold">Ergativity</h2>
       <p className="mb-4">
-        Understanding the verb structure in Kabardian requires recognizing that it is an ergative
-        language, which is different from the more familiar accusative languages such as English,
-        Russian, Turkish, Arabic, and German. In Europe and nearby regions, only a few languages
-        like Basque and other Caucasian languages, including Circassian and Georgian, follow the
-        ergative system.
+        Understanding the verb structure in Kabardian requires recognizing that it is an ergative language, which is different from the more familiar accusative languages such as English, Russian, Turkish, Arabic, and German. In Europe and nearby regions, only a few languages like Basque and other Caucasian languages, including Circassian and Georgian, follow the ergative system.
       </p>
       <p className="mb-4">
         In linguistic terms, the key difference between ergative and accusative languages lies in how the subject of a sentence is marked, depending on whether the verb is transitive (involving a direct object) or intransitive (no direct object). Generally, intransitive verbs have just a subject, while transitive verbs include both a subject and a direct object.
