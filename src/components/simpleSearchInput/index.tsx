@@ -18,7 +18,7 @@ export default function SimpleSearchInput({
   return (
     <div
       className={cn(
-        "flex flex-row gap-2 bg-transparent items-center justify-start w-full bg-[#343438] rounded-[8px] p-2",
+        "flex w-full flex-row items-center justify-start gap-2 rounded-[8px] bg-[#343438] bg-transparent p-2",
         className,
       )}
     >

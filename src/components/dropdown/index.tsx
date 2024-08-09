@@ -38,7 +38,7 @@ export default function Dropdown<T>({
         onChange={handleChange}
         className={cn(
           "bg-transparent p-2",
-          { "border border-solid border-gray": showBorders },
+          { "border-gray border border-solid": showBorders },
           overrideClassName,
         )}
       >
