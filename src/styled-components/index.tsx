@@ -162,7 +162,9 @@ export function CText({
 
 // TODO(artur): Make better breakpoints.
 export function GrammarBookContainer({ children }: { children: React.ReactNode }) {
-  return <div className="md m-2 mx-auto w-[97%] bg-white p-4 md:max-w-screen-md">{children}</div>;
+  return (
+    <article className="m-2 mx-auto w-[97%] bg-white p-4 md:max-w-screen-md">{children}</article>
+  );
 }
 
 //SNIPPET:
@@ -194,13 +196,16 @@ export function ExampleListContainer({ children }: { children: ReactNode[] | Rea
 
   const dialect: "east" | "west" = "east";
 
+  let colorBorder;
   let colorBackground;
   let colorText;
   if (dialect === "east") {
-    colorBackground = "border-blue-500 bg-blue-100";
+    colorBorder = "border-blue-500";
+    colorBackground = "bg-blue-100";
     colorText = "text-blue-500 hover:text-blue-700";
   } else {
-    colorBackground = "border-green-500 bg-green-100";
+    colorBorder = "border-green-500";
+    colorBackground = "bg-green-100";
     colorText = "text-green-500 hover:text-green-700";
   }
 
@@ -247,16 +252,19 @@ export function ExampleListContainer({ children }: { children: ReactNode[] | Rea
   };
 
   return (
-    <div className={`rounded border ${colorBackground} shadow`}>
-      <div className={`flex items-center justify-end border-b ${colorBackground} p-0 text-xs`}>
+    <div className={`rounded border ${colorBackground} ${colorBorder} shadow`}>
+      <div className={`flex items-center justify-end border-b ${colorBorder} p-0 text-xs`}>
         {toggleButtons.map(({ state, text }) => (
-          <span
-            key={state}
-            className={`cursor-pointer ${displayState === state ? "font-bold" : ""}`}
-            onClick={() => setDisplayState(state)}
-          >
-            {text}
-          </span>
+          <>
+            <span className="mx-2"></span>
+            <span
+              key={state}
+              className={`cursor-pointer ${displayState === state ? "font-bold" : ""}`}
+              onClick={() => setDisplayState(state)}
+            >
+              {text}
+            </span>
+          </>
         ))}
       </div>
       <ul
@@ -339,7 +347,7 @@ export function MorphologyTable({ data }: { data: Table }): ReactNode {
   const hoverClasses = "bg-gray-200";
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-hidden overflow-x-auto rounded-lg">
       <table className="mb-4 w-full min-w-[600px] border-collapse overflow-hidden rounded-lg border border-gray-400 shadow-lg">
         <thead>
           <tr>
