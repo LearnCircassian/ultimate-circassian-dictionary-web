@@ -4,14 +4,20 @@ import ContainerDiv from "~/components/containerDiv";
 //NOTE(artur): This is only a temporary front end component which is not to be used in production.
 //TODO(artur): Implement a proper contact form with a backend service.
 function ContactForm() {
+  enum EmailFormState {
+    NotSentYet,
+    Sending,
+    SuccessfullySent,
+    FailedToSend,
+  }
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const [state, setState] = useState(EmailFormState.NotSentYet);
+  async function handleSubmit(e: React.FormEvent): Promise<void> {
     e.preventDefault();
 
-    const res = await fetch("/api/send-email", {
+    const resPromise: Promise<Response> = fetch("/api/sendEmail", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -23,40 +29,84 @@ function ContactForm() {
       }),
     });
 
+    setState(EmailFormState.Sending);
+
+    const res: Response = await resPromise;
+
     if (res.ok) {
-      alert("Email sent successfully!");
+      setState(EmailFormState.SuccessfullySent);
       setEmail("");
       setSubject("");
       setMessage("");
     } else {
-      alert("Failed to send the email.");
+      setState(EmailFormState.FailedToSend);
     }
-  };
+  }
+  async function handleSubmitFakeSimulation(e: React.FormEvent): Promise<void> {
+    e.preventDefault();
+    setState(EmailFormState.Sending);
+    setTimeout(() => {
+      setState(EmailFormState.SuccessfullySent);
+      setEmail("");
+      setSubject("");
+      setMessage("");
+    }, 2000);
+  }
+  let borderColor = "";
+  switch (state) {
+    case EmailFormState.FailedToSend:
+      borderColor = "border-red-500";
+      break;
+    case EmailFormState.SuccessfullySent:
+      borderColor = "border-green-500";
+      break;
+    case EmailFormState.Sending:
+      borderColor = "border-blue-500";
+      // What might be a better color than blue?
+
+      break;
+    case EmailFormState.NotSentYet:
+      borderColor = "";
+      break;
+    default: {
+      const _exhaustiveCheck: never = state;
+      return _exhaustiveCheck;
+    } // This line is needed to make TypeScript understand that the switch is exhaustive
+  }
 
   return (
     <div className="mx-auto max-w-md p-4">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmitFakeSimulation} className="flex flex-col gap-4">
         <input
           type="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            setState(EmailFormState.NotSentYet);
+          }}
           placeholder="Your email"
-          className="border p-2"
+          className={`${borderColor} border p-2`}
           required
         />
         <input
           type="text"
           value={subject}
-          onChange={(e) => setSubject(e.target.value)}
+          onChange={(e) => {
+            setSubject(e.target.value);
+            setState(EmailFormState.NotSentYet);
+          }}
           placeholder="Subject"
-          className="border p-2"
+          className={`${borderColor} border p-2`}
           required
         />
         <textarea
           value={message}
-          onChange={(e) => setMessage(e.target.value)}
+          onChange={(e) => {
+            setMessage(e.target.value);
+            setState(EmailFormState.NotSentYet);
+          }}
           placeholder="Message"
-          className="border p-2"
+          className={`${borderColor} border p-2`}
           rows={5}
           required
         />
@@ -85,7 +135,7 @@ export default function ContactUsPage() {
           learncircassian@gmail.com
         </a>
       </p>
-      {/* <ContactForm /> */}
+      <ContactForm />
     </ContainerDiv>
   );
 }
