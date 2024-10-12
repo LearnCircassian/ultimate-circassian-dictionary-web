@@ -6,7 +6,7 @@ import { containsOnlyEnglishLetters } from "~/utils/lang";
 import {
   fetchWordAutocompletes,
   fetchWordAutocompletesThatContains,
-  fetchWordAutocompletesWithVerbs,
+  fetchEnglishWordAutocompletesWithVerbs,
 } from "~/requests";
 import { cn } from "~/utils/classNames";
 import {
@@ -50,7 +50,7 @@ export default function HeaderSearchResultsDropdown({
       if (4 <= debouncedSearchInputValue.length) {
         res = await fetchWordAutocompletesThatContains(debouncedSearchInputValue);
       } else if (containsOnlyEnglishLetters(debouncedSearchInputValue)) {
-        res = await fetchWordAutocompletesWithVerbs(debouncedSearchInputValue);
+        res = await fetchEnglishWordAutocompletesWithVerbs(debouncedSearchInputValue);
       } else {
         res = await fetchWordAutocompletes(debouncedSearchInputValue);
       }
@@ -238,12 +238,6 @@ export default function HeaderSearchResultsDropdown({
           return a.key.localeCompare(b.key);
         })
         .map((word) => {
-          const searchInputValAdjusted = replaceStickLettersToPalochka(debouncedSearchInputValue);
-          const index = word.key.toLowerCase().indexOf(searchInputValAdjusted.toLowerCase());
-          const before = word.key.slice(0, index);
-          const bold = word.key.slice(index, index + searchInputValAdjusted.length);
-          const after = word.key.slice(index + searchInputValAdjusted.length);
-
           return (
             <button
               className={cn(
@@ -257,9 +251,7 @@ export default function HeaderSearchResultsDropdown({
                   [{word.fromLangs.join(", ")}]
                 </span>
                 <span className="text-lg xl:text-xl 2xl:text-2xl 3xl:text-3xl 4xl:text-4xl">
-                  {before}
-                  <span className="font-bold">{bold}</span>
-                  {after}
+                  {word.key}
                 </span>
               </div>
             </button>

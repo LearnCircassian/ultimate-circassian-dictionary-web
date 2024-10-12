@@ -19,7 +19,7 @@ import { containsOnlyEnglishLetters } from "~/utils/lang";
 import {
   fetchWordAutocompletes,
   fetchWordAutocompletesThatContains,
-  fetchWordAutocompletesWithVerbs,
+  fetchEnglishWordAutocompletesWithVerbs,
 } from "~/requests";
 
 import {
@@ -127,7 +127,7 @@ function useAutocompleteQuery(
       if (4 <= searchInput.length) {
         res = await fetchWordAutocompletesThatContains(searchInput);
       } else if (containsOnlyEnglishLetters(searchInput)) {
-        res = await fetchWordAutocompletesWithVerbs(searchInput);
+        res = await fetchEnglishWordAutocompletesWithVerbs(searchInput);
       } else {
         res = await fetchWordAutocompletes(searchInput);
       }

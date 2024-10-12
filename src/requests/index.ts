@@ -103,7 +103,7 @@ export async function fetchWordAutocompletesThatContains(
   }
 }
 
-export async function fetchWordAutocompletesWithVerbs(
+export async function fetchEnglishWordAutocompletesWithVerbs(
   word: string,
 ): Promise<Result<Autocomplete[], string>> {
   let wordAdjusted = regularWordToSafeWord(word).trim().toLowerCase();
