@@ -8,7 +8,7 @@ interface CustomTableProps {
 
 export default function DiscoverTable({ rowItems }: CustomTableProps) {
   return (
-    <div className={cn("flex flex-col w-[300px]")}>
+    <div className={cn("flex w-[300px] flex-col")}>
       <HeaderCells />
       <RowCells rowItems={rowItems} />
     </div>
@@ -27,7 +27,7 @@ function HeaderCells() {
         return (
           <div
             key={idx}
-            className={cn("flex-1 items-center p-2 text-xs font-medium text-white bg-black", {
+            className={cn("flex-1 items-center bg-black p-2 text-xs font-medium text-white", {
               [firstCellClass]: idx === 0,
               [middleCellClass]: 0 < idx && idx < headerItems.length - 1,
               [lastCellClass]: idx === headerItems.length - 1,
@@ -60,7 +60,7 @@ function RowCells({ rowItems }: { rowItems: NameToTwitter[] }) {
               return (
                 <div
                   key={colIdx}
-                  className={cn("flex-1 p-2 w-full text-twitter font-medium text-left")}
+                  className={cn("text-twitter w-full flex-1 p-2 text-left font-medium")}
                 >
                   {c}
                 </div>

@@ -36,7 +36,7 @@ export default function Modal({
           <motion.div
             className={cn(
               "overlay fixed left-0 top-0 z-40 flex h-full w-full",
-              "items-center justify-center bg-black-main/70 backdrop-blur-lg",
+              "bg-black-main/70 items-center justify-center backdrop-blur-lg",
               "z-900",
             )}
             onClick={closeOnOutsideClick ? onClose : () => {}}
@@ -72,9 +72,9 @@ export default function Modal({
             }}
             transition={{ ease: [0.19, 1, 0.22, 1], duration: 0.4 }}
             className={cn(
-              "fixed top-1/2 left-1/2 z-9999 max-w-full",
+              "fixed left-1/2 top-1/2 z-9999 max-w-full",
               !unstyled &&
-                "rounded-2xl border border-solid border-white/2 bg-popupBg p-5 shadow-modal",
+                "bg-popupBg rounded-2xl border border-solid border-white/2 p-5 shadow-modal",
               className,
             )}
           >
