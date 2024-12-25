@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaHome, FaBars, FaTimes } from "react-icons/fa";
+import { FaHome, FaTimes } from "react-icons/fa";
 import SearchContainer from "~/containers/header/searchContainer";
 import { useRouter } from "next/navigation";
 import { cn } from "~/utils/classNames";

@@ -1,11 +1,10 @@
 import { cn } from "~/utils/classNames";
-import { HiArrowLeft, HiArrowRight, HiHome, HiFilter } from "react-icons/hi";
+import { HiArrowLeft, HiArrowRight, HiFilter } from "react-icons/hi";
 import React from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { regularWordToSafeWord, safeWordToRegularWord } from "~/utils/wordFormatting";
 import { findLeftAndRightOfCachedWord } from "~/cache/wordHistory";
-import useModal from "~/hooks/useModal"; // Import useModal hook if it's defined elsewhere in your project
 
 export default function WordPageFooter() {
   const params = useParams<{ word: string }>();

@@ -1,4 +1,4 @@
-import React, { useState, ReactNode } from "react";
+import React from "react";
 import {
   TranslateText,
   HighlightText,

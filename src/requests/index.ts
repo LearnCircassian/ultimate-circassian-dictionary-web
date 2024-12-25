@@ -9,11 +9,7 @@ import {
 } from "~/interfaces";
 import { err, ok, Result } from "neverthrow";
 import queryString from "query-string";
-import {
-  regularWordToSafeWord,
-  replaceStickLettersToOne,
-  safeWordToRegularWord,
-} from "~/utils/wordFormatting";
+import { regularWordToSafeWord, replaceStickLettersToOne } from "~/utils/wordFormatting";
 import { transformAutocomplete, transformWordDefinitionsResults } from "~/transform";
 import { getSearchFilterPrefsCache } from "~/cache/searchFilterPrefs";
 
@@ -27,7 +23,7 @@ export async function fetchWordAutocompletesPaginated(args: {
   const searchFilterPrefs = getSearchFilterPrefsCache();
 
   try {
-    const params: String = queryString.stringify({
+    const params: string = queryString.stringify({
       page: args.page,
       size: args.size,
       fromLangs: searchFilterPrefs.fromLang.join(","),
@@ -55,7 +51,7 @@ export async function fetchWordAutocompletes(
   wordAdjusted = replaceStickLettersToOne(wordAdjusted);
 
   const searchFilterPrefs = getSearchFilterPrefsCache();
-  const params: String = queryString.stringify({
+  const params: string = queryString.stringify({
     fromLangs: searchFilterPrefs.fromLang.join(","),
     toLangs: searchFilterPrefs.toLang.join(","),
   });
@@ -83,7 +79,7 @@ export async function fetchWordAutocompletesThatContains(
   wordAdjusted = replaceStickLettersToOne(wordAdjusted);
 
   const searchFilterPrefs = getSearchFilterPrefsCache();
-  const params: String = queryString.stringify({
+  const params: string = queryString.stringify({
     fromLangs: searchFilterPrefs.fromLang.join(","),
     toLangs: searchFilterPrefs.toLang.join(","),
   });
@@ -110,7 +106,7 @@ export async function fetchEnglishWordAutocompletesWithVerbs(
   wordAdjusted = replaceStickLettersToOne(wordAdjusted);
 
   const searchFilterPrefs = getSearchFilterPrefsCache();
-  const params: String = queryString.stringify({
+  const params: string = queryString.stringify({
     fromLangs: searchFilterPrefs.fromLang.join(","),
     toLangs: searchFilterPrefs.toLang.join(","),
   });
