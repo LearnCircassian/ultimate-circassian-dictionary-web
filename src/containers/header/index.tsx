@@ -80,8 +80,8 @@ export default function Header() {
   const navItems = [
     { title: "Home", link: "/", icon: <FaHome /> },
     { title: "Dictionary", link: "/dictionary", icon: <MdMenuBook /> },
+    { title: "Learn", link: "/blog", icon: <MdMenuBook /> },
     { title: "Grammar", link: "/grammar", icon: <MdMenuBook /> },
-    // { title: "Blog", link: "/blog", icon: <MdMenuBook /> },
     { title: "Contact Us", link: "/contact-us", icon: <MdContactSupport /> },
   ];
 
