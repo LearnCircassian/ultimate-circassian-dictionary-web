@@ -423,7 +423,7 @@ function SearchInput({
   setDropdownVisible: (value: boolean) => void;
   dropdownVisible: boolean;
   clickWordHandler: (word: string) => void;
-  searchInputRef: React.RefObject<HTMLInputElement>;
+  searchInputRef: React.RefObject<HTMLInputElement | null>;
 }) {
   const { width } = useWindowSize();
   return (

@@ -12,8 +12,6 @@ interface ModalContextProps {
   options: ModalProps;
 }
 
-// @ts-ignore
-// @ts-ignore
 /**
  * ModalContext internals
  *
