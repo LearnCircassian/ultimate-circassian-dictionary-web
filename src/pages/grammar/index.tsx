@@ -78,6 +78,5 @@ export default function GrammarPage() {
       </main>
     </>
   );
-  
    */
 }
