@@ -5,7 +5,6 @@ import { getAllSupportedLangs, SupportedLang } from "~/interfaces";
 import { getSearchFilterPrefsCache, saveSearchFilterPrefsCache } from "~/cache/searchFilterPrefs";
 import { useRouter } from "next/navigation";
 import { CACHE_VERSION } from "~/constants/cache";
-import { toastUtil } from "~/components/toast";
 
 interface SearchFilterModalProps {
   hide: () => void;

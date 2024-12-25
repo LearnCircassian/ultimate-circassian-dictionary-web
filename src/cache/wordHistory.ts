@@ -1,5 +1,4 @@
-// Function to load state from localStorage
-import { getAllSupportedLangs, WordDefinitionsResults } from "~/interfaces";
+import { WordDefinitionsResults } from "~/interfaces";
 import { CACHE_VERSION, WORD_HISTORY_CACHE_KEY } from "~/constants/cache";
 
 const MAX_WORD_HISTORY_CACHE = 100;

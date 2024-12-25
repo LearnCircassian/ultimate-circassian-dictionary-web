@@ -12,6 +12,8 @@ interface ModalContextProps {
   options: ModalProps;
 }
 
+// @ts-ignore
+// @ts-ignore
 /**
  * ModalContext internals
  *
@@ -20,8 +22,6 @@ interface ModalContextProps {
 const ModalContext = React.createContext<ModalContextProps>({
   content: null,
   isOpen: false,
-  // we can safely ignore because we set the initial values instantly on initialisation of the provider
-  // @ts-ignore
   show: () => {},
   hide: () => {},
   options: {},

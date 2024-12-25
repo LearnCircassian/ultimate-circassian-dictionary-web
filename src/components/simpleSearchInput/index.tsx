@@ -1,6 +1,5 @@
 import React from "react";
 import { cn } from "~/utils/classNames";
-import MagnifyingGlassSvg from "~/components/svg/magnifyingGlassSvg";
 
 interface SimpleSearchInputProps {
   value: string;

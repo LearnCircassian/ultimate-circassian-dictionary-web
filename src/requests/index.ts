@@ -9,11 +9,7 @@ import {
 } from "~/interfaces";
 import { err, ok, Result } from "neverthrow";
 import queryString from "query-string";
-import {
-  regularWordToSafeWord,
-  replaceStickLettersToOne,
-  safeWordToRegularWord,
-} from "~/utils/wordFormatting";
+import { regularWordToSafeWord, replaceStickLettersToOne } from "~/utils/wordFormatting";
 import { transformAutocomplete, transformWordDefinitionsResults } from "~/transform";
 import { getSearchFilterPrefsCache } from "~/cache/searchFilterPrefs";
 
