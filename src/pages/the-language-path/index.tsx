@@ -62,14 +62,14 @@ function LessonButton({
 }) {
   return (
     <button
-      className="cursor-pointer border-2 border-solid border-[#68a629] flex flex-row gap-2 justify-start items-center"
+      className="cursor-pointer border-2 border-solid border-[#68a629] flex flex-row gap-2 justify-start items-center min-h-[80px]"
       onClick={onClick}
     >
-      <div className="flex flex-col justify-start items-start">
-        <div className="bg-[#68a629] h-full px-4 flex flex-col justify-center items-center text-3xl text-white font-bold ml-4 rounded-b-sm">
+      <div className="flex flex-col justify-start items-start h-full">
+        <div className="bg-[#68a629] h-full px-4 flex flex-col justify-center items-center text-3xl text-white font-bold ml-4 rounded-b-lg">
           {index}
         </div>
-        <div />
+        <div className="mb-2" />
       </div>
       <p className="text-3xl font-medium text-[#68a629] hover:underline text-left">{title}</p>
     </button>
