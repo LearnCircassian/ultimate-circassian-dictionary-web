@@ -2,8 +2,9 @@ import Head from "next/head";
 import React from "react";
 import ContainerDiv from "~/components/containerDiv";
 import { useRouter } from "next/navigation";
+import { LESSON_LIST } from "~/constants/content";
 
-export default function GrammarPage() {
+export default function TheLanguagePathPage() {
   const router = useRouter();
   return (
     <>
@@ -13,37 +14,16 @@ export default function GrammarPage() {
       <main>
         <ContainerDiv className="p-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
-            <LessonButton
-              index={1}
-              title="The Letters"
-              onClick={() => router.push(`/grammar/noun`)}
-            />
-            <LessonButton index={2} title="Welcome" onClick={() => router.push(`/grammar/noun`)} />
-            <LessonButton
-              index={3}
-              title="How are You?"
-              onClick={() => router.push(`/grammar/noun`)}
-            />
-            <LessonButton
-              index={4}
-              title="What is The Price of This?"
-              onClick={() => router.push(`/grammar/noun`)}
-            />
-            <LessonButton
-              index={5}
-              title="What is The Time?"
-              onClick={() => router.push(`/grammar/noun`)}
-            />
-            <LessonButton
-              index={6}
-              title="How Can I Help You?"
-              onClick={() => router.push(`/grammar/noun`)}
-            />
-            <LessonButton
-              index={7}
-              title="Family Life"
-              onClick={() => router.push(`/grammar/noun`)}
-            />
+            {LESSON_LIST.map((lesson, index) => {
+              return (
+                <LessonButton
+                  key={lesson}
+                  title={lesson}
+                  index={index + 1}
+                  onClick={() => router.push(`/the-language-path/${index + 1}`)}
+                />
+              );
+            })}
           </div>
         </ContainerDiv>
       </main>
