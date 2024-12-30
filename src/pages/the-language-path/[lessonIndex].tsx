@@ -60,8 +60,29 @@ export default function TheLanguagePathPage() {
 function Lesson_1() {
   return (
     <div className="flex flex-col gap-2">
-      <DialogBubble leftOrRight="left" character={CHARACTERS[0]} />
-      <DialogBubble leftOrRight="right" character={CHARACTERS[1]} />
+      <DialogBubble
+        leftOrRight="left"
+        character={CHARACTERS[0]}
+        cirText="Уимафэ шlу. Сэ сцIэр Данэ. О сыда пцlэр?"
+        engTranslation="Good day. My name is Dana. What is your name?"
+        wordByWordTranslation={[
+          "your day",
+          "Good",
+          "I",
+          "my name is",
+          "Dana",
+          "You",
+          "what is",
+          "your name?",
+        ]}
+      />
+      <DialogBubble
+        leftOrRight="right"
+        character={CHARACTERS[1]}
+        cirText="Сэ сцlэр Сэтэнай."
+        engTranslation="My name is Satanay."
+        wordByWordTranslation={["I", "name is", "Satanay"]}
+      />
     </div>
   );
 }
@@ -69,46 +90,55 @@ function Lesson_1() {
 function DialogBubble({
   leftOrRight,
   character,
+  cirText,
+  wordByWordTranslation,
+  engTranslation,
 }: {
   leftOrRight: "left" | "right";
   character: ICharacter;
+  cirText: string;
+  wordByWordTranslation: string[];
+  engTranslation: string;
 }) {
   return (
-    <div
-      className={cn("flex items-start gap-4", {
-        "flex-row": leftOrRight === "left",
-        "flex-row-reverse": leftOrRight === "right",
-      })}
-    >
-      {/* Avatar and name */}
-      <div className="flex flex-col items-center gap-1">
-        <Image src={character.avatar} alt={character.name} width={50} height={50} />
-        <p className="text-[#4a7324] text-2xl font-bold">{character.name}</p>
-      </div>
-
-      {/* Dialog bubble */}
-      <div className="relative">
-        <div
-          className={cn(
-            "border border-solid text-2xl p-4 rounded-sm relative",
-            { "bg-[#fbddd1] border-[#f19f76]": leftOrRight === "left" },
-            { "bg-[#d6e8ce] border-[#96c07e]": leftOrRight === "right" },
-          )}
-        >
-          Уимафэ шlу. Сэ сцIэр Данэ. О сыда пцlэр?
+    <div className="flex flex-col gap-2">
+      <div
+        className={cn("flex items-start gap-4", {
+          "flex-row": leftOrRight === "left",
+          "flex-row-reverse": leftOrRight === "right",
+        })}
+      >
+        {/* Avatar and name */}
+        <div className="flex flex-col items-center gap-1">
+          <Image src={character.avatar} alt={character.name} width={50} height={50} />
+          <p className="text-[#4a7324] text-2xl font-bold">{character.name}</p>
         </div>
-        {/* Spike */}
-        <div
-          className={cn("absolute top-4 w-0 h-0", {
-            // Spike styles for "left"
-            "-left-2 border-t-[10px] border-t-transparent border-r-[10px] border-r-[#fbddd1] border-b-[10px] border-b-transparent":
-              leftOrRight === "left",
-            // Spike styles for "right"
-            "-right-2 border-t-[10px] border-t-transparent border-l-[10px] border-l-[#d6e8ce] border-b-[10px] border-b-transparent":
-              leftOrRight === "right",
-          })}
-        />
+
+        {/* Dialog bubble */}
+        <div className="relative">
+          <div
+            className={cn(
+              "border border-solid text-2xl p-4 rounded-sm relative",
+              { "bg-[#fbddd1] border-[#f19f76]": leftOrRight === "left" },
+              { "bg-[#d6e8ce] border-[#96c07e]": leftOrRight === "right" },
+            )}
+          >
+            {cirText}
+          </div>
+          {/* Spike */}
+          <div
+            className={cn("absolute top-4 w-0 h-0", {
+              // Spike styles for "left"
+              "-left-2 border-t-[10px] border-t-transparent border-r-[10px] border-r-[#fbddd1] border-b-[10px] border-b-transparent":
+                leftOrRight === "left",
+              // Spike styles for "right"
+              "-right-2 border-t-[10px] border-t-transparent border-l-[10px] border-l-[#d6e8ce] border-b-[10px] border-b-transparent":
+                leftOrRight === "right",
+            })}
+          />
+        </div>
       </div>
+      <p className="text-2xl border-b-2 border-solid border-gray-300">{engTranslation}</p>
     </div>
   );
 }
