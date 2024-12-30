@@ -48,13 +48,20 @@ export default function TheLanguagePathPage() {
 function Lesson_1() {
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex flex-row gap-2">
-        <div className="flex flex-col gap-2">
+      <div className="flex flex-row gap-4 items-start">
+        {/* Avatar and name */}
+        <div className="flex flex-col items-center gap-1">
           <Image src="/lessons/girl1.png" alt="girl1" width={30} height={30} />
           <p>Данэ</p>
         </div>
-        <div className="bg-[#fbddd1] border border-solid border-[#f19f76] text-2xl p-4">
-          Уимафэ шlу. Сэ сцIэр Данэ. О сыда пцlэр?
+
+        {/* Dialog bubble */}
+        <div className="relative">
+          <div className="bg-[#fbddd1] border border-solid border-[#f19f76] text-2xl p-4 rounded-lg relative">
+            Уимафэ шlу. Сэ сцIэр Данэ. О сыда пцlэр?
+          </div>
+          {/* Spike */}
+          <div className="absolute top-4 -left-2 w-0 h-0 border-t-[10px] border-t-transparent border-r-[10px] border-r-[#fbddd1] border-b-[10px] border-b-transparent"></div>
         </div>
       </div>
     </div>
