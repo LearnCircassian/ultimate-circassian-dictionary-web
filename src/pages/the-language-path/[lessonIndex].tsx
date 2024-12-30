@@ -67,13 +67,13 @@ function Lesson_1() {
         engTranslation="Good day. My name is Dana. What is your name?"
         wordByWordTranslation={[
           "your day",
-          "Good",
+          "good",
           "I",
           "my name is",
           "Dana",
-          "You",
+          "you",
           "what is",
-          "your name?",
+          "your name",
         ]}
       />
       <DialogBubble
@@ -100,6 +100,9 @@ function DialogBubble({
   wordByWordTranslation: string[];
   engTranslation: string;
 }) {
+  // Split the cirText into words
+  const cirTextWords = cirText.split(" ");
+
   return (
     <div className="flex flex-col gap-2">
       <div
@@ -118,12 +121,21 @@ function DialogBubble({
         <div className="relative">
           <div
             className={cn(
-              "border border-solid text-2xl p-4 rounded-sm relative",
+              "border border-solid p-4 rounded-sm relative flex flex-row flex-wrap gap-4",
               { "bg-[#fbddd1] border-[#f19f76]": leftOrRight === "left" },
               { "bg-[#d6e8ce] border-[#96c07e]": leftOrRight === "right" },
             )}
           >
-            {cirText}
+            {cirTextWords.map((word, idx) => {
+              return (
+                <div key={idx} className="flex flex-col gap-0 w-fit flex-wrap">
+                  <span className="text-black text-2xl">{word}</span>
+                  <span className="text-gray-600 text-lg font-medium">
+                    {wordByWordTranslation[idx]}
+                  </span>
+                </div>
+              );
+            })}
           </div>
           {/* Spike */}
           <div
