@@ -95,3 +95,8 @@ export interface Autocomplete {
   fromLangs: SupportedLang[];
   toLangs: SupportedLang[];
 }
+
+export interface ICharacter {
+  name: string;
+  avatar: string;
+}
