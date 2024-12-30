@@ -128,9 +128,9 @@ function DialogBubble({
           >
             {cirTextWords.map((word, idx) => {
               return (
-                <div key={idx} className="flex flex-col gap-0 w-fit flex-wrap">
-                  <span className="text-black text-2xl">{word}</span>
-                  <span className="text-gray-600 text-lg font-medium">
+                <div key={idx} className="flex flex-col gap-1 w-fit flex-wrap">
+                  <span className="text-black text-2xl leading-none">{word}</span>
+                  <span className="text-gray-600 text-base font-medium leading-none">
                     {wordByWordTranslation[idx]}
                   </span>
                 </div>
