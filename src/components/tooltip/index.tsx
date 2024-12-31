@@ -19,7 +19,7 @@ export default function TopTooltipWithBottomSpike({
       {/* Tooltip Content */}
       <div
         className={cn(
-          `absolute bg-white text-black text-sm rounded-md px-3 py-2 font-vt323 shadow-md transition-opacity duration-200`,
+          `absolute bg-white text-black text-sm rounded-md px-3 py-2 font-vt323 transition-opacity duration-200`,
           "bottom-full left-1/2 transform -translate-x-1/2 mb-2",
           { hidden: !isVisible },
           className,
@@ -30,7 +30,7 @@ export default function TopTooltipWithBottomSpike({
         <div
           className={cn(
             `absolute w-3 h-3 bg-white transform rotate-45`,
-            "left-1/2 -translate-x-1/2 -bottom-1 shadow-md",
+            "left-1/2 -translate-x-1/2 -bottom-1",
           )}
         />
       </div>
