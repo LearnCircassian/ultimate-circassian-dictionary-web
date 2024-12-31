@@ -43,7 +43,7 @@ export default function LessonTable({
             >
               {/* Show Index Column */}
               <td
-                className={cn("font-bold text-white text-center px-4 py-2 ", {
+                className={cn("font-bold text-white text-center px-1", {
                   "bg-[#ed7d31]": rowIndex % 2 === 0,
                   "bg-[#70ad47]": rowIndex % 2 !== 0,
                   hidden: !showIndexes,
