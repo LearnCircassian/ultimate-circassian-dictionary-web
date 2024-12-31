@@ -5,6 +5,7 @@ import { LESSON_LIST } from "~/constants/content";
 import { cn } from "~/utils/classNames";
 import Image from "next/image";
 import { ICharacter } from "~/interfaces";
+import TopTooltipWithBottomSpike from "~/components/tooltip";
 
 const CHARACTERS: ICharacter[] = [
   {
@@ -129,7 +130,11 @@ function DialogBubble({
             {cirTextWords.map((word, idx) => {
               return (
                 <div key={idx} className="flex flex-col gap-1 w-fit flex-wrap">
-                  <span className="text-black text-2xl leading-none">{word}</span>
+                  <TopTooltipWithBottomSpike text={wordByWordTranslation[idx]}>
+                    <span className="text-black text-2xl leading-none font-semibold hover:text-blue-400">
+                      {word}
+                    </span>
+                  </TopTooltipWithBottomSpike>
                   <span className="text-gray-600 text-base font-medium leading-none">
                     {wordByWordTranslation[idx]}
                   </span>
